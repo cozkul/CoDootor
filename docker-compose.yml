@@ -25,4 +25,3 @@ services:
       - ./ollama:/root/.ollama
     command: serve
     # https://huggingface.co/google/codegemma-2b#description
-    
