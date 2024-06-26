@@ -53,7 +53,3 @@ Our backend will have Llama3 via Ollama. REST API will handle this interaction w
 3. **Access the application:**
  - Backend API: `http://localhost:XXXX`
  - Frontend: `http://localhost:XXXX`
-
-### Development
-
-Currently project is set for hot-loading for both front end and back end. Simply save changes and it will be hot-loaded.
