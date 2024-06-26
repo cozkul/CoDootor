@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server:/usr/src/app/server
+    command: npm run start
+  frontend:
+    build: ./client
+    ports:
+      - 5173:5173
+    volumes:
+      - ./client:/usr/src/app/client
+    command: yarn dev --host
+  ollama:
+    image: ollama/ollama:0.1.46
+    ports:
+      - 11434:11434
+    volumes:
+      - ./ollama:/root/.ollama
+    command: serve
+    # https://huggingface.co/google/codegemma-2b#description
+    

@@ -1,0 +1,13 @@
+# Ignore docker errors
+tmp/*
+
+# Ignore all air builds
+server/tmp/*
+
+# .env is shared for TAs marking
+# server/.env 
+
+# 
+server/.DS_Store
+
+# Ignore client
