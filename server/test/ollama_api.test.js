@@ -10,6 +10,36 @@ function foo(a, b) {\
 }\
 ```"
 
+describe("Testing the GeneratePrompt function", function () {
+    it('Basic description of a function test', function () {
+        const prompt = oa.GeneratePrompt("hello world");
+        expect(prompt)
+        .to
+        .equal("Write me a Javascript function that has the following purpose: hello world. Only show me the code and call the function foo.")
+    });
+
+    it('Missing description (empty string)', function () {
+        const prompt = oa.GeneratePrompt("");
+        expect(prompt)
+        .to
+        .equal(null)
+    });
+
+    it('Missing description (empty string)', function () {
+        const prompt = oa.GeneratePrompt(null);
+        expect(prompt)
+        .to
+        .equal(null)
+    });
+
+    it('Missing description (empty string)', function () {
+        const prompt = oa.GeneratePrompt();
+        expect(prompt)
+        .to
+        .equal(null)
+    });
+})
+
 describe('Testing the ParseResponse function', function () {
     it('Regular response from LLM', function () {
         const resp = oa.ParseLLMResponse(llm_two_sum_response);

@@ -13,6 +13,7 @@ const { default: ollama } = require('ollama');
 */
 
 function GeneratePrompt(x) {
+    if (x == null || x == undefined || x == "") return null;
     return "Write me a Javascript function that has the following purpose: " + x + 
     ". Only show me the code and call the function foo."
 }
@@ -101,4 +102,4 @@ function TestGeneratedCode(code_json) {
     return res;
 }
 
-module.exports = { ParseLLMResponse, FetchResponse, TestGeneratedCode };
+module.exports = { GeneratePrompt, ParseLLMResponse, FetchResponse, TestGeneratedCode };
