@@ -160,9 +160,28 @@ describe('Testing the TestGeneratedCode function', function () {
     it('Testing improper JSON formats and undefined', function () {
         expect(oa.TestGeneratedCode({})).to.equal(null);
         expect(oa.TestGeneratedCode({"code": "hello"})).to.equal(null);
-        expect(oa.TestGeneratedCode({"llm_code": "", "id": "one", "user": "derpahel"})).to.equal(null);
-        expect(oa.TestGeneratedCode({"llm_code": "", "id": 1})).to.equal(null);
+        expect(oa.TestGeneratedCode({"id": "hello"})).to.equal(null);
+        expect(oa.TestGeneratedCode({"llm_code": "hello"})).to.equal(null);
         expect(oa.TestGeneratedCode(null)).to.equal(null);
         expect(oa.TestGeneratedCode()).to.equal(null);
     });
+})
+
+describe('Combining everything', function () {
+    it('Regular test with proper query', async () => {
+        const resp = await oa.FetchResponse(two_sum_fn_desc);
+        expect(resp).to.not.equal(null);
+        expect(resp.llm_code).to.contain("function");
+        expect(resp.llm_code).to.contain("(a, b)");
+        expect(resp.llm_code).to.contain("return a + b");
+
+        resp.id = 1;
+        
+        const graded = oa.TestGeneratedCode(resp);
+        expect(graded.length).to.equal(2);
+        expect(graded[0].score).to.equal(1);
+        expect(graded[0].desc).to.equal("A test to check if adding properly.");
+        expect(graded[1].score).to.equal(1);
+        expect(graded[1].desc).to.equal("A less basic test to check if adding properly.");
+    })
 })
