@@ -1,15 +1,17 @@
-FROM ollama/ollama:0.1.46 as builder
+FROM ollama/ollama:0.1.46 AS builder
 
 RUN apt-get update && apt-get install -y netcat
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/bash", "/usr/local/bin/entrypoint.sh"]
 
-# RUN ollama pull codegemma:2b
+FROM ollama/ollama
 
-FROM ollama/ollama:0.1.46
+COPY --from=builder /root/.ollama /root/.ollama
+
+ENTRYPOINT ["ollama", "serve"]
 
 WORKDIR /root/.ollama
 
