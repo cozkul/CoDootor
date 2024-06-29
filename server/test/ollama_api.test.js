@@ -120,7 +120,10 @@ describe('Testing the TestGeneratedCode function', function () {
             "id": 99
         })
         
-        expect(res).to.equal(null);
+        expect(res).to.not.equal(null);
+        expect(res.length).to.equal(1);
+        expect(res[0].err).to.equal(true);
+        expect(res[0].err_reason).to.include("Cannot find module");
     });
 
     it('Testing an incorrectly generated LLM function for Q1', function () {
