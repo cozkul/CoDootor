@@ -103,8 +103,7 @@ describe('Testing the TestGeneratedCode function', function () {
     it('Testing a correctly generated LLM function for Q1', function () {
         const res = oa.TestGeneratedCode({
             "llm_code": "function foo(a, b) { return a + b }",
-            "id": 1,
-            "user": "deraphel" 
+            "id": 1
         })
         
         expect(res.length).to.equal(2);
@@ -115,11 +114,19 @@ describe('Testing the TestGeneratedCode function', function () {
         expect(res[1].score).to.equal(1);
     });
 
+    it('Testing a correctly generated LLM function for invalid q', function () {
+        const res = oa.TestGeneratedCode({
+            "llm_code": "function foo(a, b) { return a + b }",
+            "id": 99
+        })
+        
+        expect(res).to.equal(null);
+    });
+
     it('Testing an incorrectly generated LLM function for Q1', function () {
         const res = oa.TestGeneratedCode({
             "llm_code": "function foo() { return; }",
-            "id": 1,
-            "user": "deraphel" 
+            "id": 1 
         })
 
         expect(res.length).to.equal(2);
@@ -134,8 +141,7 @@ describe('Testing the TestGeneratedCode function', function () {
     it('Testing a broken function for Q1', function () {
         const res = oa.TestGeneratedCode({
             "llm_code": "function foo() { , }",
-            "id": 1,
-            "user": "deraphel" 
+            "id": 1 
         })
 
         expect(res.length).to.equal(1);
@@ -147,8 +153,7 @@ describe('Testing the TestGeneratedCode function', function () {
     it('Testing a function with missing parameters for Q1', function () {
         const res = oa.TestGeneratedCode({
             "llm_code": "function foo() { return a + b }",
-            "id": 1,
-            "user": "deraphel" 
+            "id": 1
         })
 
         expect(res.length).to.equal(1);

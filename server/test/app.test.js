@@ -35,3 +35,45 @@ describe('Testing the POST endpoint for /code', function () {
     })
 });
 
+describe('Testing the POST endpoint for /grade', function () {
+    // Uncompilable code should produce a response that says the tests failed
+    it('Providing uncompilable code', function (done) {
+        requestSuper.post('/grade')
+        .send({"id": 1, "llm_code": "blah"})
+        .set('Accept', 'application/json')
+        .end(function(err, res) {
+            expect(res.statusCode).to.not.equal(200);
+            expect(res.body).to.not.equal(null);
+            expect(res.body[0].err).to.equal(true);
+            if (err) done(err);
+            done();
+        })
+    });
+
+    it('Providing invalid QID', function (done) {
+        requestSuper.post('/grade')
+        .send({"id": 999, "llm_code": "function foo(a, b) { return a + b; }"})
+        .set('Accept', 'application/json')
+        .end(function(err, res) {
+            expect(res.statusCode).to.not.equal(200);
+            if (err) done(err);
+            done();
+        })
+    });
+
+    it('Providing a regular, valid function for grade', function (done) {
+        requestSuper.post('/grade')
+        .send({"id": 1, "llm_code": "function foo(a, b) { return a + b; }"})
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function(err, res) {
+            expect(res.body).to.not.equal(null);
+            expect(res.body.length).to.equal(2);
+            expect(res.body[0].score).to.equal(1);
+            expect(res.body[1].score).to.equal(1);
+            if (err) done(err);
+            done();
+        })
+    });
+})

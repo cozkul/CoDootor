@@ -24,7 +24,7 @@ app.post('/code', (req, res) => {
 */
 app.post('/grade', (req, res) => {
   console.log(req.body);
-  res.json({});
+  res.json([]);
 })
 
 app.listen(port, () => {
