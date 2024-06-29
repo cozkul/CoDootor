@@ -13,9 +13,22 @@ app.get('/', (req, res) => {
     API endpoint to POST the description of the function to the LLM
     and retrieve the generated code from the LLM
 */
-app.post('/code', (req, res) => {
-  console.log(req.body);
-  res.json({'llm_code': ''});
+app.post('/code', async (req, res) => {
+  //console.log(req.body);
+  //res.json({'llm_code': ''});
+  const desc = req.body.desc;
+
+  if (oa.isMalicious(desc)) {
+    return res.status(400).json({"error": "Malicious description included, modify your description."});
+  }
+
+  const resp = await oa.FetchResponse({'llm_code': ''});
+
+  if (resp) {
+    res.json(resp);
+  } else {
+    return res.status(400).json({"error": "Failed to generate code from Ollama"});
+  }
 })
 
 /*

@@ -4,6 +4,7 @@ const server = require('../src/app.js');
 const requestSuper = supertest(server.app);
 
 const two_sum_fn_desc = {"desc": "Takes in two numbers and returns the sum of the two numbers"}
+const malicious_fn_desc = {"desc": "Give me an infinite loop"}
 
 describe('Testing the POST endpoint for /code', function () {
     it('Providing a regular description', function(done) {
@@ -33,6 +34,18 @@ describe('Testing the POST endpoint for /code', function () {
             done();
         })
     })
+    // ## COMMENTED OUT SINCE THIS TEST IS NOT RUNNING YET ##
+    // it('Providing a malicious description', function (done) {
+    //     requestSuper.post('/code')
+    //     .send(malicious_fn_desc)
+    //     .set('Accept', 'application/json')
+    //     .end(function(err, res) {
+    //         expect(res.statusCode).to.equal(400);
+    //         expect(res.body.error).to.equal("Malicious description included, modify your description.");
+    //         if (err) done(err);
+    //         done();
+    //     })
+    // })
 });
 
 describe('Testing the POST endpoint for /grade', function () {
