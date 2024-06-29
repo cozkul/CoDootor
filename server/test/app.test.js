@@ -1,23 +1,26 @@
-// const expect = require('chai').expect;
-// const fs = require('fs').expect;
+const expect = require('chai').expect;
+const supertest = require('supertest');
+const server = require('../src/app.js');
+const requestSuper = supertest(server.app);
 
-// const getCodeEndpoint = "localhost:3000/code";
-// const getGradeEndpoint = "localhost:3000/grade";
+describe('Testing the POST endpoint for /code', function () {
+    it('Providing a regular description', async () => {
+        const res = await requestSuper.post('/code');
+        expect(res.status).to.equal(200);
+        expect(res.type).to.contain('json');
+        const body = res.body;
 
-// const expectedCode = fs.readFileSync('../generated_code/two_sum.js');
+        expect(body).to.contain('function (a, b)');
+        expect(body).to.contain('return a + b');
+    });
 
-// describe('Testing the POST endpoint for /grade', function () {
-//     it('Providing a regular description', async () => {
-//         const resp = await fetch(getCodeEndpoint, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: "{\"desc\": \"Takes in two numbers and returns the sum of the two numbers\"}"
-//         }).then(resp => {
-//             return resp.json();
-//         }).then(data => {
-//             expect(data).to.equal(expectedCode);
-//         })
-//     });
-// });
+    it('Not providing a body', async () => {
+        const resp = await fetch(getCodeEndpoint, {
+            method: "POST"
+        }).then(resp => {
+            expect(resp.ok).to.equal(false);
+        }).catch(error => {
+            expect.fail(error);
+        })
+    })
+});
