@@ -4,7 +4,7 @@ WORKDIR /usr/src/app/server
 
 RUN apk add ca-certificates
 
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 
 COPY . .
