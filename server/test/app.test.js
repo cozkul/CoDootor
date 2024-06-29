@@ -3,24 +3,35 @@ const supertest = require('supertest');
 const server = require('../src/app.js');
 const requestSuper = supertest(server.app);
 
-describe('Testing the POST endpoint for /code', function () {
-    it('Providing a regular description', async () => {
-        const res = await requestSuper.post('/code');
-        expect(res.status).to.equal(200);
-        expect(res.type).to.contain('json');
-        const body = res.body;
+const two_sum_fn_desc = {"desc": "Takes in two numbers and returns the sum of the two numbers"}
 
-        expect(body).to.contain('function (a, b)');
-        expect(body).to.contain('return a + b');
+describe('Testing the POST endpoint for /code', function () {
+    it('Providing a regular description', function(done) {
+        requestSuper
+        .post('/code')
+        .send(two_sum_fn_desc)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function(err, res) {
+            console.log(res);
+            expect(res.body.llm_code).to.not.equal(null);
+            expect(res.body.llm_code).to.contain('function (a, b)');
+            expect(res.body.llm_code).to.contain('return a + b');
+            if (err) done(err);
+            done();
+        })
     });
 
-    it('Not providing a body', async () => {
-        const resp = await fetch(getCodeEndpoint, {
-            method: "POST"
-        }).then(resp => {
-            expect(resp.ok).to.equal(false);
-        }).catch(error => {
-            expect.fail(error);
+    it('Not providing a body', function (done) {
+        requestSuper.post('/code')
+        .send({})
+        .set('Accept', 'application/json')
+        .end(function(err, res) {
+            expect(res.statusCode).to.not.equal(200);
+            if (err) done(err);
+            done();
         })
     })
 });
+
