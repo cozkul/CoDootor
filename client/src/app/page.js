@@ -1,9 +1,14 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { NavbarSimple } from "@/app/NavbarSimple/NavbarSimple";
 
 export default function Home() {
   return (
     <main className={styles.main}>
+      <div className={styles.left}>
+        <NavbarSimple />
+      </div>
+
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
