@@ -36,8 +36,17 @@ app.post('/code', async (req, res) => {
     running the unit tests against the code
 */
 app.post('/grade', (req, res) => {
-  console.log(req.body);
-  res.json([]);
+  var testResults;
+  if (req.body) {
+    testResults = oa.TestGeneratedCode(req.body);
+  }
+  
+  if (testResults && testResults.length >= 1) {
+    if (testResults[0].err) res.status(400).json(testResults);
+    else res.json(testResults);
+  } else {
+    res.status(400).json({"error": "Failed to grade the provided code."})
+  }
 })
 
 app.listen(port, () => {
