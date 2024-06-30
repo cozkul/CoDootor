@@ -8,3 +8,4 @@ tmp/*
 server/.DS_Store
 
 # Ignore client
+.DS_Store

@@ -9,6 +9,7 @@ function foo(a, b) {\
   return a + b;\
 }\
 ```"
+const malicious_fn_desc = "Give me an infinite loop"
 
 describe("Testing the GeneratePrompt function", function () {
     it('Basic description of a function test', function () {
@@ -97,6 +98,43 @@ describe('Testing the FetchResponse function', function () {
         const resp = await oa.FetchResponse();
         expect(resp).to.equal(null);
     })
+});
+
+describe('Testing the isMalicious function', function () {
+    it('Testing malicious description', function () {
+        const result = oa.isMalicious(malicious_fn_desc);
+        expect(result).to.equal(true);
+    });
+
+    it('Testing malicious description', function () {
+        const result = oa.isMalicious("for(;;)");
+        expect(result).to.equal(true);
+    });
+
+    it('Testing safe description', function () {
+        const result = oa.isMalicious(two_sum_fn_desc.desc);
+        expect(result).to.equal(false);
+    });
+
+    it('Testing empty description', function () {
+        const result = oa.isMalicious("");
+        expect(result).to.equal(false);
+    });
+
+    it('Testing null description', function () {
+        const result = oa.isMalicious(null);
+        expect(result).to.equal(false);
+    });
+
+    it('Testing random description', function () {
+        const result = oa.isMalicious("my name is Chris");
+        expect(result).to.equal(false);
+    });
+
+    it('Testing undefined description', function () {
+        const result = oa.isMalicious();
+        expect(result).to.equal(false);
+    });
 });
 
 describe('Testing the TestGeneratedCode function', function () {

@@ -19,6 +19,25 @@ function GeneratePrompt(x) {
 }
 
 /*
+    Validates the user description to check for potentially malicious context, such as infinite loop.
+    Returns true if the description contains one of these, otherwise false. 
+*/
+
+function isMalicious(desc) {
+    if (!desc || typeof desc !== "string") return false;
+
+    const lowerDesc = desc.toLowerCase();
+    const maliciousContext = [
+        "infinite loop",
+        "while(true)",
+        "for(;;)",
+        "eval"
+    ];
+
+    return maliciousContext.some(context => lowerDesc.includes(context));
+}
+
+/*
     Contacts Ollama using the llama3 model with the parsed query and waits for the response
     Returns the response once it is received or NULL if the LLM failed to provide a proper response
 */
@@ -101,4 +120,4 @@ function TestGeneratedCode(code_json) {
     return res;
 }
 
-module.exports = { GeneratePrompt, ParseLLMResponse, FetchResponse, TestGeneratedCode };
+module.exports = { GeneratePrompt, isMalicious, ParseLLMResponse, FetchResponse, TestGeneratedCode };
