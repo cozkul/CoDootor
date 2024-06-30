@@ -64,6 +64,19 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
                 done();
             })
         });
+
+        it('Providing bad JSON body', function (done) {
+            request.post('/grade')
+            .send({})
+            .set('Accept', 'application/json')
+            .end(function(err, res) {
+                expect(res.statusCode).to.equal(400);
+                expect(res.body).to.not.equal(null);
+                expect(res.body.error).to.equal("Failed to grade the provided code.");
+                if (err) done(err);
+                done();
+            })
+        });
     
         it('Providing invalid QID', function (done) {
             request.post('/grade')
