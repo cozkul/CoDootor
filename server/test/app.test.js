@@ -15,7 +15,6 @@ describe('Testing the POST endpoint for /code', function () {
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function(err, res) {
-            console.log(res);
             expect(res.body.llm_code).to.not.equal(null);
             expect(res.body.llm_code).to.contain('function (a, b)');
             expect(res.body.llm_code).to.contain('return a + b');
