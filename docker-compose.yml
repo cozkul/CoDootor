@@ -15,7 +15,7 @@ services:
     ports:
       - 5173:3000
     volumes:
-      - ./client:/usr/src/app/client
+      - ./client:/usr/src/app/frontend
     command: npm run dev
   ollama:
     build:
