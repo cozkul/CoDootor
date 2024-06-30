@@ -62,7 +62,7 @@ describe('Testing the ParseResponse function', function () {
 
 describe('Testing the FetchResponse function', function () {
     it('Fetching response for regular query', async () => {
-        const resp = await oa.FetchResponse(two_sum_fn_desc);
+        const resp = await oa.FetchResponse(two_sum_fn_desc.desc);
         expect(resp).to.not.equal(null);
         expect(resp.llm_code).to.contain("function");
         expect(resp.llm_code).to.contain("(a, b)");
@@ -70,7 +70,7 @@ describe('Testing the FetchResponse function', function () {
     });
 
     it('Fetching response for random query', async () => {
-        const resp = await oa.FetchResponse({"desc": "blah"})
+        const resp = await oa.FetchResponse("blah")
         expect(resp).to.equal(null);
     });
 
@@ -79,25 +79,10 @@ describe('Testing the FetchResponse function', function () {
         expect(resp).to.equal(null);
     });
 
-    it('Fetching response for invalid JSON query', async () => {
-        const resp = await oa.FetchResponse({});
-        expect(resp).to.equal(null);
-    });
-
-    it('Fetching response for missing desc query', async () => {
-        const resp = await oa.FetchResponse({"fn_code": ""});
-        expect(resp).to.equal(null);
-    });
-
-    it('Fetching response for misnamed desc query', async () => {
-        const resp = await oa.FetchResponse({"fn_desc": ""});
-        expect(resp).to.equal(null);
-    });
-
-    it('Fetching response with no function arguments', async () => {
+    it('Fetching response for missing query', async () => {
         const resp = await oa.FetchResponse();
         expect(resp).to.equal(null);
-    })
+    });
 });
 
 describe('Testing the isMalicious function', function () {
@@ -215,7 +200,7 @@ describe('Testing the TestGeneratedCode function', function () {
 
 describe('Combining everything', function () {
     it('Regular test with proper query', async () => {
-        const resp = await oa.FetchResponse(two_sum_fn_desc);
+        const resp = await oa.FetchResponse(two_sum_fn_desc.desc);
         expect(resp).to.not.equal(null);
         expect(resp.llm_code).to.contain("function");
         expect(resp.llm_code).to.contain("(a, b)");

@@ -41,10 +41,10 @@ function isMalicious(desc) {
     Contacts Ollama using the llama3 model with the parsed query and waits for the response
     Returns the response once it is received or NULL if the LLM failed to provide a proper response
 */
-async function FetchResponse(resp_json) {
+async function FetchResponse(desc) {
     // If the fn description is missing, or the json is not properly formatted, return null
-    if (resp_json == undefined || resp_json == null || resp_json.desc == null || resp_json.desc == "") return null;
-    const prompt = GeneratePrompt(resp_json.desc);
+    if (desc == undefined || desc == null || desc == "") return null;
+    const prompt = GeneratePrompt(desc);
 
     if (prompt == null) return null;
 

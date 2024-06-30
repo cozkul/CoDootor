@@ -14,15 +14,15 @@ app.get('/', (req, res) => {
     and retrieve the generated code from the LLM
 */
 app.post('/code', async (req, res) => {
-  //console.log(req.body);
-  //res.json({'llm_code': ''});
   const desc = req.body.desc;
+
+  if (desc == null || desc == "") return res.status(400).json({"error": "No description was provided."});
 
   if (oa.isMalicious(desc)) {
     return res.status(400).json({"error": "Malicious description included, modify your description."});
   }
 
-  const resp = await oa.FetchResponse({'llm_code': ''});
+  const resp = await oa.FetchResponse(desc);
 
   if (resp) {
     res.json(resp);
