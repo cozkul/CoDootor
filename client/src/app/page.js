@@ -1,9 +1,10 @@
+'use client'
+
 import React from 'react';
-import { Button } from '@mantine/core';
-import { Title } from '@mantine/core';
-import { Code } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { Button, Title, Textarea, Grid, Space, LoadingOverlay, Box } from '@mantine/core';
+import { CodeHighlight } from '@mantine/code-highlight';
 import TestCases from '../components/TestCases';
-import { Textarea } from '@mantine/core';
 import styles from './page.module.css';
 
 const demo = `
@@ -14,6 +15,8 @@ function Demo() {
 }`;
 
 const AnswerPage = () => {
+  const [visible, { toggle }] = useDisclosure(false);
+
   return (
     <div>
       <div className={styles.page}>
@@ -21,26 +24,37 @@ const AnswerPage = () => {
         <Button variant="filled">Home</Button>
         </div>
         <Title order={1}>Problem title</Title>
-        <div className={styles.content}>
-          <div className={styles.leftColumn}>
+        <Grid grow>
+          <Grid.Col span={4}>
             <Title order={2}>Given Function</Title>
-            <Code block>{demo}</Code>
-          </div>
-          <div className={styles.centerColumn}>
+            <CodeHighlight withCopyButton={false} code={demo} language="jsx" />
+          </Grid.Col>
+          <Grid.Col span={4}>
             <Title order={2}>Test Cases</Title>
             <TestCases />
-          </div>
-          <div className={styles.rightColumn}>
+          </Grid.Col>
+          <Grid.Col span={4}>
             <Title order={2}>Ollama Output</Title>
-            <Code block>{demo}</Code>
-          </div>
-        </div>
-        <Textarea
-          label="User Input"
-          description="Description for Given Function"
-          placeholder="Please enter the description for given function."
-        />
-        <Button variant="filled">Submit</Button>
+            <CodeHighlight withCopyButton={false} code={demo} language="jsx" />
+          </Grid.Col>
+          <Grid.Col span={4}>
+            <Box pos="relative">
+              <LoadingOverlay
+                visible={visible}
+                zIndex={1000}
+                overlayProps={{ radius: 'sm', blur: 2 }}
+                loaderProps={{ color: 'pink', type: 'bars' }}
+              />
+              {<Textarea
+              label="User Input"
+              description="Description for Given Function"
+              placeholder="Please enter the description for given function."
+              />}
+            </Box>
+            <Space h="md" />
+            <Button fullWidth variant="filled" onClick={toggle}>Submit</Button>
+          </Grid.Col>
+        </Grid>
       </div>
     </div>
   );

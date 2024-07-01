@@ -1,4 +1,3 @@
-'use client'
 
 import { Tabs, rem } from '@mantine/core';
 import { IconCircleDotted, IconCheck, IconX } from '@tabler/icons-react';
