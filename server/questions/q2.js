@@ -1,7 +1,7 @@
-function lower(str) {
+function foo(str) {
     var ans = "";
 
-    for ( i = 0; i < str.length; i++) {
+    for (var i = 0; i < str.length; i++) {
         ans += str[i].toLowerCase();
     }
 
