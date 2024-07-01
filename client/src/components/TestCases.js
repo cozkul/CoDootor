@@ -1,7 +1,7 @@
 'use client'
 
 import { Tabs, rem } from '@mantine/core';
-import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import { IconCircleDotted, IconCheck, IconX } from '@tabler/icons-react';
 
 
 // Test cases section for UI, this should retrieve prestored testcases for each question
@@ -11,13 +11,13 @@ const TestCases = () => {
   return (
     <Tabs defaultValue="test1">
       <Tabs.List>
-        <Tabs.Tab value="test1" leftSection={<IconPhoto style={iconStyle} />}>
+        <Tabs.Tab value="test1" leftSection={<IconCircleDotted style={iconStyle} />}>
           Test 1
         </Tabs.Tab>
-        <Tabs.Tab value="test2" leftSection={<IconMessageCircle style={iconStyle} />}>
+        <Tabs.Tab value="test2" leftSection={<IconCheck style={iconStyle} />}>
           Test 2
         </Tabs.Tab>
-        <Tabs.Tab value="test3" leftSection={<IconSettings style={iconStyle} />}>
+        <Tabs.Tab value="test3" leftSection={<IconX style={iconStyle} />}>
           Test 3
         </Tabs.Tab>
       </Tabs.List>
