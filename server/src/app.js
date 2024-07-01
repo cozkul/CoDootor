@@ -1,9 +1,10 @@
 const express = require('express');
+const cors = require('cors')
 const oa = require('./ollama_api.js');
 const app = express();
 const port = 5001;
 
-app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

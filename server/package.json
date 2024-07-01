@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^4.4.1",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "mocha": "^10.5.2",
     "ollama": "^0.5.2",
