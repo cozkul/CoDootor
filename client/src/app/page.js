@@ -5,6 +5,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { Button, Title, Textarea, Grid, Space, LoadingOverlay, Box } from '@mantine/core';
 import { CodeHighlight } from '@mantine/code-highlight';
 import TestCases from '../components/TestCases';
+
+import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
 
 const demo = `
