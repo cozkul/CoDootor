@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - 5001:5000
+      - 5001:5001
     volumes:
       - ./server:/usr/src/app/server
       - /usr/src/app/server/node_modules
@@ -14,7 +14,7 @@ services:
   frontend:
     build: ./client
     ports:
-      - 5173:3000
+      - 5173:5173
     volumes:
       - ./client:/usr/src/app/frontend
     command: npm run dev
