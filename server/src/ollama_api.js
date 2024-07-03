@@ -48,13 +48,36 @@ async function FetchResponse(desc) {
 
     if (prompt == null) return null;
 
-    const response = await ollama.generate({
-        model: "llama3",
-        prompt: prompt,
-        options: {
-            "seed": 101
-        }
+    // try {
+    //     const response = await ollama.generate({
+    //         model: "llama3",
+    //         prompt: prompt,
+    //         options: {
+    //             "seed": 101
+    //         }
+    //     })
+    // } catch (e) {
+    //     console.log(e);
+    // }
+    
+    const data = {
+        "model": "llama3", 
+        "messages": [{"role": "user", "content": prompt}],
+        "stream": false,
+        // "options": {"seed": 101}
+    };
+
+    // If fetching from outside the container, then use localhost, otherwise need to use host.docker.internal
+    const response = await fetch("http://host.docker.internal:11434/api/chat", {
+        method: "POST",
+        body: JSON.stringify(data)
+    }).then(resp => {
+        return resp.json();
+    }).catch(err => {
+        console.log(err);
     })
+
+    console.log(response);
 
     // If response can't be acquired from LLM
     if (response == null) return null;

@@ -7,7 +7,7 @@ FROM ollama/ollama:0.1.46 AS builder
 
 # ENTRYPOINT ["/usr/bin/bash", "/usr/local/bin/entrypoint.sh"]
 
-RUN ollama serve & sleep 5 ; ollama pull codegemma:2b ;
+RUN ollama serve & sleep 5 ; ollama pull llama3 ;
 RUN ps -ef | grep 'ollama serve' | grep -v grep | awk '{print $2}' | xargs -r kill -9
 
 FROM ollama/ollama

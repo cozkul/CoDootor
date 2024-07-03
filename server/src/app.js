@@ -14,6 +14,8 @@ app.get('/', (req, res) => {
 /*
     API endpoint to POST the description of the function to the LLM
     and retrieve the generated code from the LLM
+
+    Make sure to use Content-Type: application/json as a header in your request
 */
 app.post('/code', async (req, res) => {
   const desc = req.body.desc;
