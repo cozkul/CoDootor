@@ -13,6 +13,8 @@ services:
     command: npm run start
   frontend:
     build: ./client
+    env_file:
+      - ./client/.env.local
     ports:
       - 5173:5173
     volumes:

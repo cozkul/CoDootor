@@ -8,6 +8,8 @@ import TestCases from '../components/TestCases';
 
 import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
+import LoginButton from '@/components/LoginButton';
+import LogoutButton from '@/components/LogoutButton';
 
 const demo = `
 import { Code } from '@mantine/core';
@@ -24,6 +26,8 @@ const AnswerPage = () => {
       <div className={styles.page}>
         <div className={styles.header}>
         <Button variant="filled">Home</Button>
+        <LoginButton></LoginButton>
+        <LogoutButton></LogoutButton>
         </div>
         <Title order={1}>Problem title</Title>
         <Grid grow>
