@@ -7,7 +7,8 @@
     "test": "mocha ./test/ollama_api.test.js --timeout 10000",
     "test2": "mocha ./test/app.test.js --timeout 10000",
     "run": "node ./src/app.js",
-    "start": "node ./src/app.js"
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +19,8 @@
     "mocha": "^10.5.2",
     "ollama": "^0.5.2",
     "supertest": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }

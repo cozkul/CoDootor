@@ -10,13 +10,16 @@ services:
     volumes:
       - ./server:/usr/src/app/server
       - /usr/src/app/server/node_modules
-    command: npm run start
+    command: npm run dev
   frontend:
     build: ./client
+    env_file:
+      - ./client/.env.local
     ports:
       - 5173:5173
     volumes:
       - ./client:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
     command: npm run dev
   ollama:
     build:
