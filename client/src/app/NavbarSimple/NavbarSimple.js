@@ -17,13 +17,10 @@ import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './NavbarSimple.module.css';
 
 const data = [
-  { link: '', label: 'Notifications', icon: IconBellRinging },
-  { link: '', label: 'Billing', icon: IconReceipt2 },
-  { link: '', label: 'Security', icon: IconFingerprint },
-  { link: '', label: 'SSH Keys', icon: IconKey },
-  { link: '', label: 'Databases', icon: IconDatabaseImport },
-  { link: '', label: 'Authentication', icon: Icon2fa },
-  { link: '', label: 'Other Settings', icon: IconSettings },
+  { link: '', label: 'Home', icon: IconBellRinging },
+  { link: '', label: 'Leaderboards', icon: IconReceipt2 },
+  { link: '', label: 'Stats', icon: IconFingerprint },
+  
 ];
 
 export function NavbarSimple() {
