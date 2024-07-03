@@ -4,6 +4,7 @@ const oa = require('./ollama_api.js');
 const app = express();
 const port = 5001;
 
+app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -16,17 +17,17 @@ app.get('/', (req, res) => {
 */
 app.post('/code', async (req, res) => {
   const desc = req.body.desc;
-
+  
   if (desc == null || desc == "") return res.status(400).json({"error": "No description was provided."});
-
+  
   if (oa.isMalicious(desc)) {
     return res.status(400).json({"error": "Malicious description included, modify your description."});
   }
-
+  
   const resp = await oa.FetchResponse(desc);
 
   if (resp) {
-    res.json(resp);
+    return res.status(200).json(resp);
   } else {
     return res.status(400).json({"error": "Failed to generate code from Ollama"});
   }
