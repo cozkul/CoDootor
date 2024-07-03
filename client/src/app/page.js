@@ -8,8 +8,10 @@ import TestCases from '../components/TestCases';
 
 import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
+
 import LoginButton from '@/components/LoginButton';
 import LogoutButton from '@/components/LogoutButton';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 const demo = `
 import { Code } from '@mantine/core';
@@ -59,7 +61,7 @@ const AnswerPage = () => {
             </Box>
             <Space h="md" />
             <Button fullWidth variant="filled" onClick={toggle}>Submit</Button>
-          </Grid.Col>
+          </Grid.Col> 
         </Grid>
       </div>
     </div>
