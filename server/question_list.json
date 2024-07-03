@@ -1,0 +1,18 @@
+{
+	"questions": [
+		{
+			"stage": 1,
+			"name": "Lorem ipsum dolor",
+			"num_tests": 2,
+			"filepath": "./questions/q1.js",
+			"test_filepath": "./unit_tests/q1_tests.js"
+		}, 
+		{
+			"stage": 2,
+			"name": "Lorem ipsum dolor",
+			"num_tests": 2,
+			"filepath": "./questions/q2.js",
+			"test_filepath": "./unit_tests/q2_tests.js"
+		}
+	]
+}
