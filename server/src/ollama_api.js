@@ -64,7 +64,7 @@ async function FetchResponse(desc) {
         "model": "llama3", 
         "messages": [{"role": "user", "content": prompt}],
         "stream": false,
-        // "options": {"seed": 101}
+        "options": {"seed": 101}
     };
 
     // If fetching from outside the container, then use localhost, otherwise need to use host.docker.internal
