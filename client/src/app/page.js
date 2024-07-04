@@ -1,7 +1,7 @@
 'use client'
 
 import styles from "./page.module.css";
-import { Button, Title, Table } from '@mantine/core';
+import { Title, Table, Rating } from '@mantine/core';
 import { NavbarSimple } from "./NavbarSimple/NavbarSimple";
 import {
   IconLockFilled,
@@ -24,19 +24,13 @@ export default function Home() {
 
   const rows = stages.map((question) => {
     const filledStars = Math.floor(question.score / 0.33);
-    const unfilledStars = 3 - filledStars;
 
     return (
       <Table.Tr key={question.stage}>
         <Table.Td>{question.status === 'unlocked' ? <IconLockOpen2 /> : <IconLockFilled />}</Table.Td>
         <Table.Td>{`${question.stage}. ${question.name}`}</Table.Td>
         <Table.Td style={{ textAlign: 'right'}}>{`${Math.round(question.score * 100)}%`}</Table.Td>
-        <Table.Td>
-          <div style={{ display: 'flex' }}>
-            {[...Array(filledStars)].map(() => <IconStarFilled/>)}
-            {[...Array(unfilledStars)].map(() => <IconStar/>)}
-          </div>
-        </Table.Td>
+        <Table.Td> <Rating emptySymbol={<IconStar/>} fullSymbol={<IconStarFilled/>} count={3} defaultValue={filledStars} readOnly/> </Table.Td>
         <Table.Td>
           <QuestionButton 
             disabled={question.status === 'locked'} 
