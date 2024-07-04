@@ -16,7 +16,7 @@ const AnswerPage = () => {
   const [givenFunction, setGivenFunction] = useState('');
   const [userInput, setUserInput] = useState('');
   const [ollamaOutput, setOllamaOutput] = useState('');
-  const [testResults, setTestResults] = useState('');
+  const [testResults, setTestResults] = useState([]);
   const [validQuestion, setValidQuestion] = useState(true);
   const questionId = params.qid;
 
@@ -75,7 +75,7 @@ const AnswerPage = () => {
       });
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
-      setTestResults(testData);
+      setTestResults(testData.results);
     } catch (error) {
       console.error(error);
     } finally {
@@ -89,7 +89,7 @@ const AnswerPage = () => {
     <div>
       <div className={styles.page}>
         <div className={styles.header}>
-          <Button variant="filled" onClick={() => window.history.back()}><a href="../">Home</a></Button>
+          <Button variant="filled"><a href="../">Home</a></Button>
         </div>
         <Title order={1}>{problemTitle}</Title>
         <Grid grow>
