@@ -29,5 +29,5 @@ services:
       - 11434:11434
     volumes:
       - ./ollama:/root/.ollama
-    command: run codellama:7b
+    command: serve
     # https://huggingface.co/google/codegemma-2b#description
