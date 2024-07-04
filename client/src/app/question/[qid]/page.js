@@ -4,21 +4,22 @@ import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Button, Title, Textarea, Grid, Space, LoadingOverlay, Box } from '@mantine/core';
 import { CodeHighlight } from '@mantine/code-highlight';
-import TestCases from '../../components/TestCases';
+import TestCases from '@/components/TestCases';
 import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation'
 
 const AnswerPage = () => {
+  const params = useParams();
   const [visible, { toggle }] = useDisclosure(false);
   const [problemTitle, setProblemTitle] = useState('');
   const [givenFunction, setGivenFunction] = useState('');
   const [userInput, setUserInput] = useState('');
   const [ollamaOutput, setOllamaOutput] = useState('');
   const [testResults, setTestResults] = useState('');
-  const searchParams = useSearchParams();
-  // const questionId = searchParams.get('questionId');
-  const questionId = 1;
+  const questionId = params.qid;
+
+  if (!questionId) return "Invalid page, please visit a valid question.";
 
   useEffect(() => {
     fetch(`http://localhost:5001/question/${questionId}`)
