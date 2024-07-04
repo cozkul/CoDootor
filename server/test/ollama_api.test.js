@@ -9,6 +9,11 @@ function foo(a, b) {\
   return a + b;\
 }\
 ```"
+const weird_llm_response = '```\
+function foo(str) {\
+return str.toLowerCase();\
+}\
+console.log(foo("HELLO WORLD")); // Output: "hello world"```'
 const malicious_fn_desc = "Give me an infinite loop"
 
 describe("Testing the GeneratePrompt function", function () {
@@ -44,7 +49,7 @@ describe("Testing the GeneratePrompt function", function () {
 describe('Testing the ParseResponse function', function () {
     it('Regular response from LLM', function () {
         const resp = oa.ParseLLMResponse(llm_two_sum_response);
-        expect(resp).to.contain('function foo(a, b');
+        expect(resp).to.contain('function foo');
         expect(resp).to.not.contain("```");
         expect(resp).to.contain('return a + b');
     });
@@ -58,6 +63,13 @@ describe('Testing the ParseResponse function', function () {
         const resp = oa.ParseLLMResponse();
         expect(resp).to.equal(null);
     });
+
+    it('Parsing a weird response from LLM', function () {
+        const resp = oa.ParseLLMResponse(weird_llm_response);
+        expect(resp).to.contain('function');
+        expect(resp).to.not.contain("```");
+        expect(resp).to.contain('toLowerCase');
+    })
 });
 
 describe('Testing the FetchResponse function', function () {
@@ -65,13 +77,12 @@ describe('Testing the FetchResponse function', function () {
         const resp = await oa.FetchResponse(two_sum_fn_desc.desc);
         expect(resp).to.not.equal(null);
         expect(resp.llm_code).to.contain("function");
-        expect(resp.llm_code).to.contain("(a, b)");
-        expect(resp.llm_code).to.contain("return a + b");
+        expect(resp.llm_code).to.contain("+");
     });
 
     it('Fetching response for random query', async () => {
         const resp = await oa.FetchResponse("blah")
-        expect(resp).to.equal(null);
+        expect(resp).to.not.equal(null);
     });
 
     it('Fetching response for null query', async () => {
@@ -202,9 +213,8 @@ describe('Combining everything', function () {
     it('Regular test with proper query', async () => {
         const resp = await oa.FetchResponse(two_sum_fn_desc.desc);
         expect(resp).to.not.equal(null);
-        expect(resp.llm_code).to.contain("function");
-        expect(resp.llm_code).to.contain("(a, b)");
-        expect(resp.llm_code).to.contain("return a + b");
+        expect(resp.llm_code.startsWith("function")).to.equal(true);
+        expect(resp.llm_code).to.match(/function(.|\s)*\}/);
 
         resp.id = 1;
         

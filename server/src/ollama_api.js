@@ -71,9 +71,7 @@ async function FetchResponse(desc) {
     // If response can't be acquired from LLM
     if (response == null) return null;
 
-    const parsedResponse = ParseLLMResponse(response)
-
-    if (!parsedResponse.endsWith("}")) return null;
+    const parsedResponse = ParseLLMResponse(response);
 
     return {"llm_code": parsedResponse};
 }
@@ -87,11 +85,19 @@ async function FetchResponse(desc) {
 */
 function ParseLLMResponse(resp) {
     if (resp == undefined || resp == null) return null;
-
+    
     const words = resp.split("```");
-    if (words.length < 3) return null;
 
-    return words[1].trim();
+    if (words.length == 1) {
+        const match = resp.match(/function(.|\s)*\}/)
+        if (match) return match[0]
+    } else {
+        const code = words[1];
+        const regexMatch = code.match(/function(.|\s)*\}/)
+
+        if (regexMatch.length != 0) return regexMatch[0];
+        else return null;
+    }   
 }
 
 /*  

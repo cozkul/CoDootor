@@ -80,12 +80,16 @@ app.post('/grade', async (req, res) => {
   else return res.status(400).json({"error": "Failed to generate code from Ollama"});
 
   var testResults = oa.TestGeneratedCode(resp);
+  resp.results = testResults;
+
+  console.log(resp);
   
   if (testResults && testResults.length >= 1) {
-    if (testResults[0].err) res.status(400).json(testResults);
-    else res.json(testResults);
+    if (testResults[0].err) res.status(400).json(resp);
+    else res.json(resp);
   } else {
-    res.status(400).json({"error": "Failed to grade the provided code."})
+    resp.error = "Failed to grade the provided code.";
+    res.status(400).json(resp);
   }
 })
 

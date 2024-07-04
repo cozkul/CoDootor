@@ -58,24 +58,23 @@ const AnswerPage = () => {
   const handleSubmit = async () => {
     toggle();
     try {
-      const response = await fetch('http://localhost:5001/code', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ desc: userInput }),
-      });
-      const data = await response.json();
-      setOllamaOutput(data.llm_code);
-
+      // const response = await fetch('http://localhost:5001/code', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ desc: userInput }),
+      // });
+      // const data = await response.json();
       const testResponse = await fetch('http://localhost:5001/grade', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: questionId, llm_code: data.llm_code }),
+        body: JSON.stringify({ id: questionId, desc: userInput }),
       });
       const testData = await testResponse.json();
+      setOllamaOutput(testData.llm_code);
       setTestResults(testData);
     } catch (error) {
       console.error(error);
