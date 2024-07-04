@@ -22,10 +22,12 @@ services:
       - /usr/src/app/frontend/node_modules
     command: npm run dev
   ollama:
-    build: ./ollama
+    build: 
+      context: ./ollama
+      target: builder
     ports:
       - 11434:11434
     volumes:
       - ./ollama:/root/.ollama
-    command: serve
+    command: run codellama:7b
     # https://huggingface.co/google/codegemma-2b#description
