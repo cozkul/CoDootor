@@ -17,16 +17,25 @@ const AnswerPage = () => {
   const [userInput, setUserInput] = useState('');
   const [ollamaOutput, setOllamaOutput] = useState('');
   const [testResults, setTestResults] = useState('');
+  const [validQuestion, setValidQuestion] = useState(true);
   const questionId = params.qid;
 
   if (!questionId) return "Invalid page, please visit a valid question.";
 
   useEffect(() => {
     fetch(`http://localhost:5001/question/${questionId}`)
+    .then(resp => {
+      if (resp.ok) return resp;
+      else throw new Error("Invalid question ID.");
+    })
     .then(resp => resp.json())
     .then(data => {
       setGivenFunction(data);
       setProblemTitle(`Problem ${questionId}`);
+      setValidQuestion(true);
+    })
+    .catch(err => {
+      setValidQuestion(false);
     })
   }, [])
 
@@ -74,6 +83,8 @@ const AnswerPage = () => {
       toggle();
     }
   };
+
+  if (!validQuestion) return ("There was an error fetching the specified question. Please check that the question ID is correct.")
 
   return (
     <div>
