@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation'
 
 const AnswerPage = () => {
   const params = useParams();
-  const [visible, { toggle }] = useDisclosure(false);
+  const [visible, handlers] = useDisclosure(false);
   const [problemTitle, setProblemTitle] = useState('');
   const [givenFunction, setGivenFunction] = useState('');
   const [userInput, setUserInput] = useState('');
@@ -56,7 +56,7 @@ const AnswerPage = () => {
   // }, [questionId]);
 
   const handleSubmit = async () => {
-    toggle();
+    handlers.open();
     try {
       // const response = await fetch('http://localhost:5001/code', {
       //   method: 'POST',
@@ -79,17 +79,17 @@ const AnswerPage = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      toggle();
+      handlers.close();
     }
   };
 
-  if (!validQuestion) return ("There was an error fetching the specified question. Please check that the question ID is correct.")
+  if (!validQuestion) return (<div>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
 
   return (
     <div>
       <div className={styles.page}>
         <div className={styles.header}>
-          <Button variant="filled" onClick={() => window.history.back()}>Home</Button>
+          <Button variant="filled" onClick={() => window.history.back()}><a href="../">Home</a></Button>
         </div>
         <Title order={1}>{problemTitle}</Title>
         <Grid grow>
