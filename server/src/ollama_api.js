@@ -61,7 +61,7 @@ async function FetchResponse(desc) {
     // }
     
     const data = {
-        "model": "llama3", 
+        "model": "codellama:7b", 
         "messages": [{"role": "user", "content": prompt}],
         "stream": false,
         "options": {"seed": 101}
@@ -74,6 +74,7 @@ async function FetchResponse(desc) {
     }).then(resp => {
         return resp.json();
     }).then(resp => {
+        console.log(resp);
         return resp.message.content;
     }).catch(err => {
         console.log(err);
