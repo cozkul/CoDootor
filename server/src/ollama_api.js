@@ -73,6 +73,8 @@ async function FetchResponse(desc) {
         body: JSON.stringify(data)
     }).then(resp => {
         return resp.json();
+    }).then(resp => {
+        return resp.message.content;
     }).catch(err => {
         console.log(err);
     })
