@@ -47,18 +47,6 @@ async function FetchResponse(desc) {
     const prompt = GeneratePrompt(desc);
 
     if (prompt == null) return null;
-
-    // try {
-    //     const response = await ollama.generate({
-    //         model: "llama3",
-    //         prompt: prompt,
-    //         options: {
-    //             "seed": 101
-    //         }
-    //     })
-    // } catch (e) {
-    //     console.log(e);
-    // }
     
     const data = {
         "model": "codellama:7b", 
@@ -74,18 +62,15 @@ async function FetchResponse(desc) {
     }).then(resp => {
         return resp.json();
     }).then(resp => {
-        console.log(resp);
         return resp.message.content;
     }).catch(err => {
         console.log(err);
     })
 
-    console.log(response);
-
     // If response can't be acquired from LLM
     if (response == null) return null;
 
-    const parsedResponse = ParseLLMResponse(response.response)
+    const parsedResponse = ParseLLMResponse(response)
 
     if (!parsedResponse.endsWith("}")) return null;
 
