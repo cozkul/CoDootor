@@ -22,9 +22,7 @@ services:
       - /usr/src/app/frontend/node_modules
     command: npm run dev
   ollama:
-    build:
-      context: ./ollama
-      target: builder
+    build: ./ollama
     ports:
       - 11434:11434
     volumes:
