@@ -1,7 +1,6 @@
 
 import { Center, Paper, Rating, Text, Stack, Tabs, rem } from '@mantine/core';
-import { IconCircleDotted, IconCheck, IconX } from '@tabler/icons-react';
-
+import { IconCircleDotted, IconCheck, IconX, IconStar, IconStarFilled } from '@tabler/icons-react';
 
 // Test cases section for UI, this should retrieve prestored testcases for each question
 const TestCases = () => {
@@ -49,7 +48,7 @@ const TestCases = () => {
           gap="md"
         >
           <Center><Text>3/5 tests passed</Text></Center>
-          <Center><Rating count={3} defaultValue={2} readOnly/></Center>
+          <Center><Rating emptySymbol={<IconStar/>} fullSymbol={<IconStarFilled/>} count={3} defaultValue={2} readOnly/></Center>
         </Stack>
       </Paper>
     </Stack>
