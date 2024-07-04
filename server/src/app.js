@@ -16,16 +16,15 @@ app.get('/', (req, res) => {
 /*
   Desc for question retrieve endpoint
 */
-app.get('/questions/:questionId', (req, res) => {
-  const questionId = req.params.questionId;
-  const questionPath = path.join(__dirname, `../questions/${questionId}`);
-  
-  fs.readFile(questionPath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ "error": "Question not found" });
-    }
-    res.send(data);
-  });
+app.get('/question/:id', (req, res) => {
+  const questionId = req.params.id;
+  const questionPath = `./questions/q${questionId}.js`;
+  try {
+    const data = fs.readFileSync(questionPath, "utf8");
+    res.json(data);
+  } catch (e) {
+    res.status(400).send({"error": "Failed to retrieve the question."});
+  } 
 });
 
 /*

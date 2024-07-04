@@ -17,23 +17,33 @@ const AnswerPage = () => {
   const [ollamaOutput, setOllamaOutput] = useState('');
   const [testResults, setTestResults] = useState('');
   const searchParams = useSearchParams();
-  const questionId = searchParams.get('questionId');
+  // const questionId = searchParams.get('questionId');
+  const questionId = 1;
 
   useEffect(() => {
-    console.log("questionId ID:", questionId);
-    if (questionId) {
-      // retrieve questions
-      fetch(`http://localhost:5001/questions/q${questionId}.js`)
-        .then((response) => response.text())
-        .then((data) => {
-          setGivenFunction(data);
-          setProblemTitle(`Problem ${questionId}`);
-        })
-        .catch(error => {
-          console.error('Error fetching question code:', error);
-        });
-    }
-  }, [questionId]);
+    fetch(`http://localhost:5001/question/${questionId}`)
+    .then(resp => resp.json())
+    .then(data => {
+      setGivenFunction(data);
+      setProblemTitle(`Problem ${questionId}`);
+    })
+  }, [])
+
+  // useEffect(() => {
+  //   console.log("questionId ID:", questionId);
+  //   if (questionId) {
+  //     // retrieve questions
+  //     fetch(`http://localhost:5001/question/${questionId}`)
+  //       .then((response) => response.text())
+  //       .then((data) => {
+  //         setGivenFunction(data);
+  //         setProblemTitle(`Problem ${questionId}`);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error fetching question code:', error);
+  //       });
+  //   }
+  // }, [questionId]);
 
   const handleSubmit = async () => {
     toggle();
