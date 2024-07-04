@@ -61,10 +61,10 @@ async function FetchResponse(desc) {
     // }
     
     const data = {
-        "model": "llama3", 
+        "model": "codellama:7b", 
         "messages": [{"role": "user", "content": prompt}],
         "stream": false,
-        // "options": {"seed": 101}
+        "options": {"seed": 101}
     };
 
     // If fetching from outside the container, then use localhost, otherwise need to use host.docker.internal
@@ -73,6 +73,9 @@ async function FetchResponse(desc) {
         body: JSON.stringify(data)
     }).then(resp => {
         return resp.json();
+    }).then(resp => {
+        console.log(resp);
+        return resp.message.content;
     }).catch(err => {
         console.log(err);
     })
