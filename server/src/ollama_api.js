@@ -52,6 +52,7 @@ async function FetchResponse(desc) {
         "model": "codellama:7b", 
         "messages": [{"role": "user", "content": prompt}],
         "stream": false,
+        "keep_alive": -1,
         "options": {"seed": 101}
     };
 
