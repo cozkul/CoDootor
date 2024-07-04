@@ -14,11 +14,11 @@ import QuestionButton from "@/components/QuestionButton";
 
 export default function Home() {
   const stages = [
-    { status: 'unlocked', stage: 1, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 5/7 },
-    { status: 'unlocked', stage: 2, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 2/4 },
-    { status: 'unlocked', stage: 3, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
-    { status: 'locked', stage: 4, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
-    { status: 'locked', stage: 5, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
+    { id: 1, status: 'unlocked', stage: 1, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 5/7 },
+    { id: 2, status: 'unlocked', stage: 2, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 2/4 },
+    { id: 3, status: 'unlocked', stage: 3, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
+    { id: 4, status: 'locked', stage: 4, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
+    { id: 5, status: 'locked', stage: 5, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
   ];
 
 
@@ -32,7 +32,8 @@ export default function Home() {
         <Table.Td style={{ textAlign: 'right'}}>{`${Math.round(question.score * 100)}%`}</Table.Td>
         <Table.Td> <Rating emptySymbol={<IconStar/>} fullSymbol={<IconStarFilled/>} count={3} defaultValue={filledStars} readOnly/> </Table.Td>
         <Table.Td>
-          <QuestionButton 
+          <QuestionButton
+            url={'/question/' + question.id}
             disabled={question.status === 'locked'} 
             style={question.status === 'locked' ? { backgroundColor: 'gray', cursor: 'not-allowed' } : {}}
           >

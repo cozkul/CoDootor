@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@mantine/core';
 
-const QuestionButton = ({ disabled, style, children }) => {
+const QuestionButton = ({ url, disabled, style, children }) => {
   return (
-    <Link href="/answer_page">
+    <Link href={url}>
       <Button
         disabled={disabled}
         style={style}
