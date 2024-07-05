@@ -1,10 +1,12 @@
-
-import { Center, Paper, Rating, Text, Stack, Tabs, rem } from '@mantine/core';
-import { IconCircleDotted, IconCheck, IconX, IconStar, IconStarFilled } from '@tabler/icons-react';
+import { Center, Paper, Rating, Text, Stack, Tabs, rem, Grid } from '@mantine/core';
+import { IconCircleDotted, IconCheck, IconX, IconStarFilled } from '@tabler/icons-react';
 
 // Test cases section for UI, this should retrieve prestored testcases for each question
-const TestCases = () => {
+const TestCases = ({ results }) => {
   const iconStyle = { width: rem(12), height: rem(12) };
+
+  const totalTests = results.length;
+  const passedTests = results.filter(test => test.score > 0).length;
 
   return (
     <Stack
@@ -14,31 +16,33 @@ const TestCases = () => {
       justify="top"
       gap="md"
     >
-      
-        <Tabs defaultValue="test1">
-          <Tabs.List>
-            <Tabs.Tab value="test1" leftSection={<IconCircleDotted style={iconStyle} />}>
-              Test 1
+      <Tabs defaultValue={results[0] ? results[0].desc : 'test1'}>
+        <Tabs.List>
+          {results.map((result, index) => (
+            <Tabs.Tab 
+              key={index}
+              value={result.desc}
+              leftSection={result.score > 0 ? <IconCheck style={iconStyle} /> : <IconX style={iconStyle} />}
+            >
+              Test {index + 1}
             </Tabs.Tab>
-            <Tabs.Tab value="test2" leftSection={<IconCheck style={iconStyle} />}>
-              Test 2
-            </Tabs.Tab>
-            <Tabs.Tab value="test3" leftSection={<IconX style={iconStyle} />}>
-              Test 3
-            </Tabs.Tab>
-          </Tabs.List>
+          ))}
+        </Tabs.List>
 
-          <Tabs.Panel value="test1">
-            Test 1 tab content
+        {results.map((result, index) => (
+          <Tabs.Panel key={index} value={result.desc || `test${index + 1}`}>
+            <Text>{result.err ? `Error: ${result.err_reason}` : result.desc}</Text>
           </Tabs.Panel>
+        ))}
 
-          <Tabs.Panel value="test2">
-            Test 2 tab content
+        {/* Above code is for error message handling but no error returns from Ollama... 
+        
+          {results.map((result, index) => (
+          <Tabs.Panel key={index} value={result.desc}>
+            <Text>{result.desc}</Text>
           </Tabs.Panel>
+        ))} */}
 
-          <Tabs.Panel value="test3">
-            Test 3 tab content
-          </Tabs.Panel>
       </Tabs>
       <Paper shadow="xs" withBorder p="xl">
         <Stack
@@ -47,8 +51,16 @@ const TestCases = () => {
           justify="center"
           gap="md"
         >
-          <Center><Text>3/5 tests passed</Text></Center>
-          <Center><Rating emptySymbol={<IconStar/>} fullSymbol={<IconStarFilled/>} count={3} defaultValue={2} readOnly/></Center>
+          <Center><Text>{`${passedTests}/${totalTests} tests passed`}</Text></Center>
+          <Center>
+            <Grid>
+              {results.map((result, index) => (
+                <Grid.Col key={index} span={1}>
+                  {result.score > 0 ? <IconStarFilled color="gray" /> : null}
+                </Grid.Col>
+              ))}
+            </Grid>
+          </Center>
         </Stack>
       </Paper>
     </Stack>
