@@ -95,4 +95,18 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+
+/*
+  API endpoint for retrieving list of questions for homepage
+*/
+app.get('/', (req, res) => {
+  try {
+    const question_list = fs.readFileSync('./question_list.json', 'utf-8');
+    const return_questions = JSON.parse(question_list)
+    res.json(question_list);
+  } catch(e) {
+    res.status(400).send({"error": "Failed to retrieve questions"})
+  }
+})
+
 module.exports = { app };
