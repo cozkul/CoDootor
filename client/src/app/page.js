@@ -77,7 +77,7 @@ export default function Home() {
           <Title order={2}>Your score is 123</Title>
           <br></br>
 
-          <Table striped highlightOnHover withT>
+          <Table striped highlightOnHover>
             <Table.Thead>
               <Table.Tr>
                 <Table.Th style={{width: '5%'}}>Status</Table.Th>
