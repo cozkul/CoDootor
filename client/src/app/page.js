@@ -11,15 +11,35 @@ import {
 } from '@tabler/icons-react';
 import { NavLink } from "@mantine/core";
 import QuestionButton from "@/components/QuestionButton";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  const stages = [
-    { id: 1, status: 'unlocked', stage: 1, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 5/7 },
-    { id: 2, status: 'unlocked', stage: 2, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 2/4 },
-    { id: 3, status: 'unlocked', stage: 3, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
-    { id: 4, status: 'locked', stage: 4, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
-    { id: 5, status: 'locked', stage: 5, name: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit', score: 0 },
-  ];
+
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const resp = await fetch(`http://localhost:5001/question_list`);
+        if (!resp.ok) throw new Error("Couldn't fetch questions.");
+        var data = await resp.json();
+        data = JSON.parse(data)
+        setQuestions(data.question_list);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
+  const stages = questions.map((question, index) => ({
+    id: question.stage,
+    status: 'unlocked',
+    stage: question.stage,
+    name: question.name,
+    score: 1 / question.num_tests
+  }));
 
 
   const rows = stages.map((question) => {

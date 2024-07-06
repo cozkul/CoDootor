@@ -1,5 +1,5 @@
 {
-	"questions": [
+	"question_list": [
 		{
 			"stage": 1,
 			"name": "Lorem ipsum dolor",
@@ -13,6 +13,34 @@
 			"num_tests": 2,
 			"filepath": "./questions/q2.js",
 			"test_filepath": "./unit_tests/q2_tests.js"
+		},
+		{
+			"stage": 3,
+			"name": "Lorem ipsum dolor",
+			"num_tests": 2,
+			"filepath": "./questions/q3.js",
+			"test_filepath": "./unit_tests/q3_tests.js"
+		},
+		{
+			"stage": 4,	
+			"name": "Lorem ipsum dolor",
+			"num_tests": 2,
+			"filepath": "./questions/q4.js",
+			"test_filepath": "./unit_tests/q4_tests.js"
+		},
+		{
+			"stage": 5,
+			"name": "Lorem ipsum dolor",
+			"num_tests": 2,
+			"filepath": "./questions/q5.js",
+			"test_filepath": "./unit_tests/q5_tests.js"
+		},
+		{
+			"stage": 6,
+			"name": "Lorem ipsum dolor",
+			"num_tests": 2,
+			"filepath": "./questions/q6.js",
+			"test_filepath": "./unit_tests/q6_tests.js"
 		}
 	]
 }
