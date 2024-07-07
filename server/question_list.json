@@ -17,21 +17,21 @@
 		{
 			"stage": 3,
 			"name": "Recursive recursion",
-			"num_tests": 2,
+			"num_tests": 3,
 			"filepath": "./questions/q3.js",
 			"test_filepath": "./unit_tests/q3_tests.js"
 		},
 		{
 			"stage": 4,	
 			"name": "Working With Lists I",
-			"num_tests": 2,
+			"num_tests": 4,
 			"filepath": "./questions/q4.js",
 			"test_filepath": "./unit_tests/q4_tests.js"
 		},
 		{
 			"stage": 5,
 			"name": "Working With Lists II",
-			"num_tests": 2,
+			"num_tests": 3,
 			"filepath": "./questions/q5.js",
 			"test_filepath": "./unit_tests/q5_tests.js"
 		},
