@@ -3,14 +3,14 @@
 		{
 			"stage": 1,
 			"name": "One sheep, two sheep",
-			"num_tests": 2,
+			"num_tests": 3,
 			"filepath": "./questions/q1.js",
 			"test_filepath": "./unit_tests/q1_tests.js"
 		}, 
 		{
 			"stage": 2,
 			"name": "Quiet strings",
-			"num_tests": 2,
+			"num_tests": 3,
 			"filepath": "./questions/q2.js",
 			"test_filepath": "./unit_tests/q2_tests.js"
 		},
@@ -48,6 +48,13 @@
 			"num_tests": 2,
 			"filepath": "./questions/q7.js",
 			"test_filepath": "./unit_tests/q7_tests.js"
+		},
+		{
+			"stage": 8,
+			"name": "Make some string",
+			"num_tests": 3,
+			"filepath": "./questions/q8.js",
+			"test_filepath": "./unit_tests/q8_tests.js"
 		}
 	]
 }
