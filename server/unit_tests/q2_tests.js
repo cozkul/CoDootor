@@ -20,8 +20,19 @@ function testLower1(fn) {
     return {"desc": "Test if the function converts 'JavaScript' to 'javascript' and 'UNIT TEST' to 'unit test'.", score: pts};
 }
 
+function testLower2(fn) {
+    var pts = 0;
+    var result1 = fn("CPsc310");
+    var result2 = fn("LEo");
+
+    if (result1 === "cpsc310" && result2 === "leo") pts = 1;
+    else pts = 0;
+    
+    return {"desc": "Test if the function converts 'CPsc310' to 'cpsc310' and 'LEo' to 'leo'.", score: pts};
+}
+
 function run_tests(fn) {
-    var tests = [testLower0, testLower1];
+    var tests = [testLower0, testLower1, testLower2];
     var results = [];
 
     // Run all the tests specified

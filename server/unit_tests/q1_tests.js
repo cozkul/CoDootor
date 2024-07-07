@@ -17,8 +17,17 @@ function test1(fn) {
     return {"desc": "A less basic test to check if adding properly.", score: pts};
 }
 
+function test2(fn) {
+    var pts = 0;
+
+    if (fn(0, 0) == 0 && fn(20, 7) == 27) pts = 1;
+    else pts = 0;
+    
+    return {"desc": "A less basic test to check if adding properly.", score: pts};
+}
+
 function run_tests(fn) {
-    var tests = [test0, test1];
+    var tests = [test0, test1, test2];
     var results = [];
 
     // Run all the tests specified
