@@ -11,6 +11,9 @@ services:
       - ./server:/usr/src/app/server
       - /usr/src/app/server/node_modules
     command: npm run dev
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
+
   frontend:
     build: ./client
     env_file:
@@ -21,6 +24,9 @@ services:
       - ./client:/usr/src/app/frontend
       - /usr/src/app/frontend/node_modules
     command: npm run dev
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
+
   ollama:
     build: 
       context: ./ollama
