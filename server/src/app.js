@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 /*
-  Desc for question retrieve endpoint
+  API endpoint to GET proper questions as user wants
 */
 app.get('/question/:id', (req, res) => {
   const questionId = req.params.id;
