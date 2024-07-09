@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react';
-import { Group, Code } from '@mantine/core';
+import NextImage from 'next/image';
+import { Image, Group, Code } from '@mantine/core';
 import {
   IconBellRinging,
   IconFingerprint,
@@ -14,7 +15,6 @@ import {
   IconLogout
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
-import codooter_logo from './logo.jpg';
 import classes from './NavbarSimple.module.css';
 
 const data = [
@@ -47,7 +47,7 @@ export function NavbarSimple() {
     <nav className={classes.navbar}>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
-          <img src={codooter_logo}/>
+          <Image src={"./logo.jpg"}></Image>
           <Code fw={700}>v1.0</Code>
         </Group>
         {links}
