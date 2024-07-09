@@ -53,3 +53,7 @@ Our backend will have Llama3 via Ollama. REST API will handle this interaction w
 3. **Access the application:**
  - Backend API: `http://localhost:5001`
  - Frontend: `http://localhost:5173`
+
+### Test Suite
+*Frontend Testing*: [Document](https://docs.google.com/document/d/1UHnr5hNPltCYQ_K-Hptvbo2ccVuPOCVeVaGwEgdP3oU/edit?usp=sharing)
+*Backend Tests*: [Link to Backend Test Summary, Requires Tests to Finish Running First in Docker](http://localhost:5001/tests)
