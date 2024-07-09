@@ -13,9 +13,10 @@ app.get('/', (req, res) => {
   res.send("Hello world.");
 })
 
-app.get('/tests', (req, res) => {
-  express.static(path.join(__dirname, "..", "mochawesome-report"));
-})
+/*
+  Endpoint to view the tests that were generated
+*/
+app.use('/tests', express.static(path.resolve(__dirname, "..", "mochawesome-report"), options={index: "mochawesome.html"}));
 
 /*
   API endpoint to GET proper questions as user wants
