@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
   res.send("Hello world.");
 })
 
+app.get('/tests', (req, res) => {
+  express.static(path.join(__dirname, "..", "mochawesome-report"));
+})
+
 /*
   API endpoint to GET proper questions as user wants
 */

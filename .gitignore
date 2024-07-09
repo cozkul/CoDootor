@@ -9,3 +9,6 @@ server/.DS_Store
 
 # Ignore client
 .DS_Store
+
+#Ignore mochawesome report
+mochawesome-report/
