@@ -23,7 +23,7 @@ function test2(fn) {
     if (fn(0, 0) == 0 && fn(20, 7) == 27) pts = 1;
     else pts = 0;
     
-    return {"desc": "A less basic test to check if adding properly.", score: pts};
+    return {"desc": "Another basic test to check if adding properly.", score: pts};
 }
 
 function run_tests(fn) {

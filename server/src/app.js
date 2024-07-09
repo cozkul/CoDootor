@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile('test.html', { root: __dirname });
 })
 
 /*

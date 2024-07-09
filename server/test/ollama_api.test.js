@@ -140,12 +140,15 @@ describe('Testing the TestGeneratedCode function', function () {
             "id": 1
         })
         
-        expect(res.length).to.equal(2);
+        expect(res.length).to.equal(3);
         expect(res[0].desc).to.equal("A test to check if adding properly.");
         expect(res[0].score).to.equal(1);
 
         expect(res[1].desc).to.equal("A less basic test to check if adding properly.");
         expect(res[1].score).to.equal(1);
+
+        expect(res[2].score).to.equal(1);
+        expect(res[2].desc).to.equal("Another basic test to check if adding properly.");
     });
 
     it('Testing a correctly generated LLM function for invalid q', function () {
@@ -166,13 +169,16 @@ describe('Testing the TestGeneratedCode function', function () {
             "id": 1 
         })
 
-        expect(res.length).to.equal(2);
+        expect(res.length).to.equal(3);
         expect(res[0]).to.not.equal(null);
         expect(res[0].desc).to.equal("A test to check if adding properly.");
         expect(res[0].score).to.equal(0);
 
         expect(res[1].desc).to.equal("A less basic test to check if adding properly.");
         expect(res[1].score).to.equal(0);
+
+        expect(res[2].score).to.equal(0);
+        expect(res[2].desc).to.equal("Another basic test to check if adding properly.");
     });
 
     it('Testing a broken function for Q1', function () {
@@ -219,10 +225,12 @@ describe('Combining everything', function () {
         resp.id = 1;
         
         const graded = oa.TestGeneratedCode(resp);
-        expect(graded.length).to.equal(2);
+        expect(graded.length).to.equal(3);
         expect(graded[0].score).to.equal(1);
         expect(graded[0].desc).to.equal("A test to check if adding properly.");
         expect(graded[1].score).to.equal(1);
         expect(graded[1].desc).to.equal("A less basic test to check if adding properly.");
+        expect(graded[2].score).to.equal(1);
+        expect(graded[2].desc).to.equal("Another basic test to check if adding properly.");
     })
 })
