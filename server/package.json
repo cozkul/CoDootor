@@ -8,7 +8,7 @@
     "test2": "mocha ./test/app.test.js --timeout 10000",
     "run": "node ./src/app.js",
     "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js"
+    "dev": "mocha ./test/*.test.js --timeout 30000 && nodemon ./src/app.js"
   },
   "author": "",
   "license": "ISC",

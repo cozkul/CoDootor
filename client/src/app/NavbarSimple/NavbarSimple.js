@@ -48,6 +48,7 @@ export function NavbarSimple() {
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
           <Image src={"./logo.jpg"}></Image>
+          {/* <MantineLogo></MantineLogo> */}
           <Code fw={700}>v1.0</Code>
         </Group>
         {links}

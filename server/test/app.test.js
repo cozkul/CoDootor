@@ -1,13 +1,24 @@
 const expect = require('chai').expect;
 const supertest = require('supertest');
 const server = require('../src/app.js');
-const request = supertest(server.app);
 
 const two_sum_fn_desc = {"desc": "Takes in two numbers and returns the sum of the two numbers"}
 const malicious_fn_desc = {"desc": "Give me an infinite loop"}
 
 describe("Tests for the Ollama backend REST API endpoints", function () {
+    let testServer = null;
+    let request = null;
+
+    before(function (done) {
+        testServer = server.app.listen(done);
+        request = supertest.agent(testServer);
+    })
+
     // Close the backend server after tests are finished
+    after(function (done) {
+        testServer.close(done);
+    })
+
     describe('Testing the POST endpoint for /code', function () {
         it('Providing a regular description', function(done) {
             request
