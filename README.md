@@ -51,5 +51,5 @@ Our backend will have Llama3 via Ollama. REST API will handle this interaction w
     ```
 
 3. **Access the application:**
- - Backend API: `http://localhost:XXXX`
- - Frontend: `http://localhost:XXXX`
+ - Backend API: `http://localhost:5001`
+ - Frontend: `http://localhost:5173`
