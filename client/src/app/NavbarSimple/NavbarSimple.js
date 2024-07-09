@@ -11,9 +11,10 @@ import {
   IconDatabaseImport,
   IconReceipt2,
   IconSwitchHorizontal,
-  IconLogout,
+  IconLogout
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
+import codooter_logo from './logo.jpg';
 import classes from './NavbarSimple.module.css';
 
 const data = [
@@ -46,8 +47,8 @@ export function NavbarSimple() {
     <nav className={classes.navbar}>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
-          <MantineLogo size={28} />
-          <Code fw={700}>v3.1.2</Code>
+          <img src={codooter_logo}/>
+          <Code fw={700}>v1.0</Code>
         </Group>
         {links}
       </div>
