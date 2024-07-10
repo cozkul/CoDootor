@@ -39,6 +39,18 @@ const AnswerPage = () => {
     })
   }, [])
 
+  useEffect(() => {
+    fetch(`http://localhost:5001/unit_tests/${questionId}`)
+    .then(resp => {
+      if (resp.ok) return resp;
+      else throw new Error("Unit tests could not be fetched.");
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      setTestResults(data);
+    })
+  }, [])
+
   const handleSubmit = async () => {
     setLoading.open();
     try {

@@ -115,3 +115,20 @@ app.get('/question_list', (req, res) => {
 })
 
 module.exports = { app };
+
+
+/*
+  API endpoint for retrieving test cases for answering page
+*/
+app.get('/unit_tests/:id', (req, res) => {
+  const testId = req.params.id;
+  const testPath = `../unit_tests/q${testId}_tests.js`;
+  try {
+    dummy_fn = function() {};
+    const descs = require(testPath);
+    const result = descs.run_tests(dummy_fn);
+    res.send(result);
+  } catch (e) {
+    res.status(400).send({"error": "Failed to retrieve test cases."});
+  } 
+});
