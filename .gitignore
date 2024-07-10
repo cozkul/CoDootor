@@ -11,4 +11,4 @@ server/.DS_Store
 .DS_Store
 
 #Ignore mochawesome report
-mochawesome-report/
+# mochawesome-report/

@@ -12,7 +12,7 @@ services:
     volumes:
       - ./server:/usr/src/app/server
       - /usr/src/app/server/node_modules
-    command: npm run dev
+    command: npm run start
     extra_hosts:
     - "host.docker.internal:host-gateway"
 
@@ -26,7 +26,7 @@ services:
       - ./client:/usr/src/app/frontend
       - /usr/src/app/frontend/node_modules
       - /usr/src/app/frontend/mochawesome-report
-    command: npm run dev
+    command: npm run start
     extra_hosts:
     - "host.docker.internal:host-gateway"
 
