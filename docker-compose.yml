@@ -26,7 +26,7 @@ services:
       - ./client:/usr/src/app/frontend
       - /usr/src/app/frontend/node_modules
       - /usr/src/app/frontend/mochawesome-report
-    command: npm run start
+    command: npm run dev
     extra_hosts:
     - "host.docker.internal:host-gateway"
 
