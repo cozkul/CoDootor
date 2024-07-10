@@ -1,34 +1,31 @@
 'use client'
 
+/*
+Adapted from NavbarSimple template from mantine
+*/
 import { useState } from 'react';
-import NextImage from 'next/image';
-import { Image, Group, Code } from '@mantine/core';
+import { Image, Group, Code, Text } from '@mantine/core';
 import {
-  IconBellRinging,
-  IconFingerprint,
-  IconKey,
-  IconSettings,
-  Icon2fa,
-  IconDatabaseImport,
-  IconReceipt2,
+  IconHomeFilled,
+  IconTrophyFilled,
+  IconChartBar,
   IconSwitchHorizontal,
   IconLogout
 } from '@tabler/icons-react';
-import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './NavbarSimple.module.css';
 
 const data = [
-  { link: '', label: 'Home', icon: IconBellRinging },
-  { link: '', label: 'Leaderboards', icon: IconReceipt2 },
-  { link: '', label: 'Stats', icon: IconFingerprint },
+  { link: 'https://localhost:5173', label: 'Home', icon: IconHomeFilled },
+  { link: '', label: 'Leaderboards', icon: IconTrophyFilled },
+  { link: '', label: 'Stats', icon: IconChartBar },
   
 ];
 
 export function NavbarSimple() {
-  const [active, setActive] = useState('Billing');
+  const [active, setActive] = useState('Home');
 
   const links = data.map((item) => (
-    <a
+    <a  
       className={classes.link}
       data-active={item.label === active || undefined}
       href={item.link}
@@ -47,8 +44,7 @@ export function NavbarSimple() {
     <nav className={classes.navbar}>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
-          <Image src={"./logo.jpg"}></Image>
-          {/* <MantineLogo></MantineLogo> */}
+          <Image src={"./logo.png"}></Image>
           <Code fw={700}>v1.0</Code>
         </Group>
         {links}

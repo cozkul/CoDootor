@@ -2,7 +2,7 @@
 
 import styles from "./page.module.css";
 import { Title } from '@mantine/core';
-import { NavbarSimple } from "./NavbarSimple/NavbarSimple";
+import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import QuestionList from "@/components/QuestionList";
 
 export default async function Home() {
