@@ -18,7 +18,6 @@ const data = [
   { link: 'https://localhost:5173', label: 'Home', icon: IconHomeFilled },
   { link: '', label: 'Leaderboards', icon: IconTrophyFilled },
   { link: '', label: 'Stats', icon: IconChartBar },
-  
 ];
 
 export function NavbarSimple() {
@@ -56,7 +55,7 @@ export function NavbarSimple() {
           <span>Change account</span>
         </a>
 
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+        <a href="/api/auth/logout" className={classes.link}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
         </a>
