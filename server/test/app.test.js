@@ -120,4 +120,52 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
             })
         });
     })
+    
+    describe('Testing question and unit test GET endpoints', function () {
+
+        it('Fetching question 1', function (done) {
+            request.get('/question/1')
+            .end(function(err, res) {
+                expect(res.statusCode).to.equal(200);
+                expect(res.body).to.not.equal(null);
+                if (err) done(err);
+                done();
+            })
+        });
+
+        it('Fetching a non-existant question', function (done) {
+            request.get('/question/ford_prefect')
+            .end(function(err, res) {
+                expect(res.statusCode).to.equal(400);
+                expect(res.body).to.not.equal(null);
+                expect(res.body.error).to.equal("Failed to retrieve the question.");
+                if (err) done(err);
+                done();
+            })
+        });
+
+        it('Fetching unit tests for question 1', function (done) {
+            request.get('/unit_tests/1')
+            .end(function(err, res) {
+                expect(res.body).to.not.equal(null);
+                expect(res.body.length).to.equal(3);
+                expect(res.body[0].desc).to.equal("A test to check if adding properly.");
+                expect(res.body[1].desc).to.equal("A less basic test to check if adding properly.");
+                expect(res.body[2].desc).to.equal("Another basic test to check if adding properly.");
+                if (err) done(err);
+                done();
+            })
+        });
+
+        it('Fetching a non-existant set of unit tests', function (done) {
+            request.get('/unit_tests/ford_prefect')
+            .end(function(err, res) {
+                expect(res.statusCode).to.equal(400);
+                expect(res.body).to.not.equal(null);
+                expect(res.body.error).to.equal("Failed to retrieve test cases.");
+                if (err) done(err);
+                done();
+            })
+        });
+    })
 })
