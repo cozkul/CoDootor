@@ -29,8 +29,8 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
             .expect(200)
             .end(function(err, res) {
                 expect(res.body.llm_code).to.not.equal(null);
-                expect(res.body.llm_code).to.contain('(a, b)');
-                expect(res.body.llm_code).to.contain('return a + b');
+                expect(res.body.llm_code).to.match(/return [\w]+ \+ [\w]+/);
+                expect(res.body.llm_code).to.match(/function [\w]+\([\w]+\,[\s]*[\w]+\)/);
                 if (err) done(err);
                 done();
             })
