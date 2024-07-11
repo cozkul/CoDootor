@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { Button } from '@mantine/core'
 
 // link to the home page
 const HomeButton = () => {
   return (
-    <Link href="/"> 
-      <button className="home-button">Home</button>
+    <Link href="/">
+      <Button variant="filled">Home</Button>
     </Link>
   );
 };

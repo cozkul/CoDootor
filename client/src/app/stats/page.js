@@ -1,13 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useDisclosure } from '@mantine/hooks';
 import { Button, Title, Textarea, Grid, Space, LoadingOverlay, Box } from '@mantine/core';
-import { CodeHighlight } from '@mantine/code-highlight';
-import TestCases from '@/components/TestCases';
 import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
-import { useParams } from 'next/navigation'
+import HomeButton from '@/components/HomeButton';
 
 const AnswerPage = () => {
 
@@ -33,7 +30,7 @@ const AnswerPage = () => {
     <div>
       <div className={styles.page}>
         <div className={styles.header}>
-          <Button variant="filled"><a href="../">Home</a></Button>
+          <HomeButton></HomeButton>
         </div>
 
       </div>

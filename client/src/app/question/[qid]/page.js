@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Button, Title, Textarea, Grid, Space, LoadingOverlay, Box } from '@mantine/core';
+import HomeButton from '@/components/HomeButton'
 import { CodeHighlight } from '@mantine/code-highlight';
 import TestCases from '@/components/TestCases';
 import '@mantine/code-highlight/styles.css';
@@ -77,7 +78,7 @@ const AnswerPage = () => {
     <div>
       <div className={styles.page}>
         <div className={styles.header}>
-          <Button variant="filled"><a href="../">Home</a></Button>
+          <HomeButton></HomeButton>
         </div>
         <Title order={1}>{problemTitle}</Title>
         <Grid grow>
