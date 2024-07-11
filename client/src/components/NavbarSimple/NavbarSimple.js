@@ -50,14 +50,14 @@ export function NavbarSimple() {
       </div>
 
       <div className={classes.footer}>
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+        {/* <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
           <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
           <span>Change account</span>
-        </a>
+        </a> */}
 
         <a href="/api/auth/logout" className={classes.link}>
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
+          <IconLogout color="red" className={classes.linkIcon} stroke={1.5} />
+          <Text color="red">Logout</Text>
         </a>
       </div>
     </nav>

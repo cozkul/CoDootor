@@ -14,7 +14,6 @@ export default async function Home() {
     .then(res => JSON.parse(res))
     .then(res => res.question_list)
     .catch(error => console.error('Error fetching data:', error));
-  console.log(sessionInfo);
 
   return (
     sessionInfo == null ? 
