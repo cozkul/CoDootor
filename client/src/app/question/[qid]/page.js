@@ -20,7 +20,7 @@ const AnswerPage = () => {
   const [validQuestion, setValidQuestion] = useState(true);
   const questionId = params.qid;
 
-  if (!questionId) return "Invalid page, please visit a valid question.";
+  if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
 
   useEffect(() => {
     fetch(`http://localhost:5001/question/${questionId}`)
