@@ -14,6 +14,7 @@ export default async function Home() {
     .then(res => JSON.parse(res))
     .then(res => res.question_list)
     .catch(error => console.error('Error fetching data:', error));
+  console.log(sessionInfo);
 
   return (
     sessionInfo == null ? 
@@ -26,7 +27,7 @@ export default async function Home() {
           <NavbarSimple />
         </div>
         <div className={styles.centerColumn}>
-          <Title order={1}>Welcome XYZ!</Title>
+          <Title order={1}>Welcome, {sessionInfo.user.nickname}!</Title>
           <Title order={2}>Your score is 123</Title>
           <br></br>
           <QuestionList questions={questions} />

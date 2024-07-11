@@ -10,17 +10,6 @@ import styles from './page.module.css';
 import { useParams } from 'next/navigation'
 
 const AnswerPage = () => {
-  const params = useParams();
-  const [loading, setLoading] = useDisclosure(false);
-  const [problemTitle, setProblemTitle] = useState('');
-  const [givenFunction, setGivenFunction] = useState('');
-  const [userInput, setUserInput] = useState('');
-  const [ollamaOutput, setOllamaOutput] = useState('');
-  const [testResults, setTestResults] = useState([]);
-  const [validQuestion, setValidQuestion] = useState(true);
-  const questionId = params.qid;
-
-  if (!questionId) return "Invalid page, please visit a valid question.";
 
 //   useEffect(() => {
 //     fetch(`http://localhost:5001/question/${questionId}`)
@@ -39,8 +28,6 @@ const AnswerPage = () => {
 //     })
 //   }, [])
 // };
-
-  if (!validQuestion) return (<div className={styles.page}>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
 
   return (
     <div>

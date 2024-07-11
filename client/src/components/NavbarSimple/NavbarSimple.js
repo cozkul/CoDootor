@@ -17,7 +17,7 @@ import classes from './NavbarSimple.module.css';
 const data = [
   { link: 'https://localhost:5173', label: 'Home', icon: IconHomeFilled },
   { link: '', label: 'Leaderboards', icon: IconTrophyFilled },
-  { link: '', label: 'Stats', icon: IconChartBar },
+  { link: 'https://localhost:5173/stats', label: 'Stats', icon: IconChartBar },
 ];
 
 export function NavbarSimple() {
