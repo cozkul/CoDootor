@@ -15,9 +15,9 @@ import {
 import classes from './NavbarSimple.module.css';
 
 const data = [
-  { link: 'https://localhost:5173', label: 'Home', icon: IconHomeFilled },
+  { link: 'http://localhost:5173', label: 'Home', icon: IconHomeFilled },
   { link: '', label: 'Leaderboards', icon: IconTrophyFilled },
-  { link: 'https://localhost:5173/stats', label: 'Stats', icon: IconChartBar },
+  { link: 'http://localhost:5173/stats', label: 'Stats', icon: IconChartBar },
 ];
 
 export function NavbarSimple() {
@@ -30,7 +30,7 @@ export function NavbarSimple() {
       href={item.link}
       key={item.label}
       onClick={(event) => {
-        event.preventDefault();
+        // event.preventDefault();
         setActive(item.label);
       }}
     >
