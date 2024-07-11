@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '@mantine/core';
+import { Center, Button } from '@mantine/core';
 
-const LoginButton = () => {
+const LoginPrompt = () => {
     return (
         <div>
             <p>You must be logged in before you are able to access the application.</p>
@@ -10,4 +10,4 @@ const LoginButton = () => {
     );
   };
   
-  export default LoginButton;
+  export default LoginPrompt;

@@ -71,7 +71,7 @@ const AnswerPage = () => {
     }
   };
 
-  if (!validQuestion) return (<div>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
+  if (!validQuestion) return (<div className={styles.page}>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
 
   return (
     <div>

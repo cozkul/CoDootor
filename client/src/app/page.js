@@ -5,7 +5,7 @@ import { Title } from '@mantine/core';
 import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import QuestionList from "@/components/QuestionList";
 import { getSession } from '@auth0/nextjs-auth0';
-import LoginButton from "@/components/LoginButton";
+import LoginPrompt from "@/components/LoginPrompt";
 
 export default async function Home() {
   const sessionInfo = await getSession();
@@ -17,8 +17,8 @@ export default async function Home() {
 
   return (
     sessionInfo == null ? 
-    <div className={styles.page}>
-      <LoginButton></LoginButton>
+    <div className={styles.loginPromptPage}>
+      <LoginPrompt></LoginPrompt>
     </div> :
     <div>
       <div className={styles.page}>
