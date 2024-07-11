@@ -1,7 +1,7 @@
 'use server'
 
 import styles from "./page.module.css";
-import { Title } from '@mantine/core';
+import { Space, Image, Title } from '@mantine/core';
 import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import QuestionList from "@/components/QuestionList";
 import { getSession } from '@auth0/nextjs-auth0';
@@ -14,6 +14,7 @@ export default async function Home() {
     .then(res => JSON.parse(res))
     .then(res => res.question_list)
     .catch(error => console.error('Error fetching data:', error));
+  console.log(sessionInfo);
 
   return (
     sessionInfo == null ? 
@@ -26,11 +27,18 @@ export default async function Home() {
           <NavbarSimple />
         </div>
         <div className={styles.centerColumn}>
-          <Title order={1}>Welcome, {sessionInfo.user.nickname}!</Title>
-          <Title order={2}>Your score is 123</Title>
+          <div className={styles.logo}>
+            <Image h={79} w="auto" fit="contain" src={sessionInfo.user.picture}></Image>
+            <Space w="md"></Space>
+            <div>
+              <Title order={1}>Welcome, {sessionInfo.user.nickname}!</Title>
+              <Title order={2}>Your score is 123</Title>
+            </div>
+          </div>
           <br></br>
           <QuestionList questions={questions} />
         </div>
+        
 
       </div>
     </div>
