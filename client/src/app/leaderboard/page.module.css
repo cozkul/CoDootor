@@ -7,6 +7,20 @@
   min-height: 100vh;
 }
 
+.logo {
+  display: flex;
+  flex-direction: row;
+}
+
+.loginPromptPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
 .stripedTable tbody tr:nth-child(even) {
   background-color: #f0f0f0;
 }

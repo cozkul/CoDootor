@@ -16,7 +16,7 @@ import classes from './NavbarSimple.module.css';
 
 const data = [
   { link: 'http://localhost:5173', label: 'Home', icon: IconHomeFilled },
-  { link: '', label: 'Leaderboards', icon: IconTrophyFilled },
+  { link: 'http://localhost:5173/leaderboard', label: 'Leaderboards', icon: IconTrophyFilled },
   { link: 'http://localhost:5173/stats', label: 'Stats', icon: IconChartBar },
 ];
 
