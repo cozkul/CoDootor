@@ -9,8 +9,9 @@ import TestCases from '@/components/TestCases';
 import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
 import { useParams } from 'next/navigation'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-const AnswerPage = () => {
+export default withPageAuthRequired(function AnswerPage() {
   const params = useParams();
   const [loading, setLoading] = useDisclosure(false);
   const [problemTitle, setProblemTitle] = useState('');
@@ -112,6 +113,4 @@ const AnswerPage = () => {
       </div>
     </div>
   );
-};
-
-export default AnswerPage;
+});
