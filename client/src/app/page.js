@@ -6,6 +6,7 @@ import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import QuestionList from "@/components/QuestionList";
 import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
+import UserBanner from "@/components/UserBanner";
 
 export default async function Home() {
   const sessionInfo = await getSession();
@@ -26,14 +27,7 @@ export default async function Home() {
           <NavbarSimple />
         </div>
         <div className={styles.centerColumn}>
-          <div className={styles.logo}>
-            <Image h={79} w="auto" fit="contain" src={sessionInfo.user.picture}></Image>
-            <Space w="md"></Space>
-            <div>
-              <Title order={1}>Welcome, {sessionInfo.user.nickname}!</Title>
-              <Title order={2}>Your score is 123</Title>
-            </div>
-          </div>
+          <UserBanner sessionInfo={sessionInfo}/>
           <br></br>
           <QuestionList questions={questions} />
         </div>
