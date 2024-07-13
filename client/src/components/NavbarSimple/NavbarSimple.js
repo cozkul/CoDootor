@@ -22,6 +22,7 @@ const data = [
 ];
 
 export function NavbarSimple() {
+  // Highlights current path as the active one
   const pathname = usePathname();
   let labelName = "Home";
   if (pathname != "/") {

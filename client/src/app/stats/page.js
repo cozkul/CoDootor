@@ -7,8 +7,9 @@ import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import LeaderboardTable from "@/components/LeaderboardTable";
 import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default async function StatsPage() {
+export default withPageAuthRequired(async function StatsPage() {
 
 //   useEffect(() => {
 //     fetch(`http://localhost:5001/question/${questionId}`)
@@ -52,4 +53,4 @@ export default async function StatsPage() {
       </div>
     </div>
   );
-};
+}, { 'returnTo': '/stats' });
