@@ -8,7 +8,7 @@ import LeaderboardTable from "@/components/LeaderboardTable";
 import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
 
-export default async function AnswerPage() {
+export default async function StatsPage() {
 
 //   useEffect(() => {
 //     fetch(`http://localhost:5001/question/${questionId}`)
