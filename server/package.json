@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha ./test/ollama_api.test.js --timeout 10000",
     "test2": "mocha ./test/app.test.js --timeout 10000",
-    "run": "node ./src/app.js",
-    "start": "node ./src/app.js",
+    "run": "nodemon ./src/app.js",
+    "start": "nodemon ./src/app.js",
     "dev": "mocha ./test/*.test.js --timeout 300000 --reporter mochawesome && nodemon ./src/app.js"
   },
   "author": "",
@@ -18,6 +18,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-oauth2-jwt-bearer": "^1.6.0",
+    "jose": "^5.6.3",
     "mocha": "^10.5.2",
     "ollama": "^0.5.2",
     "supertest": "^7.0.0"

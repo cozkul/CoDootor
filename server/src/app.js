@@ -13,10 +13,12 @@ require('dotenv').config();
 const jwtCheck = auth({
   audience: process.env.YOUR_API_IDENTIFIER,
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+  tokenSigningAlg: 'RS256'
 });
 
 app.use(express.json());
 app.use(cors());
+app.use(jwtCheck);
 
 app.get('/', (req, res) => {
   res.send("Hello world.");
