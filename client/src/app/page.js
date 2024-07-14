@@ -1,49 +1,17 @@
-'use server'
-
+import { Title, Button } from '@mantine/core';
+import Link from 'next/link';
 import styles from "./page.module.css";
-import { Space, Image, Title } from '@mantine/core';
-import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
-import QuestionList from "@/components/QuestionList";
-import { getSession } from '@auth0/nextjs-auth0';
-import LoginPrompt from "@/components/LoginPrompt";
-import UserBanner from "@/components/UserBanner";
-import { getAccessToken } from '@auth0/nextjs-auth0';
 
-export default async function Home() {
-  const sessionInfo = await getSession();
-
-  if (sessionInfo == null) return (
-  <div className={styles.loginPromptPage}>
-    <LoginPrompt></LoginPrompt>
-  </div>
-  )
-
-  const { accessToken } = await getAccessToken();
-  const questions = await fetch(`http://host.docker.internal:5001/question_list`, {
-    headers: {
-      "Authorization": `Bearer ${accessToken}`
-    }
-  }
-  )
-    .then(res => res.json())
-    .then(res => JSON.parse(res))
-    .then(res => res.question_list)
-    .catch(error => console.error('Error fetching data:', error));
-
+export default function Landing() {
   return (
-    <div>
-      <div className={styles.page}>
+    <div className={styles.landingPage}>
+      <div className={styles.topPart}>
+        <Title order={1} style={{ color: '#ffffff' }}>Welcome to CoDootor</Title>
         <div>
-          <NavbarSimple />
+          <Button style={{ margin: '10px'}} component={Link} href="/home/">Home</Button>
+          <Button style={{ margin: '10px'}} component={Link} href="https://github.students.cs.ubc.ca/CPSC310-2024S/Project-Groups-19-Lab-B">GitHub</Button>
         </div>
-        <div className={styles.centerColumn}>
-          <UserBanner sessionInfo={sessionInfo}/>
-          <br></br>
-          <QuestionList questions={questions} />
-        </div>
-        
-
       </div>
     </div>
-  )
+  );
 }
