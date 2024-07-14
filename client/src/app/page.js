@@ -19,8 +19,12 @@ export default async function Home() {
   )
 
   const { accessToken } = await getAccessToken();
-  const options = {"headers": {"authorization": `Bearer ${ accessToken }}`}}
-  const questions = await fetch(`http://host.docker.internal:5001/question_list`, options)
+  const questions = await fetch(`http://host.docker.internal:5001/question_list`, {
+    headers: {
+      "Authorization": `Bearer ${accessToken}`
+    }
+  }
+  )
     .then(res => res.json())
     .then(res => JSON.parse(res))
     .then(res => res.question_list)

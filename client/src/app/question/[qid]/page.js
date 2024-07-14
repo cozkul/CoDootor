@@ -25,7 +25,8 @@ export default withPageAuthRequired(function AnswerPage() {
   if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/question/${questionId}`)
+    fetch(`http://localhost:5173/api/question/${questionId}`)
+    // fetch(`http://localhost:5001/question/${questionId}`)
     .then(resp => {
       if (resp.ok) return resp;
       else throw new Error("Invalid question ID.");
@@ -42,7 +43,7 @@ export default withPageAuthRequired(function AnswerPage() {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:5001/unit_tests/${questionId}`)
+    fetch(`http://localhost:5173/api/unit_tests/${questionId}`)
     .then(resp => {
       if (resp.ok) return resp;
       else throw new Error("Unit tests could not be fetched.");
@@ -56,7 +57,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const handleSubmit = async () => {
     setLoading.open();
     try {
-      const testResponse = await fetch('http://localhost:5001/grade', {
+      const testResponse = await fetch('http://localhost:5173/api/grade', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

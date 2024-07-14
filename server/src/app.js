@@ -32,7 +32,7 @@ app.use('/tests', express.static(path.resolve(__dirname, "..", "mochawesome-repo
 /*
   API endpoint to GET proper questions as user wants
 */
-app.get('/question/:id', (req, res) => {
+app.get('/question/:id', jwtCheck, (req, res) => {
   const questionId = req.params.id;
   const questionPath = `./questions/q${questionId}.js`;
   try {
@@ -49,7 +49,7 @@ app.get('/question/:id', (req, res) => {
 
     Make sure to use Content-Type: application/json as a header in your request
 */
-app.post('/code', async (req, res) => {
+app.post('/code', jwtCheck, async (req, res) => {
   const desc = req.body.desc;
   
   if (desc == null || desc == "") return res.status(400).json({"error": "No description was provided."});
@@ -75,7 +75,7 @@ app.post('/code', async (req, res) => {
     curl -d "{\"desc\": \"Takes in two numbers and returns the sum of both of them\", \"id\": 1}" \
     --header "Content-Type: application/json" localhost:5001/grade
 */
-app.post('/grade', async (req, res) => {
+app.post('/grade', jwtCheck, async (req, res) => {
   const desc = req.body.desc;
   const id = req.body.id;
   
@@ -137,7 +137,7 @@ app.listen(port, () => {
 /*
   API endpoint for retrieving list of questions for homepage
 */
-app.get('/question_list', (req, res) => {
+app.get('/question_list', jwtCheck, (req, res) => {
   try {
     const question_list = fs.readFileSync('./question_list.json', 'utf-8');
     const return_questions = JSON.parse(question_list)
@@ -153,7 +153,7 @@ module.exports = { app };
 /*
   API endpoint for retrieving test cases for answering page
 */
-app.get('/unit_tests/:id', (req, res) => {
+app.get('/unit_tests/:id', jwtCheck, (req, res) => {
   const testId = req.params.id;
   const testPath = `../unit_tests/q${testId}_tests.js`;
   try {
