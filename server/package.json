@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha ./test/ollama_api.test.js --timeout 10000",
     "test2": "mocha ./test/app.test.js --timeout 10000",
+    "test3": "mocha ./test/user_data.test.js",
     "run": "nodemon ./src/app.js",
     "start": "nodemon ./src/app.js",
     "dev": "mocha ./test/*.test.js --timeout 300000 --reporter mochawesome && nodemon ./src/app.js"
