@@ -6,6 +6,7 @@ const { auth } = require('express-oauth2-jwt-bearer');
 const oa = require('./ollama_api.js');
 const app = express();
 const port = 5001;
+const udata = require('./user_data.js');
 
 require('dotenv').config();
 
