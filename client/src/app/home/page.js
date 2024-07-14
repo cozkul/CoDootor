@@ -12,7 +12,7 @@ import { getAccessToken } from '@auth0/nextjs-auth0';
 export default async function Home() {
   const sessionInfo = await getSession();
 
-  if (sessionInfo == null) return (
+  if (!sessionInfo) return (
   <div className={styles.loginPromptPage}>
     <LoginPrompt></LoginPrompt>
   </div>

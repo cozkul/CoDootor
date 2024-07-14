@@ -29,5 +29,6 @@ return response;
 });
 
 export const config = {
-    matcher: ['/api/:path*']
+    matcher: ['/api/:path*'],
+    maxDuration: 300
 };
