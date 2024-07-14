@@ -2,9 +2,18 @@ const express = require('express');
 const cors = require('cors')
 const fs = require('fs');
 const path = require('path');
+const { auth } = require('express-oauth2-jwt-bearer');
 const oa = require('./ollama_api.js');
 const app = express();
 const port = 5001;
+
+require('dotenv').config();
+
+// should be set on .env
+const jwtCheck = auth({
+  audience: process.env.YOUR_API_IDENTIFIER,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+});
 
 app.use(express.json());
 app.use(cors());
@@ -95,6 +104,28 @@ app.post('/grade', async (req, res) => {
     res.status(400).json(resp);
   }
 })
+
+app.post('/saveProgress', jwtCheck, (req, res) => {
+  const userId = req.auth.payload.sub;
+  const { problemId, score, progress } = req.body;
+  const userData = { problemId, score, progress };
+
+  const userFilePath = path.join(__dirname, 'user_data', `${userId}.json`);
+  const userDirectory = path.dirname(userFilePath);
+
+  if (!fs.existsSync(userDirectory)) {
+    //console.log('why not');
+    fs.mkdirSync(userDirectory, { recursive: true });
+  }
+
+  fs.writeFile(userFilePath, JSON.stringify(userData, null, 2), (err) => {
+    if (err) {
+      console.error('Error writing file:', err);
+      return res.status(500).send({ error: 'Failed to save user data' });
+    }
+    res.status(200).send({ message: 'User data saved successfully' });
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
