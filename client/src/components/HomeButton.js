@@ -5,7 +5,7 @@ import { Button } from '@mantine/core'
 // link to the home page
 const HomeButton = () => {
   return (
-    <Link href="/">
+    <Link href="/home">
       <Button variant="filled">Home</Button>
     </Link>
   );

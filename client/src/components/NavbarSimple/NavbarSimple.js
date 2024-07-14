@@ -16,7 +16,7 @@ import classes from './NavbarSimple.module.css';
 import { usePathname } from 'next/navigation'
 
 const data = [
-  { link: 'http://localhost:5173', label: 'Home', icon: IconHomeFilled },
+  { link: 'http://localhost:5173/home', label: 'Home', icon: IconHomeFilled },
   { link: 'http://localhost:5173/leaderboards', label: 'Leaderboards', icon: IconTrophyFilled },
   { link: 'http://localhost:5173/stats', label: 'Stats', icon: IconChartBar },
 ];
@@ -27,7 +27,6 @@ export function NavbarSimple() {
   let labelName = "Home";
   if (pathname != "/") {
     labelName = pathname.charAt(1).toUpperCase() + pathname.slice(2, );
-    console.log(labelName);
   }
   const [active, setActive] = useState(labelName);
 
