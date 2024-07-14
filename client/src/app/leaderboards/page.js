@@ -1,4 +1,4 @@
-'use server';
+'use server'
 
 // import React, { useState, useEffect } from 'react';
 import styles from "./page.module.css";
@@ -10,7 +10,7 @@ import LoginPrompt from "@/components/LoginPrompt";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import UserBanner from "@/components/UserBanner";
 
-export default withPageAuthRequired(async function StatsPage() {
+export default withPageAuthRequired(async function LeaderboardPage() {
 
 //   useEffect(() => {
 //     fetch(`http://localhost:5001/question/${questionId}`)
@@ -47,4 +47,4 @@ export default withPageAuthRequired(async function StatsPage() {
       </div>
     </div>
   );
-}, { 'returnTo': '/stats' });
+}, { 'returnTo': '/leaderboards' });
