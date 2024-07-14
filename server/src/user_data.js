@@ -60,6 +60,7 @@ function initializeUserData(folder, userID, nickname) {
 
 /*
     Given the user's ID and the score data for a question (questionID, score)
+    update the user's score for that question in the database
 */
 function updateQuestionDataForUser(userID, questionData) {
 
