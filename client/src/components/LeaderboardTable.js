@@ -12,7 +12,7 @@ import QuestionButton from "@/components/QuestionButton";
 export default function LeaderboardTable({ users, cur_user_id }) {
     const ranks = users.map((user, index) => ({
         id: user.user_id,
-        rank: index,
+        rank: index + 1,
         nick: user.nickname,
         points: user.num_points
     }));
