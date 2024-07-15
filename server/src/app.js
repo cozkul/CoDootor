@@ -42,7 +42,7 @@ app.post('/user', (req, res) => {
   const user_id = req.body.user_id;
   const nickname = req.body.nickname;
 
-  if (!user_id || user_id == "" || isNaN(user_id)) return res.status(400).send({"error": "Invalid user id was provided"})
+  if (!user_id || user_id == "") return res.status(400).send({"error": "Invalid user id was provided"})
   if (!nickname || nickname == "") return res.status(400).send({"error": "Invalid nickname was provided"})
   
   const result = udata.initializeUserDataFile("data", user_id, nickname);
