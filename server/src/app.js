@@ -46,7 +46,8 @@ app.post('/user', (req, res) => {
   if (!nickname || nickname == "") return res.status(400).send({"error": "Invalid nickname was provided"})
   
   const result = udata.initializeUserDataFile("data", user_id, nickname);
-  if (result == "success") return res.status(200).send("The user was initialized successfully in the database.");
+  const user = udata.getUserDataFile("data", user_id);
+  if (result == "success") return res.status(200).json(user);
   else return res.status(400).send("There was an error initializing the user in the database.");
 })
 
