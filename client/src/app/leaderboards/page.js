@@ -9,29 +9,15 @@ import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import UserBanner from "@/components/UserBanner";
+import GetUser from "@/util/GetUser";
 
 export default withPageAuthRequired(async function LeaderboardPage() {
 
-//   useEffect(() => {
-//     fetch(`http://localhost:5001/question/${questionId}`)
-//     .then(resp => {
-//       if (resp.ok) return resp;
-//       else throw new Error("Invalid question ID.");
-//     })
-//     .then(resp => resp.json())
-//     .then(data => {
-//       setGivenFunction(data);
-//       setProblemTitle(`Problem ${questionId}`);
-//       setValidQuestion(true);
-//     })
-//     .catch(err => {
-//       setValidQuestion(false);
-//     })
-//   }, [])
-// };
   const sessionInfo = await getSession();
-  const users = [];
-  const cur_user_id = sessionInfo.user.email;
+  const selfUser = await GetUser({sessionInfo})
+  const users = await fetch("http://host.docker.internal:5001/leaderboard")
+  .then(resp => resp.json())
+  .catch(err => console.log(err));
 
   return (
     <div>
@@ -42,7 +28,7 @@ export default withPageAuthRequired(async function LeaderboardPage() {
         <div className={styles.centerColumn}>
           <UserBanner sessionInfo={sessionInfo}/>
           <br></br>
-          <LeaderboardTable users={users} cur_user_id={cur_user_id}/>
+          <LeaderboardTable users={users} cur_user_id={selfUser.user_id}/>
         </div>
       </div>
     </div>
