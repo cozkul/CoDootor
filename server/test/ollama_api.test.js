@@ -235,4 +235,27 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
             expect(graded[2].desc).to.equal("Another basic test to check if adding properly.");
         })
     })
+
+    describe('Testing the getTotalScore function', function () {
+        const err_results = [{err: true, err_reason: "a is not defined"}];
+        const normal_results = [
+            {"desc": "A less basic test to check if adding properly.", score: 2},
+            {"desc": "Another basic test to check if adding properly.", score: 3},
+            {"desc": "A more advanced test to check if adding properly.", score: 1}
+        ]
+
+        it('Testing when results are null/undefined', function () {
+            expect(oa.getTotalScore()).to.equal(null);
+            expect(oa.getTotalScore(null)).to.equal(null);
+            expect(oa.getTotalScore([])).to.equal(0);
+        });
+
+        it('Testing when error in testing function (i.e. errors)', function () {
+            expect(oa.getTotalScore(err_results)).to.equal(0);
+        });
+
+        it('Testing with normal results', function () {
+            expect(oa.getTotalScore(normal_results)).to.equal(6);
+        });
+    })
 })

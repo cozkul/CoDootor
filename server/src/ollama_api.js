@@ -138,4 +138,21 @@ function TestGeneratedCode(code_json) {
     return res;
 }
 
-module.exports = { GeneratePrompt, isMalicious, ParseLLMResponse, FetchResponse, TestGeneratedCode };
+/*
+    Given the test results for a question, figure out why the final score is
+    If the 
+*/
+function getTotalScore(results) {
+    if (!results) return null;
+    if (results.length == 1 && results[0].err) return 0;
+    
+    var totalScore = 0;
+
+    for (var i = 0; i < results.length; i++) {
+        totalScore += results[i].score;
+    }
+
+    return totalScore;
+}
+
+module.exports = { GeneratePrompt, isMalicious, ParseLLMResponse, FetchResponse, TestGeneratedCode, getTotalScore };

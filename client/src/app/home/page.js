@@ -7,7 +7,6 @@ import QuestionList from "@/components/QuestionList";
 import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
 import UserBanner from "@/components/UserBanner";
-import { getAccessToken } from '@auth0/nextjs-auth0';
 
 export default async function Home() {
   const sessionInfo = await getSession();
@@ -18,13 +17,7 @@ export default async function Home() {
   </div>
   )
 
-  const { accessToken } = await getAccessToken();
-  const questions = await fetch(`http://host.docker.internal:5001/question_list`, {
-    headers: {
-      "Authorization": `Bearer ${accessToken}`
-    }
-  }
-  )
+  const questions = await fetch(`http://host.docker.internal:5001/question_list`)
     .then(res => res.json())
     .then(res => JSON.parse(res))
     .then(res => res.question_list)
