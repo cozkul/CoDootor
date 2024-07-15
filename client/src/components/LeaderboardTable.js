@@ -29,12 +29,12 @@ export default function LeaderboardTable({ users, cur_user_id }) {
     });
   
     return (
-        <Table striped highlightOnHover style={{width: '75%'}}>
+        <Table highlightOnHover style={{width: '75%'}}>
             <Table.Thead>
             <Table.Tr>
                 <Table.Th style={{width: '5%'}}>Rank</Table.Th>
                 <Table.Th style={{width: '10%'}}>User</Table.Th>
-                <Table.Th style={{width: '40%', textAlign: 'right'}}>Score</Table.Th>
+                <Table.Th style={{width: '40%'}}>Score</Table.Th>
             </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
