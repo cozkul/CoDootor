@@ -1,1 +1,4 @@
 node_modules
+
+# Ignore all JSON files in the data directory
+data/*.json
