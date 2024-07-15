@@ -18,8 +18,6 @@ export default withPageAuthRequired(async function LeaderboardPage() {
   const users = await fetch("http://host.docker.internal:5001/leaderboard")
   .then(resp => resp.json())
   .catch(err => console.log(err));
-  
-  users.sort((a, b) => b.num_points - a.num_points);
 
   return (
     <div>
