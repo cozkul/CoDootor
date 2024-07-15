@@ -20,7 +20,7 @@ export default function LeaderboardTable({ users, cur_user_id }) {
     const rows = ranks.map((user) => {
   
       return (
-        <Table.Tr key={user.rank} bg={(cur_user_id == user.id) ? 'var(--mantine-color-blue-light)' : undefined}>
+        <Table.Tr key={user.rank} bg={(cur_user_id == user.id) ? 'var(--mantine-color-blue-2)' : undefined}>
           <Table.Td>{user.rank}</Table.Td>
           <Table.Td>{user.nick}</Table.Td>
           <Table.Td>{user.points}</Table.Td>
