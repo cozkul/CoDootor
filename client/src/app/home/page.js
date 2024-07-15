@@ -57,7 +57,7 @@ export default async function Home() {
         <div className={styles.centerColumn}>
           <UserBanner sessionInfo={sessionInfo} userData={userData}/>
           <br></br>
-          <QuestionList questions={questions} />
+          <QuestionList questions={questions} userData={userData} />
         </div>
         
 
