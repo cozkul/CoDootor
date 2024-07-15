@@ -65,6 +65,8 @@ app.get('/users', (req, res) => {
 */
 app.get('/leaderboard', (req, res) => {
   let users = udata.getUsers();
+  // sort the users in descending order by num_points
+  users.sort((a, b) => b.num_points - a.num_points);
   res.status(200).json(users);
 })
 
