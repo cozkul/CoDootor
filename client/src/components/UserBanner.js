@@ -12,7 +12,7 @@ export default async function UserBanner({ sessionInfo }) {
   .then(res => {
     if (res.ok) return res.json();
     else return null;
-  });
+  })
 
   // If user doesn't already exist, then we use the POST endpoint to create a new one
   if (!userData) {
@@ -27,7 +27,10 @@ export default async function UserBanner({ sessionInfo }) {
       headers: {
         "Content-Type": 'application/json'
       }
-    }).then(resp => resp.json());
+    }).then(resp => {
+      if (resp.ok) return resp.json();
+      else return null;
+    });
   }
 
   return (
@@ -36,7 +39,7 @@ export default async function UserBanner({ sessionInfo }) {
       <Space w="md"></Space>
       <div>
         <Title order={1}>Welcome, {sessionInfo.user.nickname}!</Title>
-        <Title order={2}>Your score is {userData.num_points}</Title>
+        <Title order={2}>Your score is {userData? userData.num_points : "ERROR"}</Title>
       </div>
     </div>
   );

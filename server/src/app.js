@@ -31,10 +31,11 @@ app.get('/', (req, res) => {
 app.get('/user/:user_id', (req, res) => {
   const user_id = req.params.user_id;
 
-  if (!user_id || user_id == "" || isNaN(user_id)) return res.status(400).send({"error": "Invalid user id was provided"})
+  if (!user_id || user_id == "") return res.status(400).json({"error": "Invalid user id was provided"})
 
   const user = udata.getUserDataFile("data", user_id);
-  if (!user) return res.status(400).send({"error": "User with the specified user ID was not found."});
+  
+  if (!user) return res.status(400).json({"error": "User with the specified user ID was not found."});
   else return res.status(200).json(user);
 })
 
@@ -42,11 +43,12 @@ app.post('/user', (req, res) => {
   const user_id = req.body.user_id;
   const nickname = req.body.nickname;
 
-  if (!user_id || user_id == "") return res.status(400).send({"error": "Invalid user id was provided"})
-  if (!nickname || nickname == "") return res.status(400).send({"error": "Invalid nickname was provided"})
+  if (!user_id || user_id == "") return res.status(400).json({"error": "Invalid user id was provided"})
+  if (!nickname || nickname == "") return res.status(400).json({"error": "Invalid nickname was provided"})
   
   const result = udata.initializeUserDataFile("data", user_id, nickname);
   const user = udata.getUserDataFile("data", user_id);
+
   if (result == "success") return res.status(200).json(user);
   else return res.status(400).send("There was an error initializing the user in the database.");
 })
