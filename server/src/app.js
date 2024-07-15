@@ -45,8 +45,8 @@ app.post('/user', (req, res) => {
   if (!user_id || user_id == "" || isNaN(user_id)) return res.status(400).send({"error": "Invalid user id was provided"})
   if (!nickname || nickname == "") return res.status(400).send({"error": "Invalid nickname was provided"})
   
-  const res = udata.initializeUserDataFile("data", user_id, nickname);
-  if (res == "success") return res.status(200).send("The user was initialized successfully in the database.");
+  const result = udata.initializeUserDataFile("data", user_id, nickname);
+  if (result == "success") return res.status(200).send("The user was initialized successfully in the database.");
   else return res.status(400).send("There was an error initializing the user in the database.");
 })
 
