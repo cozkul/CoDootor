@@ -61,6 +61,14 @@ app.get('/users', (req, res) => {
 })
 
 /*
+  API endpoint for leaderboards
+*/
+app.get('/leaderboard', (req, res) => {
+  let users = udata.getUsers();
+  res.status(200).json(users);
+})
+
+/*
   API endpoint to GET proper questions as user wants
 */
 app.get('/question/:id', (req, res) => {

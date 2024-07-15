@@ -35,8 +35,10 @@ function loadUserDataOnStart(folder) {
     }
 
     for (var i = 0; i < files.length; i++) {
-        const file = fs.readFileSync(baseUserPath + files[i]);
-        users.push(JSON.parse(file));
+        if (files[i].includes(".json")) {
+            const file = fs.readFileSync(baseUserPath + files[i]);
+            users.push(JSON.parse(file));
+        }
     }
 
     return users;
