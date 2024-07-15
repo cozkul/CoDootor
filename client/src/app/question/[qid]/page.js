@@ -10,6 +10,8 @@ import '@mantine/code-highlight/styles.css';
 import styles from './page.module.css';
 import { useParams } from 'next/navigation'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0/client';
+
 
 export default withPageAuthRequired(function AnswerPage() {
   const params = useParams();
@@ -21,6 +23,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const [testResults, setTestResults] = useState([]);
   const [validQuestion, setValidQuestion] = useState(true);
   const questionId = params.qid;
+  const { user, error, isLoading } = useUser();
 
   if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -61,7 +64,7 @@ export default withPageAuthRequired(function AnswerPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: questionId, desc: userInput }),
+        body: JSON.stringify({ id: questionId, desc: userInput, user_id: user.sub.split("|")[1]}),
       });
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
@@ -74,6 +77,7 @@ export default withPageAuthRequired(function AnswerPage() {
   };
 
   if (!validQuestion) return (<div className={styles.page}>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
+  if (isLoading) return ("Loading...");
 
   return (
     <div>
