@@ -9,14 +9,21 @@ import {
 } from '@tabler/icons-react';
 import QuestionButton from "@/components/QuestionButton";
 
-export default function QuestionList({ questions }) {
-    const stages = questions.map((question, index) => ({
-        id: question.stage,
-        status: 'unlocked',
-        stage: question.stage,
-        name: question.name,
-        score: 1 / question.num_tests
-    }));
+export default function QuestionList({ questions, userData }) {
+    const stages = questions.map((question, index) => {
+      console.log(userData);
+      const scores = userData.questions_solved;
+        const previous_score = (question.stage > 1) ? scores[question.stage - 1] : 1
+        const status = (previous_score > 0) ? 'unlocked' : 'locked'
+        const score = scores[question.stage] || 0;
+        return {
+            id: question.stage,
+            status: status,
+            stage: question.stage,
+            name: question.name,
+            score: score
+        };
+    });
 
     const rows = stages.map((question) => {
       const filledStars = Math.floor(question.score / 0.33);
