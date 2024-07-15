@@ -7,6 +7,7 @@ import QuestionList from "@/components/QuestionList";
 import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
 import UserBanner from "@/components/UserBanner";
+import GetUser from "@/util/GetUser";
 
 export default async function Home() {
   const sessionInfo = await getSession();
@@ -17,30 +18,7 @@ export default async function Home() {
   </div>
   )
 
-  const user_id = sessionInfo.user.sub.split("|")[1];
-
-  // Get the user data for the user id of the current logged-in user
-  let userData = await fetch(`http://host.docker.internal:5001/user/${user_id}`)
-  .then(res => {
-    if (res.ok) return res.json();
-    else return null;
-  });
-
-  // If user doesn't already exist, then we use the POST endpoint to create a new one
-  if (!userData) {
-    const data = {
-      "user_id": user_id,
-      "nickname": sessionInfo.user.nickname
-    }
-
-    userData = await fetch(`http://host.docker.internal:5001/user/`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": 'application/json'
-      }
-    }).then(resp => resp.json());
-  }
+  const user = await GetUser(sessionInfo);
 
   const questions = await fetch(`http://host.docker.internal:5001/question_list`)
     .then(res => res.json())
@@ -57,7 +35,7 @@ export default async function Home() {
         <div className={styles.centerColumn}>
           <UserBanner sessionInfo={sessionInfo}/>
           <br></br>
-          <QuestionList questions={questions} userData={userData} />
+          <QuestionList questions={questions} userData={user} />
         </div>
         
 
