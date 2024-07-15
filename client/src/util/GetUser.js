@@ -23,4 +23,6 @@ export default async function GetUser({ sessionInfo }) {
         }
       }).then(resp => resp.json());
     }
+
+    return userData;
 }

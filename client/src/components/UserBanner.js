@@ -6,7 +6,7 @@ import styles from '../app/page.module.css';
 import GetUser from '@/util/GetUser';
 
 export default async function UserBanner({ sessionInfo }) {
-  const userData = await GetUser(sessionInfo);
+  const userData = await GetUser({sessionInfo});
 
   return (
     <div className={styles.logo}>

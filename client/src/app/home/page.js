@@ -18,7 +18,7 @@ export default async function Home() {
   </div>
   )
 
-  const user = await GetUser(sessionInfo);
+  const user = await GetUser({sessionInfo});
 
   const questions = await fetch(`http://host.docker.internal:5001/question_list`)
     .then(res => res.json())
