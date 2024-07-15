@@ -55,7 +55,7 @@ export default async function Home() {
           <NavbarSimple />
         </div>
         <div className={styles.centerColumn}>
-          <UserBanner sessionInfo={sessionInfo} userData={userData}/>
+          <UserBanner sessionInfo={sessionInfo}/>
           <br></br>
           <QuestionList questions={questions} userData={userData} />
         </div>

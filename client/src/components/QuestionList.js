@@ -21,7 +21,7 @@ export default function QuestionList({ questions, userData }) {
             status: status,
             stage: question.stage,
             name: question.name,
-            score: score
+            score: score / question.num_tests
         };
     });
 
