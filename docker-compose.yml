@@ -12,7 +12,7 @@ services:
     volumes:
       - ./server:/usr/src/app/server
       - /usr/src/app/server/node_modules
-    command: npm run start
+    command: npm run dev
     extra_hosts:
     - "host.docker.internal:host-gateway"
 
