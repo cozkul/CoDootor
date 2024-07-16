@@ -4,6 +4,7 @@ Parses the response, contacts the LLM, and writes the code to a file.
 */
 
 const { default: ollama } = require('ollama');
+const MODEL_NAME = "granite-code:3b"
 
 /*
     Given the description as a string, generates the prompt for the LLM by appending the
@@ -49,11 +50,13 @@ async function FetchResponse(desc) {
     if (prompt == null) return null;
     
     const data = {
-        "model": "codellama:7b", 
+        "model": MODEL_NAME, 
         "messages": [{"role": "user", "content": prompt}],
         "stream": false,
         "keep_alive": -1,
-        "options": {"seed": 101}
+        "options": {
+            "seed": 101
+        }
     };
 
     // If fetching from outside the container, then use localhost, otherwise need to use host.docker.internal

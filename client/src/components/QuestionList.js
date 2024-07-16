@@ -11,7 +11,6 @@ import QuestionButton from "@/components/QuestionButton";
 
 export default function QuestionList({ questions, userData }) {
     const stages = questions.map((question, index) => {
-      console.log(userData);
       const scores = userData.questions_solved;
         const previous_score = (question.stage > 1) ? scores[question.stage - 1] : 1
         const status = (previous_score > 0) ? 'unlocked' : 'locked'

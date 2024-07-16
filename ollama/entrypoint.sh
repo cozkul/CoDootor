@@ -6,8 +6,8 @@ while ! nc -z localhost 11434; do
     sleep 1
 done
 
-echo "Retrieving codellama model..."
-ollama pull codellama:7b
+echo "Retrieving granite3b model..."
+ollama pull granite-code:3b
 echo "Done!"
 
 wait $pid
