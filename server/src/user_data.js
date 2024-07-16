@@ -86,7 +86,6 @@ function updateUserDataFile(folder, user) {
     try {
         fs.writeFileSync(baseUserPath + user.user_id + ".json", JSON.stringify(user));
     } catch (e) {
-        console.log(e);
         return null;
     }
 

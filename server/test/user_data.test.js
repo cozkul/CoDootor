@@ -9,9 +9,13 @@ const testFolderName = "testDataFolder";
 
 const clearFolder = () => {
     const fp = path.join(__dirname, "../", testFolderName)
+    const readme = path.join(fp, "/", "README.md");
+    const readmeText = "This folder is used to store the test user data in the form of JSON files. Only JSON files will be read here."
+
     try {
         fs.rmSync(fp, {recursive: true});
         fs.mkdirSync(fp);
+        fs.writeFileSync(readme, readmeText);
         udata.loadUserDataOnStart(testFolderName);
     } catch (e) {
     }
