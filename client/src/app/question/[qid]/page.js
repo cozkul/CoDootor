@@ -11,6 +11,7 @@ import styles from './page.module.css';
 import { useParams } from 'next/navigation'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import GetUser from "@/util/GetUser";
 
 
 export default withPageAuthRequired(function AnswerPage() {
@@ -30,12 +31,9 @@ export default withPageAuthRequired(function AnswerPage() {
 
   useEffect(() => {
     const GetUserData = async () => {
-      const user_id = user.sub.split("|")[1];
-      const userData = await fetch(`http://localhost:5001/user/${user_id}`)
-      .then(res => {
-      if (res.ok) return res.json();
-      else return null;
-    });
+      const sessionInfo = {};
+      sessionInfo['user'] = user;
+      const userData = await GetUser({sessionInfo});
       const userScores = userData.questions_solved;
       const previous_score = (questionId > 1) ? userScores[questionId - 1] : 1;
       if (previous_score === 0 || previous_score == null) {
