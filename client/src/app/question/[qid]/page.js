@@ -24,8 +24,26 @@ export default withPageAuthRequired(function AnswerPage() {
   const [validQuestion, setValidQuestion] = useState(true);
   const questionId = params.qid;
   const { user, error, isLoading } = useUser();
+  const [unlocked, setUnlocked] = useState(true);
 
   if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
+
+  useEffect(() => {
+    const GetUserData = async () => {
+      const user_id = user.sub.split("|")[1];
+      const userData = await fetch(`http://localhost:5001/user/${user_id}`)
+      .then(res => {
+      if (res.ok) return res.json();
+      else return null;
+    });
+      const userScores = userData.questions_solved;
+      const previous_score = (questionId > 1) ? userScores[questionId - 1] : 1;
+      if (previous_score === 0 || previous_score == null) {
+        setUnlocked(false);
+      }
+    };
+    GetUserData();
+  }, [])
 
   useEffect(() => {
     fetch(`http://localhost:5001/question/${questionId}`)
@@ -77,6 +95,7 @@ export default withPageAuthRequired(function AnswerPage() {
   };
 
   if (!validQuestion) return (<div className={styles.page}>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
+  if (!unlocked) return (<div className={styles.page}>Question not yet unlocked. Please return to homepage.</div>);
   if (isLoading) return ("Loading...");
 
   return (
