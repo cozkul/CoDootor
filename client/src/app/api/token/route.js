@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
-import { getAccessToken } from '@auth0/nextjs-auth0/edge'; // Note the /edge import
+import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
 
-export async function GET() {
-  const { accessToken } = await getAccessToken();
-  return NextResponse.json({ token: accessToken });
-}
+const GET = withApiAuthRequired(async function GET(req) {
+  const res = new NextResponse();
+  const { accessToken } = await getAccessToken(req, res, {
+    audience: process.env.AUTH0_AUDIENCE,
+    scope: 'openid email profile'
+  });
+  return NextResponse.json({ token: accessToken }, res);
+});
 
-export const runtime = 'edge';
+export { GET };
