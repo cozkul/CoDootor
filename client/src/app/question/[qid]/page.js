@@ -128,7 +128,7 @@ export default withPageAuthRequired(function AnswerPage() {
               />
             </Box>
               <Space h="md" />
-              <Button fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
+              <Button disabled={loading || !userInput} fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
           </Grid.Col>
         </Grid>
       </div>
