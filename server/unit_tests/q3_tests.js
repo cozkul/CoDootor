@@ -26,7 +26,7 @@ function testFib1(fn) {
     return {"desc": "Test if the function returns '1' when input is '1'.", score: pts};
 }
 
-// Test that checks that output is 6765 when input is 20
+// Test that checks appropriate integer is outputted when input is 20
 function testFib2(fn) {
     var pts = 0;
     var result = fn(20);

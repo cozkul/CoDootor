@@ -10,7 +10,7 @@ function testMax0(fn) {
         pts = 0;
     }
     
-    return {"desc": "Test if the function returns the last number of its input when the input is [5, 4, 3, 2, 1, 0].", score: pts};
+    return {"desc": "Test if the function returns the right output when the input is [5, 4, 3, 2, 1, 0].", score: pts};
 }
 
 // Test for where input is array of decreasing numbers
@@ -25,7 +25,7 @@ function testMax1(fn) {
         pts = 0;
     }
     
-    return {"desc": "Test if the function returns the first number of its input when the input is [5, 4, 3, 2, 1, 0].", score: pts};
+    return {"desc": "Test if the function returns the right output when the input is [5, 4, 3, 2, 1, 0].", score: pts};
 }
 
 // Test for where input is an array of a mix of negative and positive numbers
@@ -40,7 +40,7 @@ function testMax2(fn) {
         pts = 0;
     }
     
-    return {"desc": "Test if the function returns 9982 when the input is [-101, 452, 97, 2, 78, 6546, 6102, 0, 9982].", score: pts};
+    return {"desc": "Test if the function returns the right output when the input is [-101, 452, 97, 2, 78, 6546, 6102, 0, 9982].", score: pts};
 }
 
 // Test for where input is an empty array
