@@ -150,6 +150,7 @@ function updatedUserFileWithNewScore(folder, userID, questionData) {
     else return null;
 }
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function getUserInfo(accessToken) {
     try {
       const response = await axios.get(`${process.env.AUTH0_ISSUER_BASE_URL}/userinfo`, {
@@ -159,8 +160,14 @@ async function getUserInfo(accessToken) {
       });
       return response.data;
     } catch (error) {
-      console.error('Error fetching user info:', error);
-      throw new Error('Failed to fetch user info');
+        if (error.response.status === 429) {
+            console.log("Retrying...")
+            await sleep(1500);
+            return getUserInfo(accessToken);
+        } else {
+            console.error('Error fetching user info:', error);
+            throw new Error('Failed to fetch user info');
+        }
     }
   }
 
