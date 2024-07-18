@@ -10,31 +10,19 @@ import LoginPrompt from "@/components/LoginPrompt";
 import { withPageAuthRequired, getAccessToken } from '@auth0/nextjs-auth0';
 import UserBanner from "@/components/UserBanner";
 import GetUser from "@/util/GetUser";
+import StatsTable from "@/components/StatsTable";
 
 export default withPageAuthRequired(async function StatsPage() {
-
-//   useEffect(() => {
-//     fetch(`http://localhost:5001/question/${questionId}`)
-//     .then(resp => {
-//       if (resp.ok) return resp;
-//       else throw new Error("Invalid question ID.");
-//     })
-//     .then(resp => resp.json())
-//     .then(data => {
-//       setGivenFunction(data);
-//       setProblemTitle(`Problem ${questionId}`);
-//       setValidQuestion(true);
-//     })
-//     .catch(err => {
-//       setValidQuestion(false);
-//     })
-//   }, [])
-// };
   const sessionInfo = await getSession();
   const users = [];
   const { accessToken } = await getAccessToken();
   const user = await GetUser(accessToken);
-
+  
+  const stats = await fetch(`http://host.docker.internal:5001/stats`)
+    .then(res => res.json())
+    .then(res => JSON.parse(res))
+    .then(res => res.question_list)
+    .catch(error => console.error('Error fetching data:', error));
   return (
     <div>
       <div className={styles.page}>
@@ -44,7 +32,7 @@ export default withPageAuthRequired(async function StatsPage() {
         <div className={styles.centerColumn}>
           <UserBanner sessionInfo={sessionInfo} userData={user}/>
           <br></br>
-          <LeaderboardTable users={users} cur_user_id={user.user_id}/>
+          <StatsTable stats={stats} userData={user}/>
         </div>
       </div>
     </div>

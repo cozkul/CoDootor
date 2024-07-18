@@ -9,12 +9,8 @@ export default async function GetUser(accessToken) {
           'Content-Type': 'application/json'
         },})
         .then(res => {
-          console.log("res")
-          console.log(res)
         if (res.ok) return res.json();
         else return null;
     });
-    console.log("userData")
-    console.log(userData)
     return userData;
 }

@@ -181,7 +181,7 @@ app.get('/question_list', (req, res) => {
   try {
     const question_list = fs.readFileSync('./question_list.json', 'utf-8');
     const return_questions = JSON.parse(question_list)
-    res.json(question_list);
+    res.status(200).json(question_list);
   } catch(e) {
     res.status(400).send({"error": "Failed to retrieve questions"})
   }
@@ -210,3 +210,31 @@ app.get('/unit_tests/:id', (req, res) => {
   Endpoint to view the tests that were generated
 */
 app.use('/tests', express.static(path.resolve(__dirname, "..", "mochawesome-report"), options={index: "mochawesome.html"}));
+
+/*
+  API endpoint for retrieving list of questions for homepage
+*/
+app.get('/stats', (req, res) => {
+  const users = udata.getUsers();
+  try {
+    let list = fs.readFileSync('./question_list.json', 'utf-8');
+    list = JSON.parse(list);
+    let stats = list.question_list;
+    
+    list.question_list.forEach(question => {
+      let totalScore = 0;
+      let userCount = 0;
+      users.forEach(user => {
+        if (user.questions_solved[question.stage]) {
+          totalScore += user.questions_solved[question.stage];
+          userCount++;
+        }
+      });
+      question.average_score = userCount > 0 ? totalScore / userCount : 0;
+    });
+
+    res.status(200).json(JSON.stringify(list));
+  } catch(e) {
+    res.status(400).send({"error": "Failed to retrieve questions"})
+  }
+})
