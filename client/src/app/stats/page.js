@@ -7,8 +7,9 @@ import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import LeaderboardTable from "@/components/LeaderboardTable";
 import { getSession } from '@auth0/nextjs-auth0';
 import LoginPrompt from "@/components/LoginPrompt";
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired, getAccessToken } from '@auth0/nextjs-auth0';
 import UserBanner from "@/components/UserBanner";
+import GetUser from "@/util/GetUser";
 
 export default withPageAuthRequired(async function StatsPage() {
 
@@ -31,7 +32,8 @@ export default withPageAuthRequired(async function StatsPage() {
 // };
   const sessionInfo = await getSession();
   const users = [];
-  const cur_user_id = sessionInfo.user.email;
+  const { accessToken } = await getAccessToken();
+  const user = await GetUser(accessToken);
 
   return (
     <div>
@@ -40,9 +42,9 @@ export default withPageAuthRequired(async function StatsPage() {
           <NavbarSimple />
         </div>
         <div className={styles.centerColumn}>
-          <UserBanner sessionInfo={sessionInfo}/>
+          <UserBanner sessionInfo={sessionInfo} userData={user}/>
           <br></br>
-          <LeaderboardTable users={users} cur_user_id={cur_user_id}/>
+          <LeaderboardTable users={users} cur_user_id={user.user_id}/>
         </div>
       </div>
     </div>
