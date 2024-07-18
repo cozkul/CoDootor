@@ -5,8 +5,7 @@ import { Space, Image, Title } from '@mantine/core';
 import styles from '../app/page.module.css';
 import GetUser from '@/util/GetUser';
 
-export default async function UserBanner({ sessionInfo }) {
-  const userData = await GetUser({sessionInfo});
+export default async function UserBanner({ sessionInfo, userData }) {
 
   return (
     <div className={styles.logo}>

@@ -28,21 +28,25 @@ app.get('/', (req, res) => {
 /*
   API endpoints for user data
 */
-app.get('/user/:user_id', (req, res) => {
-  const user_id = req.params.user_id;
+app.get('/user', jwtCheck, async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const userInfo = await udata.getUserInfo(token);
+  
+  const user_id = userInfo.sub.split('|')[1];
+  const nickname = userInfo.nickname;
 
   if (!user_id || user_id == "") return res.status(400).json({"error": "Invalid user id was provided"})
 
   const user = udata.getUserDataFile("data", user_id);
   
-  if (!user) return res.status(400).json({"error": "User with the specified user ID was not found."});
+  if (!user) {
+    return createUser(req, res, user_id, nickname);
+  }
+
   else return res.status(200).json(user);
 })
 
-app.post('/user', (req, res) => {
-  const user_id = req.body.user_id;
-  const nickname = req.body.nickname;
-
+const createUser = (req, res, user_id, nickname) => {
   if (!user_id || user_id == "") return res.status(400).json({"error": "Invalid user id was provided"})
   if (!nickname || nickname == "") return res.status(400).json({"error": "Invalid nickname was provided"})
   
@@ -51,7 +55,7 @@ app.post('/user', (req, res) => {
 
   if (result == "success") return res.status(200).json(user);
   else return res.status(400).send("There was an error initializing the user in the database.");
-})
+};
 
 app.get('/users', (req, res) => {
   // you can call udata.getUsers() function to retrieve all the users in the database

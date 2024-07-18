@@ -31,32 +31,25 @@ export default withPageAuthRequired(function AnswerPage() {
   if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
 
   useEffect(() => {
-    const fetchToken = async () => {
+    const fetchTokenAndUserData = async () => {
       try {
         const response = await fetch('http://localhost:5173/api/token');
         const data = await response.json();
         setToken(data.token);
+        const sessionInfo = {};
+        sessionInfo['user'] = user;
+        const userData = await GetUser(data.token);
+        const userScores = userData.questions_solved;
+        const previous_score = (questionId > 1) ? userScores[questionId - 1] : 1;
+        if (previous_score === 0 || previous_score == null) {
+          setUnlocked(false);
+        }
       } catch (error) {
         console.error('Error fetching token:', error);
       }
     };
-
-    fetchToken();
+    fetchTokenAndUserData();
   }, []);
-
-  useEffect(() => {
-    const GetUserData = async () => {
-      const sessionInfo = {};
-      sessionInfo['user'] = user;
-      const userData = await GetUser({sessionInfo});
-      const userScores = userData.questions_solved;
-      const previous_score = (questionId > 1) ? userScores[questionId - 1] : 1;
-      if (previous_score === 0 || previous_score == null) {
-        setUnlocked(false);
-      }
-    };
-    GetUserData();
-  }, [])
 
   useEffect(() => {
     fetch(`http://localhost:5001/question/${questionId}`)

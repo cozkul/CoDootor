@@ -1,28 +1,20 @@
-export default async function GetUser({ sessionInfo }) {
-    const user_id = sessionInfo.user.sub.split("|")[1];
-
+export default async function GetUser(accessToken) {
     // Get the user data for the user id of the current logged-in user
-    let userData = await fetch(`http://host.docker.internal:5001/user/${user_id}`)
-    .then(res => {
-      if (res.ok) return res.json();
-      else return null;
-    });
-  
-    // If user doesn't already exist, then we use the POST endpoint to create a new one
-    if (!userData) {
-      const data = {
-        "user_id": user_id,
-        "nickname": sessionInfo.user.nickname
-      }
-  
-      userData = await fetch(`http://host.docker.internal:5001/user/`, {
-        method: "POST",
-        body: JSON.stringify(data),
+    let userData = await fetch(process.browser
+      ? 'http://localhost:5001/user'
+      : 'http://host.docker.internal:5001/user', {
+        method: 'GET',
         headers: {
-          "Content-Type": 'application/json'
-        }
-      }).then(resp => resp.json());
-    }
-
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },})
+        .then(res => {
+          console.log("res")
+          console.log(res)
+        if (res.ok) return res.json();
+        else return null;
+    });
+    console.log("userData")
+    console.log(userData)
     return userData;
 }
