@@ -26,8 +26,23 @@ export default withPageAuthRequired(function AnswerPage() {
   const questionId = params.qid;
   const { user, error, isLoading } = useUser();
   const [unlocked, setUnlocked] = useState(true);
+  const [token, setToken] = useState(null);
 
   if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await fetch('http://localhost:5173/api/token');
+        const data = await response.json();
+        setToken(data.token);
+      } catch (error) {
+        console.error('Error fetching token:', error);
+      }
+    };
+
+    fetchToken();
+  }, []);
 
   useEffect(() => {
     const GetUserData = async () => {
@@ -78,9 +93,10 @@ export default withPageAuthRequired(function AnswerPage() {
       const testResponse = await fetch('http://localhost:5001/grade', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: questionId, desc: userInput, user_id: user.sub.split("|")[1]}),
+        body: JSON.stringify({ id: questionId, desc: userInput}),
       });
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
@@ -124,11 +140,13 @@ export default withPageAuthRequired(function AnswerPage() {
                 placeholder="Please enter the description for given function."
                 value={userInput}
                 disabled={loading}
+                required
+                error={ !userInput ? "Description cannot be empty." : null }
                 onChange={(event) => setUserInput(event.currentTarget.value)}
               />
             </Box>
-              <Space h="md" />
-              <Button disabled={loading || !userInput} fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
+            <Space h="md" />
+            <Button disabled={loading || !userInput} fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
           </Grid.Col>
         </Grid>
       </div>

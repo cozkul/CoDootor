@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 var users = [];
 
@@ -149,4 +150,18 @@ function updatedUserFileWithNewScore(folder, userID, questionData) {
     else return null;
 }
 
-module.exports = {getUserDataFile, loadUserDataOnStart, initializeUserDataFile, updateUserDataFile, updateQuestionScore, updatedUserFileWithNewScore, getUsers};
+async function getUserInfo(accessToken) {
+    try {
+      const response = await axios.get(`${process.env.AUTH0_ISSUER_BASE_URL}/userinfo`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+      throw new Error('Failed to fetch user info');
+    }
+  }
+
+module.exports = {getUserDataFile, loadUserDataOnStart, initializeUserDataFile, updateUserDataFile, updateQuestionScore, updatedUserFileWithNewScore, getUsers, getUserInfo};

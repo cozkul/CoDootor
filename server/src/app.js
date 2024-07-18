@@ -11,11 +11,11 @@ const udata = require('./user_data.js');
 require('dotenv').config();
 
 // should be set on .env
-// const jwtCheck = auth({
-//   audience: process.env.YOUR_API_IDENTIFIER,
-//   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-//   tokenSigningAlg: 'RS256'
-// });
+const jwtCheck = auth({
+  audience: process.env.YOUR_API_IDENTIFIER,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+  tokenSigningAlg: 'RS256'
+});
 
 app.use(express.json());
 app.use(cors());
@@ -116,10 +116,13 @@ app.post('/code', async (req, res) => {
     curl -d "{\"desc\": \"Takes in two numbers and returns the sum of both of them\", \"id\": 1}" \
     --header "Content-Type: application/json" localhost:5001/grade
 */
-app.post('/grade', async (req, res) => {
+app.post('/grade', jwtCheck, async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const userInfo = await udata.getUserInfo(token);
+  
   const desc = req.body.desc;
   const id = req.body.id;
-  const user_id = req.body.user_id;
+  const user_id = userInfo.sub.split('|')[1];
   
   // If any of the required parameters are missing send a 400 response
   if (desc == null || desc == "") return res.status(400).json({"error": "No description was provided."});
