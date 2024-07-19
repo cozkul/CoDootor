@@ -66,7 +66,8 @@ function initializeUserDataFile(folder, userID, nickname) {
         "user_id": `${userID}`,
         "nickname": `${nickname}`,
         "questions_solved": {},
-        "num_points": 0
+        "num_points": 0,
+        "attempts": []
     }
 
     users.push(defaultUserInfo);
@@ -91,6 +92,25 @@ function updateUserDataFile(folder, user) {
     }
 
     return "success";
+}
+
+/*
+    Adds an attempt to the user's data
+*/
+function addAttemptToUserData(folder, userID, attemptData) {
+    if (!userID || !attemptData) return null;
+
+    const user = getUserDataFile(folder, userID);
+    if (!user) return null;
+
+    if (!user.attempts) {
+        user.attempts = [];
+    }
+
+    user.attempts.push(attemptData);
+    const res = updateUserDataFile(folder, user);
+
+    return res === "success" ? "success" : null;
 }
 
 /*
@@ -169,6 +189,9 @@ async function getUserInfo(accessToken) {
             throw new Error('Failed to fetch user info');
         }
     }
-  }
+}
 
-module.exports = {getUserDataFile, loadUserDataOnStart, initializeUserDataFile, updateUserDataFile, updateQuestionScore, updatedUserFileWithNewScore, getUsers, getUserInfo};
+module.exports = {
+    getUserDataFile, loadUserDataOnStart, initializeUserDataFile, updateUserDataFile,
+    updateQuestionScore, updatedUserFileWithNewScore, getUsers, getUserInfo, addAttemptToUserData
+};
