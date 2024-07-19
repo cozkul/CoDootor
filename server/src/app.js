@@ -187,8 +187,55 @@ app.get('/question_list', (req, res) => {
   }
 })
 
-module.exports = { app };
+/*
+  API endpoints for user attempts
+*/
+app.post('/user/:userId/attempts', jwtCheck, (req, res) => {
+  const userID = req.params.userId;
+  const attemptData = req.body;
 
+  if (!attemptData || Object.keys(attemptData).length === 0) {
+      return res.status(400).json({"error": "Invalid attempt data"});
+  }
+
+  const result = udata.addAttemptToUserData("data", userID, attemptData);
+
+  if (result === "success") {
+      res.status(200).send("Attempt added successfully");
+  } else {
+      res.status(400).send("Failed to add attempt");
+  }
+});
+
+app.get('/user/:userId/attempts', jwtCheck, (req, res) => {
+  const userID = req.params.userId;
+
+  const user = udata.getUserDataFile("data", userID);
+
+  if (user && user.attempts) {
+      res.status(200).json(user.attempts);
+  } else {
+      res.status(400).json({"error": "No attempts found for this user"});
+  }
+});
+
+app.get('/question/:qid/attempts', jwtCheck, (req, res) => {
+  const questionID = req.params.qid;
+  const users = udata.getUsers();
+
+  const attempts = users.reduce((acc, user) => {
+      const userAttempts = user.attempts.filter(attempt => attempt.id === parseInt(questionID));
+      return acc.concat(userAttempts);
+  }, []);
+
+  if (attempts.length > 0) {
+      res.status(200).json(attempts);
+  } else {
+      res.status(400).json({"error": "No attempts found for this question"});
+  }
+});
+
+module.exports = { app };
 
 /*
   API endpoint for retrieving test cases for answering page
