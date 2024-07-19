@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');
 
 var users = [];
 
@@ -170,25 +169,20 @@ function updatedUserFileWithNewScore(folder, userID, questionData) {
     else return null;
 }
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const accessTokenCache = new Map();
 async function getUserInfo(accessToken) {
-    try {
-      const response = await axios.get(`${process.env.AUTH0_ISSUER_BASE_URL}/userinfo`, {
+    if (accessTokenCache.has(accessToken)) {
+        return accessTokenCache.get(accessToken);
+    }
+    const response = await fetch(`${process.env.AUTH0_ISSUER_BASE_URL}/userinfo`, {
+        method: 'GET',
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          'Authorization': `Bearer ${accessToken}`,
         },
       });
-      return response.data;
-    } catch (error) {
-        if (error.response.status === 429) {
-            console.log("Retrying...")
-            await sleep(1500);
-            return getUserInfo(accessToken);
-        } else {
-            console.error('Error fetching user info:', error);
-            throw new Error('Failed to fetch user info');
-        }
-    }
+    const data = await response.json();
+    accessTokenCache.set(accessToken, data);
+    return data;
 }
 
 module.exports = {
