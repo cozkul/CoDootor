@@ -28,6 +28,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const { user, error, isLoading } = useUser();
   const [unlocked, setUnlocked] = useState(true);
   const [token, setToken] = useState(null);
+  const [attempts, setAttempts] = useState([]);
 
   if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -95,10 +96,48 @@ export default withPageAuthRequired(function AnswerPage() {
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
       setTestResults(testData.results);
+
+      // Adding the attempt to user data, fetching data
+      // need to reloead...?
+      const attemptData = {
+        id: questionId,
+        desc: userInput,
+        results: testData.results
+      };
+
+      await fetch(`http://localhost:5001/user/${user.sub.split('|')[1]}/attempts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(attemptData),
+      });
+
+      const fetchAttempts = async () => {
+        try {
+          const res = await fetch('/api/token');
+          const { token } = await res.json();
+          const response = await fetch(`http://localhost:5001/user/${user.sub.split('|')[1]}/attempts`, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          });
+          const data = await response.json();
+          const filteredAttempts = data.filter(attempt => attempt.id === questionId);
+          setAttempts(filteredAttempts);
+        } catch (error) {
+            console.error("Failed to fetch attempts:", error);
+        }
+      };
+
+      fetchAttempts();
+
     } catch (error) {
       console.error(error);
     } finally {
       setLoading.close();
+      //window.location.reload();
     }
   };
 
@@ -166,7 +205,7 @@ export default withPageAuthRequired(function AnswerPage() {
         </div>
         <Grid>
           <Grid.Col span={12}>
-            <AttemptsList callback={populateAnswerFields}></AttemptsList>
+            <AttemptsList questionID={questionId} callback={populateAnswerFields}></AttemptsList>
           </Grid.Col>
         </Grid>
       </div>
