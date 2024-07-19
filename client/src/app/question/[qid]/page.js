@@ -12,6 +12,7 @@ import { useParams } from 'next/navigation'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import GetUser from "@/util/GetUser";
+import AttemptsList from '@/components/AttemptsList';
 
 
 export default withPageAuthRequired(function AnswerPage() {
@@ -101,6 +102,24 @@ export default withPageAuthRequired(function AnswerPage() {
     }
   };
 
+  const populateAnswerFields = async (data) => {
+    const llm_resp = await fetch('http://localhost:5001/code', {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({"desc": data.desc})
+    })
+    .then(resp => resp.json())
+    .catch(err => {
+      return {"llm_code": "ERROR retrieving code from Ollama"}
+    });
+
+    console.log(llm_resp);
+
+    setTestResults(data.results);
+    setUserInput(data.desc);
+    setOllamaOutput(llm_resp.llm_code);
+  }
+
   if (!validQuestion) return (<div className={styles.page}>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
   if (!unlocked) return (<div className={styles.page}>Question not yet unlocked. Please return to homepage.</div>);
   if (isLoading) return ("Loading...");
@@ -140,6 +159,14 @@ export default withPageAuthRequired(function AnswerPage() {
             </Box>
             <Space h="md" />
             <Button disabled={loading || !userInput} fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
+          </Grid.Col>
+        </Grid>
+        <div>
+          <Title>Previous Attempts</Title>
+        </div>
+        <Grid>
+          <Grid.Col span={12}>
+            <AttemptsList callback={populateAnswerFields}></AttemptsList>
           </Grid.Col>
         </Grid>
       </div>
