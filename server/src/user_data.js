@@ -80,11 +80,12 @@ function initializeUserDataFile(folder, userID, nickname) {
     Overwrites the current user data file with the new one, assuming it already exists.
     Otherwise, it will create a new file for the user.
 */
-function updateUserDataFile(folder, user) {
+function updateUserDataFile(folder, user, userID) {
     if (!folder || !user) return null;
 
     const baseUserPath = path.join(__dirname, '..', `/${folder}/`);
     try {
+        userID ? fs.writeFileSync(baseUserPath + userID + ".json", JSON.stringify(user)) : 
         fs.writeFileSync(baseUserPath + user.user_id + ".json", JSON.stringify(user));
     } catch (e) {
         return null;
@@ -95,21 +96,73 @@ function updateUserDataFile(folder, user) {
 
 /*
     Adds an attempt to the user's data
+    If user doesn't exist yet, initialize it
+    Assumes that the attemptData is in correct format
+    attemptData is in format {"results": List[Object], "desc": String}
 */
-function addAttemptToUserData(folder, userID, attemptData) {
-    if (!userID || !attemptData) return null;
+function addAttemptToUserData(folder, userID, qid, attemptData) {
+    if (!userID || !attemptData || !folder) return null;
+    var data = getUserDataFile(folder + `/${qid}`, userID);
+    if (!data) data = initializeAttemptData(folder, qid, userID);
 
-    const user = getUserDataFile(folder, userID);
-    if (!user) return null;
-
-    if (!user.attempts) {
-        user.attempts = [];
-    }
-
-    user.attempts.push(attemptData);
-    const res = updateUserDataFile(folder, user);
+    data.push(attemptData);
+    const res = updateUserDataFile(folder + `/${qid}`, data, userID);
 
     return res === "success" ? "success" : null;
+}
+
+/*
+    Gets all the attempt data for a specific question and a given user
+    If the user doesn't exist for the question, then return empty list
+*/
+function getAttemptData(folder, questionID, userID) {
+    if (!folder || !questionID || !userID) return null;
+
+    var user = getUserDataFile(folder + `/${questionID}`, userID);
+    if (!user) user = [];
+
+    return user;
+}
+
+/*
+    Initializes the attempt data for a particular user for a particular question
+    if the user doesn't have data already
+*/
+function initializeAttemptData(folder, questionID, userID) {
+    if (!folder || !questionID || !userID) return null;
+    const basePath = path.join(__dirname, '..', `/${folder}/${questionID}/`);
+
+    // Create the directory incase it doesn't exist yet
+    createDataFolder(folder, questionID);
+
+    const user = getUserDataFile(folder + `/${questionID}`, userID);
+    if (user) return null;
+
+    defaultData = [];
+
+    const data = JSON.stringify(defaultData);
+    try {
+        fs.writeFileSync(basePath + userID + ".json", data);
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+
+    return defaultData;
+}
+
+function createDataFolder(folder, questionID) {
+    if (!folder || !questionID) return null;
+    const basePath = path.join(__dirname, '..', `/${folder}/${questionID}/`);
+
+    try {
+        fs.mkdirSync(basePath, {recursive: true});
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+
+    return "success";
 }
 
 /*
@@ -187,5 +240,5 @@ async function getUserInfo(accessToken) {
 
 module.exports = {
     getUserDataFile, loadUserDataOnStart, initializeUserDataFile, updateUserDataFile,
-    updateQuestionScore, updatedUserFileWithNewScore, getUsers, getUserInfo, addAttemptToUserData
+    updateQuestionScore, updatedUserFileWithNewScore, getUsers, getUserInfo, addAttemptToUserData, getAttemptData
 };

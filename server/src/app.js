@@ -158,6 +158,15 @@ app.post('/grade', jwtCheck, async (req, res) => {
   // We don't use a separate endpoint because it is more secure to only update
   // when the user has their question graded
   udata.updatedUserFileWithNewScore("data", user_id, questionData);
+
+  // Update the user's attempt data given the specified question and userID
+  // includes the generatedCode, testResults, and desc of given function
+  const attemptData = {
+    "results": testResults,
+    "desc": desc
+  }
+
+  udata.addAttemptToUserData("data/attempts", user_id, id, attemptData);
   
   if (testResults && testResults.length >= 1) {
     if (testResults[0].err) res.status(400).json(resp);
@@ -190,48 +199,38 @@ app.get('/question_list', (req, res) => {
 /*
   API endpoints for user attempts
 */
-app.post('/user/:userId/attempts', jwtCheck, (req, res) => {
-  const userID = req.params.userId;
-  const attemptData = req.body;
+// app.post('/question/attempts', jwtCheck, async (req, res) => {
+//   const token = req.headers.authorization.split(' ')[1];
+//   const userInfo = await udata.getUserInfo(token);
 
-  if (!attemptData || Object.keys(attemptData).length === 0) {
-      return res.status(400).json({"error": "Invalid attempt data"});
-  }
+//   const userID = userInfo.sub.split('|')[1];
+//   const attemptData = req.body;
 
-  const result = udata.addAttemptToUserData("data", userID, attemptData);
+//   if (!attemptData || Object.keys(attemptData).length === 0) {
+//       return res.status(400).json({"error": "Invalid attempt data"});
+//   }
 
-  if (result === "success") {
-      res.status(200).send("Attempt added successfully");
-  } else {
-      res.status(400).send("Failed to add attempt");
-  }
-});
+//   const result = udata.addAttemptToUserData("data", userID, attemptData);
 
-app.get('/user/:userId/attempts', jwtCheck, (req, res) => {
-  const userID = req.params.userId;
+//   if (result === "success") {
+//       res.status(200).send("Attempt added successfully");
+//   } else {
+//       res.status(400).send("Failed to add attempt");
+//   }
+// });
 
-  const user = udata.getUserDataFile("data", userID);
+app.get('/question/:id/attempts', jwtCheck, async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const userInfo = await udata.getUserInfo(token);
 
-  if (user && user.attempts) {
-      res.status(200).json(user.attempts);
+  const userID = userInfo.sub.split('|')[1];
+  const qid = req.params.id.toString();
+  const user = udata.getAttemptData("data/attempts", qid, userID);
+
+  if (user) {
+      res.status(200).json(user);
   } else {
       res.status(400).json({"error": "No attempts found for this user"});
-  }
-});
-
-app.get('/question/:qid/attempts', jwtCheck, (req, res) => {
-  const questionID = req.params.qid;
-  const users = udata.getUsers();
-
-  const attempts = users.reduce((acc, user) => {
-      const userAttempts = user.attempts.filter(attempt => attempt.id === parseInt(questionID));
-      return acc.concat(userAttempts);
-  }, []);
-
-  if (attempts.length > 0) {
-      res.status(200).json(attempts);
-  } else {
-      res.status(400).json({"error": "No attempts found for this question"});
   }
 });
 

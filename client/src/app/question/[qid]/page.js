@@ -24,13 +24,13 @@ export default withPageAuthRequired(function AnswerPage() {
   const [ollamaOutput, setOllamaOutput] = useState('');
   const [testResults, setTestResults] = useState([]);
   const [validQuestion, setValidQuestion] = useState(true);
-  const questionId = params.qid;
+  const questionID = params.qid;
   const { user, error, isLoading } = useUser();
   const [unlocked, setUnlocked] = useState(true);
   const [token, setToken] = useState(null);
   const [attempts, setAttempts] = useState([]);
 
-  if (!questionId) return (<div>"Invalid page, please visit a valid question.";</div>);
+  if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
   useEffect(() => {
     const fetchTokenAndUserData = async () => {
@@ -42,7 +42,7 @@ export default withPageAuthRequired(function AnswerPage() {
         sessionInfo['user'] = user;
         const userData = await GetUser(data.token);
         const userScores = userData.questions_solved;
-        const previous_score = (questionId > 1) ? userScores[questionId - 1] : 1;
+        const previous_score = (questionID > 1) ? userScores[questionID - 1] : 1;
         if (previous_score === 0 || previous_score == null) {
           setUnlocked(false);
         }
@@ -54,7 +54,7 @@ export default withPageAuthRequired(function AnswerPage() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/question/${questionId}`)
+    fetch(`http://localhost:5001/question/${questionID}`)
     .then(resp => {
       if (resp.ok) return resp;
       else throw new Error("Invalid question ID.");
@@ -62,7 +62,7 @@ export default withPageAuthRequired(function AnswerPage() {
     .then(resp => resp.json())
     .then(data => {
       setGivenFunction(data);
-      setProblemTitle(`Problem ${questionId}`);
+      setProblemTitle(`Problem ${questionID}`);
       setValidQuestion(true);
     })
     .catch(err => {
@@ -71,7 +71,7 @@ export default withPageAuthRequired(function AnswerPage() {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:5001/unit_tests/${questionId}`)
+    fetch(`http://localhost:5001/unit_tests/${questionID}`)
     .then(resp => {
       if (resp.ok) return resp;
       else throw new Error("Unit tests could not be fetched.");
@@ -91,48 +91,11 @@ export default withPageAuthRequired(function AnswerPage() {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: questionId, desc: userInput}),
+        body: JSON.stringify({ id: questionID, desc: userInput}),
       });
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
       setTestResults(testData.results);
-
-      // Adding the attempt to user data, fetching data
-      // need to reloead...?
-      const attemptData = {
-        id: questionId,
-        desc: userInput,
-        results: testData.results
-      };
-
-      await fetch(`http://localhost:5001/user/${user.sub.split('|')[1]}/attempts`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(attemptData),
-      });
-
-      const fetchAttempts = async () => {
-        try {
-          const res = await fetch('/api/token');
-          const { token } = await res.json();
-          const response = await fetch(`http://localhost:5001/user/${user.sub.split('|')[1]}/attempts`, {
-              headers: {
-                  Authorization: `Bearer ${token}`
-              }
-          });
-          const data = await response.json();
-          const filteredAttempts = data.filter(attempt => attempt.id === questionId);
-          setAttempts(filteredAttempts);
-        } catch (error) {
-            console.error("Failed to fetch attempts:", error);
-        }
-      };
-
-      fetchAttempts();
-
     } catch (error) {
       console.error(error);
     } finally {
@@ -151,8 +114,6 @@ export default withPageAuthRequired(function AnswerPage() {
     .catch(err => {
       return {"llm_code": "ERROR retrieving code from Ollama"}
     });
-
-    console.log(llm_resp);
 
     setTestResults(data.results);
     setUserInput(data.desc);
@@ -205,7 +166,7 @@ export default withPageAuthRequired(function AnswerPage() {
         </div>
         <Grid>
           <Grid.Col span={12}>
-            <AttemptsList questionID={questionId} callback={populateAnswerFields}></AttemptsList>
+            <AttemptsList questionID={questionID} callback={populateAnswerFields}></AttemptsList>
           </Grid.Col>
         </Grid>
       </div>
