@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Button, Title, Textarea, Grid, Space, LoadingOverlay, Box } from '@mantine/core';
+import { Button, Title, Textarea, Grid, Space, Notification, Box } from '@mantine/core';
 import HomeButton from '@/components/HomeButton'
 import { CodeHighlight } from '@mantine/code-highlight';
 import TestCases from '@/components/TestCases';
@@ -100,11 +100,12 @@ export default withPageAuthRequired(function AnswerPage() {
       console.error(error);
     } finally {
       setLoading.close();
-      //window.location.reload();
     }
   };
 
   const populateAnswerFields = async (data) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setLoading.open();
     const llm_resp = await fetch('http://localhost:5001/code', {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -118,6 +119,8 @@ export default withPageAuthRequired(function AnswerPage() {
     setTestResults(data.results);
     setUserInput(data.desc);
     setOllamaOutput(llm_resp.llm_code);
+
+    setLoading.close();
   }
 
   if (!validQuestion) return (<div className={styles.page}>"There was an error fetching the specified question. Please check that the question ID is correct."</div>)
@@ -129,6 +132,10 @@ export default withPageAuthRequired(function AnswerPage() {
       <div className={styles.page}>
         <div className={styles.header}>
           <HomeButton></HomeButton>
+          {loading ? 
+          <Notification loading withCloseButton={false} title="Generating Code">
+            Please wait while we fetch the LLM code.
+          </Notification> : null}
         </div>
         <Title order={1}>{problemTitle}</Title>
         <Grid grow>
@@ -142,7 +149,7 @@ export default withPageAuthRequired(function AnswerPage() {
           </Grid.Col>
           <Grid.Col span={4}>
             <Title order={2}>Ollama Output</Title>
-            <CodeHighlight withCopyButton={false} code={ollamaOutput} language="javascript" />
+            <CodeHighlight withCopyButton={false} code={ollamaOutput} loading={loading} language="javascript" />
           </Grid.Col>
           <Grid.Col span={4}>
             <Box pos="relative">
