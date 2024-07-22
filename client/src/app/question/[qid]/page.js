@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Button, Title, Textarea, Grid, Space, Notification, Box } from '@mantine/core';
+import { Button, Title, Textarea, Grid, Space, Notification, Box, Divider } from '@mantine/core';
 import HomeButton from '@/components/HomeButton'
 import { CodeHighlight } from '@mantine/code-highlight';
 import TestCases from '@/components/TestCases';
@@ -168,14 +168,13 @@ export default withPageAuthRequired(function AnswerPage() {
             <Button disabled={loading || !userInput} fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
           </Grid.Col>
         </Grid>
+        <Divider my="md"></Divider>
         <div>
           <Title>Previous Attempts</Title>
         </div>
-        <Grid>
-          <Grid.Col span={12}>
-            <AttemptsList questionID={questionID} callback={populateAnswerFields}></AttemptsList>
-          </Grid.Col>
-        </Grid>
+        <Divider my="md"></Divider>
+        <AttemptsList questionID={questionID} callback={populateAnswerFields}></AttemptsList>
+        <Divider my="xl"></Divider>
       </div>
     </div>
   );

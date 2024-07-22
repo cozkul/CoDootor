@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, Button } from '@mantine/core';
+import { Accordion, Button, Rating } from '@mantine/core';
+import { IconStar, IconStarFilled } from '@tabler/icons-react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 /* 
@@ -35,9 +36,16 @@ const AttemptsList = ({ questionID, callback }) => {
         }
     }, [questionID, user]);
 
-    const items = attempts.map((attempt, index) => (
+    const items = attempts.map((attempt, index) => {
+        const totalScore = attempt.results.reduce((acc, cur) => acc + cur.score, 0);
+        const maxScore = attempt.results.length;
+        const numStars = Math.floor((totalScore / maxScore) / 0.33);
+        return (
         <Accordion.Item key={index} value={`Attempt ${index + 1}`}>
-            <Accordion.Control>{`Attempt ${index + 1}`}</Accordion.Control>
+            <Accordion.Control icon={<Rating emptySymbol={<IconStar/>} fullSymbol={<IconStarFilled/>} count={3} defaultValue={numStars} readOnly/>}>
+                    {`Attempt ${index + 1}`}
+                    
+            </Accordion.Control>
             <Accordion.Panel>
                 <div>{attempt.desc}</div>
                 <div>
@@ -50,10 +58,10 @@ const AttemptsList = ({ questionID, callback }) => {
                 <Button onClick={() => {callback(attempt);}}>Load Attempt</Button>
             </Accordion.Panel>
         </Accordion.Item>
-    ));
+    )});
 
     return (
-        <Accordion>
+        <Accordion variant="contained" chevronPosition="left" miw={500}>
             {items}
         </Accordion>
     );
