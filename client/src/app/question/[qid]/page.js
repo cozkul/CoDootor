@@ -29,6 +29,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const [unlocked, setUnlocked] = useState(true);
   const [token, setToken] = useState(null);
   const [attempts, setAttempts] = useState([]);
+  const [commentInput, setCommentInput] = useState('');
 
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -151,9 +152,9 @@ export default withPageAuthRequired(function AnswerPage() {
             <Title order={2}>Ollama Output</Title>
             <CodeHighlight withCopyButton={false} code={ollamaOutput} loading={loading} language="javascript" />
           </Grid.Col>
-          <Grid.Col span={4}>
+          <Grid.Col span={8}>
             <Box pos="relative">
-              <Textarea
+            <Textarea
                 label="User Input"
                 description="Description for Given Function"
                 placeholder="Please enter the description for given function."
@@ -162,6 +163,18 @@ export default withPageAuthRequired(function AnswerPage() {
                 required
                 error={ !userInput ? "Description cannot be empty." : null }
                 onChange={(event) => setUserInput(event.currentTarget.value)}
+              />
+            </Box>
+          </Grid.Col>
+          <Grid.Col span={4}>
+            <Box pos="relative">
+              <Textarea
+                label=" "
+                description="Optional comment"
+                placeholder="Please enter a brief rationale for the changes made to your previous submission."
+                value={commentInput}
+                disabled={loading}
+                onChange={(event) => setCommentInput(event.currentTarget.value)}
               />
             </Box>
           </Grid.Col>
