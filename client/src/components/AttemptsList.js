@@ -55,6 +55,7 @@ const AttemptsList = ({ questionID, callback }) => {
                         </div>
                     ))}
                 </div>
+                <div>{`Comment: ${attempt.comment}`}</div>
                 <Button onClick={() => {callback(attempt);}}>Load Attempt</Button>
             </Accordion.Panel>
         </Accordion.Item>

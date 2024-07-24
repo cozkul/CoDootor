@@ -92,7 +92,7 @@ export default withPageAuthRequired(function AnswerPage() {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: questionID, desc: userInput}),
+        body: JSON.stringify({ id: questionID, desc: userInput, comment: commentInput}),
       });
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
