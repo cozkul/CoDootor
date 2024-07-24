@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, Button, Rating, Divider, Text } from '@mantine/core';
+import { Accordion, Button, Rating, Divider, Title } from '@mantine/core';
 import { IconStar, IconStarFilled } from '@tabler/icons-react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
@@ -47,7 +47,7 @@ const AttemptsList = ({ questionID, callback, refresh }) => {
                     
             </Accordion.Control>
             <Accordion.Panel>
-                <div>{attempt.desc}</div>
+                <Title order = {4}>{attempt.desc}</Title>
                 <div>
                     {attempt.results.map((result, idx) => (
                         <div key={idx}>
