@@ -125,6 +125,7 @@ app.post('/grade', jwtCheck, async (req, res) => {
   const userInfo = await udata.getUserInfo(token);
   
   const desc = req.body.desc;
+  const comment = req.body.comment;
   const id = req.body.id;
   const user_id = userInfo.sub.split('|')[1];
   
@@ -160,10 +161,11 @@ app.post('/grade', jwtCheck, async (req, res) => {
   udata.updatedUserFileWithNewScore("data", user_id, questionData);
 
   // Update the user's attempt data given the specified question and userID
-  // includes the generatedCode, testResults, and desc of given function
+  // includes the generatedCode, testResults, desc of given function, and optional comment
   const attemptData = {
     "results": testResults,
-    "desc": desc
+    "desc": desc,
+    "comment": comment
   }
 
   udata.addAttemptToUserData("data/attempts", user_id, id, attemptData);
