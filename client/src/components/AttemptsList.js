@@ -8,7 +8,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
     Clicking on the attempt panel will load the attempt data into the form
 */
 
-const AttemptsList = ({ questionID, callback, refresh }) => {
+const AttemptsList = ({ questionID, callback1, callback2, refresh }) => {
     const [attempts, setAttempts] = useState([]);
     const { user } = useUser();
 
@@ -25,6 +25,9 @@ const AttemptsList = ({ questionID, callback, refresh }) => {
             });
             const data = await response.json();
             setAttempts(data);
+            if (data.length > 0) {
+                callback2(true);
+            }
         } catch (error) {
             console.error("Failed to fetch attempts:", error);
         }
@@ -58,7 +61,7 @@ const AttemptsList = ({ questionID, callback, refresh }) => {
                 <Divider my="md" label="User comment" labelPosition="left" />
                 <div>{attempt.comment}</div>
                 <Divider my="md"/>
-                <Button onClick={() => {callback(attempt);}}>Load Attempt</Button>
+                <Button onClick={() => {callback1(attempt);}}>Load Attempt</Button>
             </Accordion.Panel>
         </Accordion.Item>
     )});
