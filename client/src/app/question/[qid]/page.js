@@ -187,7 +187,7 @@ export default withPageAuthRequired(function AnswerPage() {
           <Title>Previous Attempts</Title>
         </div>
         <Divider my="md"></Divider>
-        <AttemptsList questionID={questionID} callback={populateAnswerFields}></AttemptsList>
+        <AttemptsList questionID={questionID} callback={populateAnswerFields} refresh={testResults}></AttemptsList>
         <Divider my="xl"></Divider>
       </div>
     </div>

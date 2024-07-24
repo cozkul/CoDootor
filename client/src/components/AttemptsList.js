@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, Button, Rating } from '@mantine/core';
+import { Accordion, Button, Rating, Divider, Text } from '@mantine/core';
 import { IconStar, IconStarFilled } from '@tabler/icons-react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
@@ -8,7 +8,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
     Clicking on the attempt panel will load the attempt data into the form
 */
 
-const AttemptsList = ({ questionID, callback }) => {
+const AttemptsList = ({ questionID, callback, refresh }) => {
     const [attempts, setAttempts] = useState([]);
     const { user } = useUser();
 
@@ -34,7 +34,7 @@ const AttemptsList = ({ questionID, callback }) => {
         if (user) {
             fetchAttempts();
         }
-    }, [questionID, user]);
+    }, [questionID, user, refresh]);
 
     const items = attempts.map((attempt, index) => {
         const totalScore = attempt.results.reduce((acc, cur) => acc + cur.score, 0);
@@ -55,7 +55,9 @@ const AttemptsList = ({ questionID, callback }) => {
                         </div>
                     ))}
                 </div>
-                <div>{`Comment: ${attempt.comment}`}</div>
+                <Divider my="md" label="User comment" labelPosition="left" />
+                <div>{attempt.comment}</div>
+                <Divider my="md"/>
                 <Button onClick={() => {callback(attempt);}}>Load Attempt</Button>
             </Accordion.Panel>
         </Accordion.Item>
