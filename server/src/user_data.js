@@ -98,7 +98,7 @@ function updateUserDataFile(folder, user, userID) {
     Adds an attempt to the user's data
     If user doesn't exist yet, initialize it
     Assumes that the attemptData is in correct format
-    attemptData is in format {"results": List[Object], "desc": String}
+    attemptData is in format {"results": List[Object], "desc": String, "comment": String}
 */
 function addAttemptToUserData(folder, userID, qid, attemptData) {
     if (!userID || !attemptData || !folder) return null;
