@@ -179,7 +179,7 @@ function getTotalScore(results) {
     var totalScore = 0;
 
     for (var i = 0; i < results.length; i++) {
-        totalScore += results[i].score;
+        results[i].passed ? totalScore += results[i].pts : null
     }
 
     return totalScore;

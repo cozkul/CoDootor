@@ -154,7 +154,7 @@ export default withPageAuthRequired(function AnswerPage() {
           </Grid.Col>
           <Grid.Col span={4}>
             <Title order={2}>Ollama Output</Title>
-            <CodeHighlight withCopyButton={false} code={ollamaOutput} loading={loading} language="javascript" />
+            <CodeHighlight withCopyButton={false} code={ollamaOutput} loading={loading ? 1 : undefined} language="javascript" />
           </Grid.Col>
           <Grid.Col span={8}>
             <Box pos="relative">
@@ -185,7 +185,7 @@ export default withPageAuthRequired(function AnswerPage() {
             </Box>
           </Grid.Col>
           <Grid.Col span={12}>
-            <Button disabled={loading } fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
+            <Button disabled={loading } fullWidth variant="filled" onClick={handleSubmit} loading={loading ? 1 : undefined}>Submit</Button>
           </Grid.Col>
         </Grid>
         <Divider my="md"></Divider>

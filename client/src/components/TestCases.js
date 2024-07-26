@@ -8,7 +8,7 @@ const TestCases = ({ testResults, setTestResults }) => {
   const iconStyle = { width: rem(12), height: rem(12) };
 
   const totalTests = (testResults) ? testResults.length : 1;
-  const passedTests = (testResults) ? testResults.filter(test => test.score > 0).length : 0;
+  const passedTests = (testResults) ? testResults.filter(test => test.passed).length : 0;
   const filledStars = Math.floor(passedTests / totalTests * 3);
 
   return (
@@ -25,7 +25,7 @@ const TestCases = ({ testResults, setTestResults }) => {
             <Tabs.Tab 
               key={index}
               value={`test${index + 1}`}
-              leftSection={result.score > 0 ? <IconCheck style={iconStyle} /> : <IconX style={iconStyle} />}>
+              leftSection={result.passed ? <IconCheck style={iconStyle} /> : <IconX style={iconStyle} />}>
               Test {index + 1}
             </Tabs.Tab>
           ))}
@@ -33,7 +33,12 @@ const TestCases = ({ testResults, setTestResults }) => {
 
         {testResults.map((result, index) => (
           <Tabs.Panel key={index} value={`test${index + 1}`}>
-            <Text>{result.err ? `Error: ${result.err_reason}` : result.desc}</Text>
+            <Text>
+              {result.err ? `Error: ${result.err_reason}` : result.desc}{"\n"}
+              {`Test Inputs: [${result.input_args.map((test => `(${test.join()})`)).join(", ")}]
+              Expected Outputs: [${result.expected_outputs.join(", ")}]
+              Actual Outputs: [${result.actual_output.join(", ")}]`}
+            </Text>
           </Tabs.Panel>
         ))}
       </Tabs>
