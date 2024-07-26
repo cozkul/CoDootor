@@ -31,6 +31,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const [commentInput, setCommentInput] = useState('');
   const [userInputFirst, setUserInputFirst] = useState(false);
   const [userCommentFirst, setUserCommentFirst] = useState(false);
+  const [attempts, setAttempts] = useState([]);
 
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -84,6 +85,26 @@ export default withPageAuthRequired(function AnswerPage() {
     })
   }, [])
 
+  useEffect(() => {
+    fetchAttempts();
+  })
+
+  const fetchAttempts = async () => {
+    try {
+        const res = await fetch('http://localhost:5173/api/token');
+        const { token } = await res.json();
+        const response = await fetch(`http://localhost:5001/question/${questionID}/attempts`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        setAttempts(data);
+    } catch (error) {
+        console.error("Failed to fetch attempts:", error);
+    }
+};
+
   const handleSubmit = async () => {
     setUserCommentFirst(true);
     setUserInputFirst(true);
@@ -101,6 +122,7 @@ export default withPageAuthRequired(function AnswerPage() {
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
       setTestResults(testData.results);
+      fetchAttempts();
     } catch (error) {
       console.error(error);
     } finally {
@@ -193,7 +215,7 @@ export default withPageAuthRequired(function AnswerPage() {
           <Title order={2}>Previous Attempts</Title>
         </div>
         <Divider my="md"></Divider>
-        <AttemptsList questionID={questionID} callback={populateAnswerFields} refresh={testResults}></AttemptsList>
+        <AttemptsList callback={populateAnswerFields} attempts={attempts}></AttemptsList>
         <Divider my="xl"></Divider>
       </div>
     </div>

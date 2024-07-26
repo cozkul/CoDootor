@@ -1,8 +1,6 @@
 import { Center, Paper, Rating, Text, Stack, Tabs, rem, Grid } from '@mantine/core';
 import { IconStar, IconCheck, IconX, IconStarFilled } from '@tabler/icons-react';
 
-
-
 // Test cases section for UI, this should retrieve prestored testcases for each question
 const TestCases = ({ testResults, setTestResults }) => {
   const iconStyle = { width: rem(12), height: rem(12) };

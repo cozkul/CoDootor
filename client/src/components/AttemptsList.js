@@ -8,40 +8,10 @@ import { useUser } from '@auth0/nextjs-auth0/client';
     Clicking on the attempt panel will load the attempt data into the form
 */
 
-const AttemptsList = ({ questionID, callback1, callback2, refresh }) => {
-    const [attempts, setAttempts] = useState([]);
-    const { user } = useUser();
-
-    if (!user) return (<div>Loading...</div>);
-
-    const fetchAttempts = async () => {
-        try {
-            const res = await fetch('/api/token');
-            const { token } = await res.json();
-            const response = await fetch(`http://localhost:5001/question/${questionID}/attempts`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            const data = await response.json();
-            setAttempts(data);
-            if (data.length > 0) {
-                callback2(true);
-            }
-        } catch (error) {
-            console.error("Failed to fetch attempts:", error);
-        }
-    };
-
-    useEffect(() => {
-        if (user) {
-            fetchAttempts();
-        }
-    }, [questionID, user, refresh]);
-
+const AttemptsList = ({ callback, attempts }) => {
     const items = attempts.map((attempt, index) => {
-        const totalScore = attempt.results.reduce((acc, cur) => acc + cur.score, 0);
-        const maxScore = attempt.results.length;
+        const totalScore = attempt.results.reduce((acc, cur) => cur.passed ? acc + cur.pts : acc, 0);
+        const maxScore = attempt.results.reduce((acc, cur) => acc + cur.pts, 0);
         const numStars = Math.floor((totalScore / maxScore) / 0.33);
         return (
         <Accordion.Item key={index} value={`Attempt ${index + 1}`}>
@@ -54,14 +24,14 @@ const AttemptsList = ({ questionID, callback1, callback2, refresh }) => {
                 <div>
                     {attempt.results.map((result, idx) => (
                         <div key={idx}>
-                            <span>{`Score: ${result.score}, Desc: ${result.desc}`}</span>
+                            <span>{`Score: ${result.passed ? result.pts : 0}, Desc: ${result.desc}`}</span>
                         </div>
                     ))}
                 </div>
                 <Divider my="md" label="User comment" labelPosition="left" />
                 <div>{attempt.comment}</div>
                 <Divider my="md"/>
-                <Button onClick={() => {callback1(attempt);}}>Load Attempt</Button>
+                <Button onClick={() => {callback(attempt);}}>Load Attempt</Button>
             </Accordion.Panel>
         </Accordion.Item>
     )});
