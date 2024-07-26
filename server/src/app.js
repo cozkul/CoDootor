@@ -10,12 +10,23 @@ const udata = require('./user_data.js');
 
 require('dotenv').config();
 
-// should be set on .env
-const jwtCheck = auth({
-  audience: process.env.YOUR_API_IDENTIFIER,
-  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-  tokenSigningAlg: 'RS256'
-});
+const jwtCheck = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+    if (token === process.env.JWT_TEST_TOKEN) {
+      console.log("OMG OMG OMG I THINK IM GONA BYPASS 8======>.");
+      return next(); // Bypass middleware for test token
+    }
+  }
+  const _jwtCheck = auth({
+    audience: process.env.YOUR_API_IDENTIFIER,
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+    tokenSigningAlg: 'RS256'
+  });
+
+  return _jwtCheck(req, res, next);
+};
 
 app.use(express.json());
 app.use(cors());

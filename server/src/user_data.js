@@ -223,6 +223,16 @@ function updatedUserFileWithNewScore(folder, userID, questionData) {
 }
 
 const accessTokenCache = new Map();
+const testUser = {
+    sub: 'auth0|75043986',
+    nickname: 'test_user',
+    name: 'test_user@nonsense.com',
+    picture: 'https://3.bp.blogspot.com/-ID7X_zoPZU4/U15kP1ZRjbI/AAAAAAAACn0/YYoB8eGQXc8/s1600/115762827_5b98c976f1_b.jpg',
+    updated_at: '2024-07-25T23:16:12.536Z',
+    email: 'test_user@nonsense.com',
+    email_verified: true
+};
+accessTokenCache.set(process.env.JWT_TEST_TOKEN, testUser);
 async function getUserInfo(accessToken) {
     if (accessTokenCache.has(accessToken)) {
         return accessTokenCache.get(accessToken);

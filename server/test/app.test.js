@@ -65,7 +65,8 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
         // Uncompilable code should produce a response that says the tests failed
         it('Providing random description', function (done) {
             request.post('/grade')
-            .send({"id": 1, "desc": "blah", "user_id": "75043986"})
+            .send({"id": 1, "desc": "blah"})
+            .set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})
             .set('Accept', 'application/json')
             .end(function(err, res) {
                 expect(res.statusCode).to.equal(200);
@@ -82,6 +83,7 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
         it('Providing bad JSON body', function (done) {
             request.post('/grade')
             .send({})
+            .set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})
             .set('Accept', 'application/json')
             .end(function(err, res) {
                 expect(res.statusCode).to.equal(400);
@@ -95,6 +97,7 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
         it('Providing invalid QID', function (done) {
             request.post('/grade')
             .send({"id": 999, "llm_code": "function foo(a, b) { return a + b; }", "user_id": "75043986"})
+            .set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})
             .set('Accept', 'application/json')
             .end(function(err, res) {
                 expect(res.statusCode).to.equal(400);
@@ -106,6 +109,7 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
         it('Providing a regular, valid function for grade', function (done) {
             request.post('/grade')
             .send({"id": 1, "desc": "Takes two numbers and adds them together", "user_id": "75043986"})
+            .set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)
