@@ -36,25 +36,36 @@ export default withPageAuthRequired(function AnswerPage() {
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
   useEffect(() => {
-    const fetchTokenAndUserData = async () => {
+    const fetchToken = async () => {
       try {
         const response = await fetch('http://localhost:5173/api/token');
         const data = await response.json();
         setToken(data.token);
+      } catch (error) {
+        console.error('Error fetching token:', error);
+      }
+    };
+    fetchToken();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!token) return;
+      try {
         const sessionInfo = {};
         sessionInfo['user'] = user;
-        const userData = await GetUser(data.token);
+        const userData = await GetUser(token);
         const userScores = userData.questions_solved;
         const previous_score = (questionID > 1) ? userScores[questionID - 1] : 1;
         if (previous_score === 0 || previous_score == null) {
           setUnlocked(false);
         }
       } catch (error) {
-        console.error('Error fetching token:', error);
+        console.error('Error user data:', error);
       }
     };
-    fetchTokenAndUserData();
-  }, []);
+    fetchUserData();
+  }, [token]);
 
   useEffect(() => {
     fetch(`http://localhost:5001/question/${questionID}`)
@@ -87,12 +98,11 @@ export default withPageAuthRequired(function AnswerPage() {
 
   useEffect(() => {
     fetchAttempts();
-  })
+  }, [token])
 
   const fetchAttempts = async () => {
+    if (!token) return;
     try {
-        const res = await fetch('http://localhost:5173/api/token');
-        const { token } = await res.json();
         const response = await fetch(`http://localhost:5001/question/${questionID}/attempts`, {
             headers: {
                 Authorization: `Bearer ${token}`
