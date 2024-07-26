@@ -205,8 +205,8 @@ export default withPageAuthRequired(function AnswerPage() {
           {attempts.length ? (<Grid.Col span={ 4 }>
             <Box pos="relative">
               <Textarea
-                label=" "
-                description="Optional comment"
+                label="Comment"
+                description="Description of change"
                 placeholder="Please enter a brief rationale for the changes made to your previous submission."
                 value={commentInput}
                 disabled={loading}
