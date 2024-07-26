@@ -15,7 +15,6 @@ services:
     command: npm run start
     extra_hosts:
     - "host.docker.internal:host-gateway"
-
   frontend:
     build: ./client
     env_file:
@@ -29,14 +28,10 @@ services:
     command: npm run dev
     extra_hosts:
     - "host.docker.internal:host-gateway"
-
   ollama:
-    build: 
-      context: ./ollama
-      target: builder
+    image: ollama/ollama:latest
     ports:
-      - 11434:11434
+      - "11434:11434"
     volumes:
       - ./ollama:/root/.ollama
     command: serve
-    # https://huggingface.co/google/codegemma-2b#description

@@ -6,6 +6,33 @@ Parses the response, contacts the LLM, and writes the code to a file.
 const { default: ollama } = require('ollama');
 const MODEL_NAME = "granite-code:3b"
 
+async function autoPullModelOnStart() {
+    console.log("Pulling the LLM model, assuming that it hasn't been pulled already.")
+    const response = await fetch("http://host.docker.internal:11434/api/pull", {
+        method: "POST",
+        body: JSON.stringify({"model": MODEL_NAME, "stream": false})
+    }).then(resp => {
+        return resp.json();
+    }).then(resp => {
+        return resp.status;
+    }).catch(err => {
+        console.log(err);
+    })
+    console.log("LLM model was pulled with code: ", response);
+
+    return;
+}
+
+async function loadModelOnStart() {
+    console.log("Preloading model ", MODEL_NAME, "...")
+    const response = await fetch("http://host.docker.internal:11434/api/chat", {
+        method: "POST",
+        body: JSON.stringify({"model": MODEL_NAME})
+    });
+
+    return;
+}
+
 /*
     Given the description as a string, generates the prompt for the LLM by appending the
     necessary background info to generate the function.
@@ -158,4 +185,4 @@ function getTotalScore(results) {
     return totalScore;
 }
 
-module.exports = { GeneratePrompt, isMalicious, ParseLLMResponse, FetchResponse, TestGeneratedCode, getTotalScore };
+module.exports = { GeneratePrompt, isMalicious, ParseLLMResponse, FetchResponse, TestGeneratedCode, getTotalScore, autoPullModelOnStart, loadModelOnStart };
