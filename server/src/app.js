@@ -260,7 +260,8 @@ app.get('/unit_tests/:id', (req, res) => {
   try {
     dummy_fn = function() {};
     const descs = require(testPath);
-    const result = descs.run_tests(dummy_fn);
+    const tester = require("../unit_tests/tests_util.js");
+    const result = tester.run_tests(dummy_fn, descs.tests);
     res.send(result);
   } catch (e) {
     res.status(400).send({"error": "Failed to retrieve test cases."});

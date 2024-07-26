@@ -2,7 +2,7 @@
 Functions that interact with Ollama to retrieve the LLM generated code
 Parses the response, contacts the LLM, and writes the code to a file.
 */
-
+const tester = require("../unit_tests/tests_util.js");
 const { default: ollama } = require('ollama');
 const MODEL_NAME = "granite-code:3b"
 
@@ -159,8 +159,8 @@ function TestGeneratedCode(code_json) {
     // Run the tests on the foo function
     try {
         eval("var foo = " + code);
-        const tester = require(test_fp);
-        res = tester.run_tests(foo);
+        const qut = require(test_fp);
+        res = tester.run_tests(foo, qut.tests);
     } catch (err) {
         return [{err: true, err_reason: err.toString()}];
     }
