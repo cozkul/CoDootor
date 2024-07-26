@@ -28,8 +28,9 @@ export default withPageAuthRequired(function AnswerPage() {
   const { user, error, isLoading } = useUser();
   const [unlocked, setUnlocked] = useState(true);
   const [token, setToken] = useState(null);
-  const [attempts, setAttempts] = useState([]);
   const [commentInput, setCommentInput] = useState('');
+  const [userInputFirst, setUserInputFirst] = useState(false);
+  const [userCommentFirst, setUserCommentFirst] = useState(false);
 
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -84,6 +85,9 @@ export default withPageAuthRequired(function AnswerPage() {
   }, [])
 
   const handleSubmit = async () => {
+    setUserCommentFirst(true);
+    setUserInputFirst(true);
+    if (userInput === "") return;
     setLoading.open();
     try {
       const testResponse = await fetch('http://localhost:5001/grade', {
@@ -161,8 +165,8 @@ export default withPageAuthRequired(function AnswerPage() {
                 value={userInput}
                 disabled={loading}
                 required
-                error={ !userInput ? "Description cannot be empty." : null }
-                onChange={(event) => setUserInput(event.currentTarget.value)}
+                error={ !userInput && userInputFirst ? "Description cannot be empty." : null }
+                onChange={(event) => { setUserInput(event.currentTarget.value); setUserInputFirst(true); }}
               />
             </Box>
           </Grid.Col>
@@ -174,17 +178,19 @@ export default withPageAuthRequired(function AnswerPage() {
                 placeholder="Please enter a brief rationale for the changes made to your previous submission."
                 value={commentInput}
                 disabled={loading}
-                onChange={(event) => setCommentInput(event.currentTarget.value)}
+                required
+                error={ !commentInput && userCommentFirst ? "Comment cannot be empty." : null }
+                onChange={(event) => { setCommentInput(event.currentTarget.value); setUserCommentFirst(true); }}
               />
             </Box>
           </Grid.Col>
           <Grid.Col span={12}>
-            <Button disabled={loading || !userInput} fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
+            <Button disabled={loading } fullWidth variant="filled" onClick={handleSubmit} loading={loading}>Submit</Button>
           </Grid.Col>
         </Grid>
         <Divider my="md"></Divider>
         <div>
-          <Title>Previous Attempts</Title>
+          <Title order={2}>Previous Attempts</Title>
         </div>
         <Divider my="md"></Divider>
         <AttemptsList questionID={questionID} callback={populateAnswerFields} refresh={testResults}></AttemptsList>
