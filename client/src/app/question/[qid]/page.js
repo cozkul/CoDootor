@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Button, Title, Textarea, Grid, Space, Notification, Box, Divider } from '@mantine/core';
+import { Button, Title, Textarea, Grid, rem, Notification, Box, Divider } from '@mantine/core';
 import HomeButton from '@/components/HomeButton'
 import { CodeHighlight } from '@mantine/code-highlight';
 import TestCases from '@/components/TestCases';
@@ -175,7 +175,7 @@ export default withPageAuthRequired(function AnswerPage() {
           </Notification> : null}
         </div>
         <Title order={1}>{problemTitle}</Title>
-        <Grid grow>
+        <Grid grow style={{ width: rem(1000) }}>
           <Grid.Col span={4}>
             <Title order={2}>Given Function</Title>
             <CodeHighlight withCopyButton={false} code={givenFunction} language="javascript" />
@@ -218,15 +218,11 @@ export default withPageAuthRequired(function AnswerPage() {
           </Grid.Col>
           <Grid.Col span={12}>
             <Button disabled={loading } fullWidth variant="filled" onClick={handleSubmit} loading={loading ? 1 : undefined}>Submit</Button>
+            <Divider my="md"></Divider>
+            <Title order={2}>Previous Attempts</Title>
+            <AttemptsList callback={populateAnswerFields} attempts={attempts}></AttemptsList>
           </Grid.Col>
         </Grid>
-        <Divider my="md"></Divider>
-        <div>
-          <Title order={2}>Previous Attempts</Title>
-        </div>
-        <Divider my="md"></Divider>
-        <AttemptsList callback={populateAnswerFields} attempts={attempts}></AttemptsList>
-        <Divider my="xl"></Divider>
       </div>
     </div>
   );
