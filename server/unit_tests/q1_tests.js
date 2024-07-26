@@ -5,7 +5,7 @@ var tests = {
         "pts": 1,
         "desc": "A test to check if adding properly.",
         "passed": false,
-        "actual_output": []
+        "actual_outputs": []
     },
     "test2": {
         "input_args": [[5, 2], [3, 4]],
@@ -13,7 +13,7 @@ var tests = {
         "pts": 1,
         "desc": "A less basic test to check if adding properly.",
         "passed": false,
-        "actual_output": []
+        "actual_outputs": []
     },
     "test3": {
         "input_args": [[0, 0], [20, 7]],
@@ -21,7 +21,7 @@ var tests = {
         "pts": 1,
         "desc": "Another basic test to check if adding properly.",
         "passed": false,
-        "actual_output": []
+        "actual_outputs": []
     }
 }
 
@@ -40,10 +40,10 @@ function run_tests(fn) {
 
                 if (actualOutput == expectedOutput) {
                     results[i].passed = true;
-                    results[i].actual_output.push(actualOutput);
+                    results[i].actual_outputs.push(actualOutput);
                 }
             } catch (err) {
-                results[i].actual_output.push(err);
+                results[i].actual_outputs.push(err);
             }
         }
     }

@@ -33,12 +33,10 @@ const TestCases = ({ testResults, setTestResults }) => {
 
         {testResults.map((result, index) => (
           <Tabs.Panel key={index} value={`test${index + 1}`}>
-            <Text>
-              {result.err ? `Error: ${result.err_reason}` : result.desc}{"\n"}
-              {`Test Inputs: [${result.input_args.map((test => `(${test.join()})`)).join(", ")}]
-              Expected Outputs: [${result.expected_outputs.join(", ")}]
-              Actual Outputs: [${result.actual_output.join(", ")}]`}
-            </Text>
+            <Text>{result.err ? `Error: ${result.err_reason}` : result.desc}{"\n"}</Text>
+            <Text>Test Inputs: [{result.input_args.map((test => `(${test.join()})`)).join(", ")}]</Text>
+            <Text>Expected Outputs: [{result.expected_outputs.join(", ")}]</Text>
+            <Text>Actual Outputs: [{result.actual_outputs.join(", ")}]</Text>
           </Tabs.Panel>
         ))}
       </Tabs>
