@@ -15,7 +15,6 @@ const jwtCheck = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     if (token === process.env.JWT_TEST_TOKEN) {
-      console.log("OMG OMG OMG I THINK IM GONA BYPASS 8======>.");
       return next(); // Bypass middleware for test token
     }
   }
