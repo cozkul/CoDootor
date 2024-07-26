@@ -175,7 +175,7 @@ export default withPageAuthRequired(function AnswerPage() {
           </Notification> : null}
         </div>
         <Title order={1}>{problemTitle}</Title>
-        <Grid grow style={{ width: rem(1000) }}>
+        <Grid grow style={{ width: rem(1200) }}>
           <Grid.Col span={4}>
             <Title order={2}>Given Function</Title>
             <CodeHighlight style={{ height: rem(300) }} withCopyButton={false} code={givenFunction} language="javascript" />
