@@ -178,7 +178,7 @@ export default withPageAuthRequired(function AnswerPage() {
         <Grid grow style={{ width: rem(1000) }}>
           <Grid.Col span={4}>
             <Title order={2}>Given Function</Title>
-            <CodeHighlight withCopyButton={false} code={givenFunction} language="javascript" />
+            <CodeHighlight style={{ height: rem(300) }} withCopyButton={false} code={givenFunction} language="javascript" />
           </Grid.Col>
           <Grid.Col span={4}>
             <Title order={2}>Test Cases</Title>
@@ -186,9 +186,9 @@ export default withPageAuthRequired(function AnswerPage() {
           </Grid.Col>
           <Grid.Col span={4}>
             <Title order={2}>Ollama Output</Title>
-            <CodeHighlight withCopyButton={false} code={ollamaOutput} loading={loading ? 1 : undefined} language="javascript" />
+            <CodeHighlight style={{ height: rem(300) }}withCopyButton={false} code={ollamaOutput} loading={loading ? 1 : undefined} language="javascript" />
           </Grid.Col>
-          <Grid.Col span={8}>
+          <Grid.Col span={ attempts.length ? 8 : 12 }>
             <Box pos="relative">
             <Textarea
                 label="User Input"
@@ -202,7 +202,7 @@ export default withPageAuthRequired(function AnswerPage() {
               />
             </Box>
           </Grid.Col>
-          <Grid.Col span={4}>
+          {attempts.length ? (<Grid.Col span={ 4 }>
             <Box pos="relative">
               <Textarea
                 label=" "
@@ -215,12 +215,13 @@ export default withPageAuthRequired(function AnswerPage() {
                 onChange={(event) => { setCommentInput(event.currentTarget.value); setUserCommentFirst(true); }}
               />
             </Box>
-          </Grid.Col>
+          </Grid.Col>) : null}
           <Grid.Col span={12}>
             <Button disabled={loading } fullWidth variant="filled" onClick={handleSubmit} loading={loading ? 1 : undefined}>Submit</Button>
-            <Divider my="md"></Divider>
+            {attempts.length ? (
+            <><Divider my="md"></Divider>
             <Title order={2}>Previous Attempts</Title>
-            <AttemptsList callback={populateAnswerFields} attempts={attempts}></AttemptsList>
+            <AttemptsList callback={populateAnswerFields} attempts={attempts}></AttemptsList></>) : null}
           </Grid.Col>
         </Grid>
       </div>
