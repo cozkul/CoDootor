@@ -118,7 +118,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const handleSubmit = async () => {
     setUserCommentFirst(true);
     setUserInputFirst(true);
-    if (userInput === "") return;
+    if (userInput === "" || (attempts.length > 0 && commentInput === "")) return;
     setLoading.open();
     try {
       const testResponse = await fetch('http://localhost:5001/grade', {
