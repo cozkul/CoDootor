@@ -1,4 +1,4 @@
 node_modules
 
-# Ignore all JSON files in the data directory
-data/*.json
+# Ignore all files and folders in the data directory
+data/*
