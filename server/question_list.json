@@ -38,14 +38,14 @@
 		{
 			"stage": 6,
 			"name": "Stringies",
-			"num_tests": 2,
+			"num_tests": 5,
 			"filepath": "./questions/q6.js",
 			"test_filepath": "./unit_tests/q6_tests.js"
 		},
 		{
 			"stage": 7,
 			"name": "Big Numbers",
-			"num_tests": 2,
+			"num_tests": 3,
 			"filepath": "./questions/q7.js",
 			"test_filepath": "./unit_tests/q7_tests.js"
 		},
@@ -55,6 +55,20 @@
 			"num_tests": 3,
 			"filepath": "./questions/q8.js",
 			"test_filepath": "./unit_tests/q8_tests.js"
+		},
+		{
+			"stage": 9,
+			"name": "String-a ding-ding",
+			"num_tests": 2,
+			"filepath": "./questions/q9.js",
+			"test_filepath": "./unit_tests/q9_tests.js"
+		},
+		{
+			"stage": 10,
+			"name": "Numbers and such",
+			"num_tests": 3,
+			"filepath": "./questions/q10.js",
+			"test_filepath": "./unit_tests/q10_tests.js"
 		}
 	]
 }
