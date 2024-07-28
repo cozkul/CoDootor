@@ -143,12 +143,12 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
             
             expect(res.length).to.equal(3);
             expect(res[0].desc).to.equal("A test to check if adding properly.");
-            expect(res[0].score).to.equal(1);
+            expect(res[0].passed).to.equal(true);
     
             expect(res[1].desc).to.equal("A less basic test to check if adding properly.");
-            expect(res[1].score).to.equal(1);
+            expect(res[1].passed).to.equal(true);
     
-            expect(res[2].score).to.equal(1);
+            expect(res[2].passed).to.equal(true);
             expect(res[2].desc).to.equal("Another basic test to check if adding properly.");
         });
     
@@ -173,12 +173,12 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
             expect(res.length).to.equal(3);
             expect(res[0]).to.not.equal(null);
             expect(res[0].desc).to.equal("A test to check if adding properly.");
-            expect(res[0].score).to.equal(0);
+            expect(res[0].passed).to.equal(false);
     
             expect(res[1].desc).to.equal("A less basic test to check if adding properly.");
-            expect(res[1].score).to.equal(0);
+            expect(res[1].passed).to.equal(false);
     
-            expect(res[2].score).to.equal(0);
+            expect(res[2].passed).to.equal(false);
             expect(res[2].desc).to.equal("Another basic test to check if adding properly.");
         });
     
@@ -200,10 +200,16 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
                 "id": 1
             })
     
-            expect(res.length).to.equal(1);
-            expect(res[0]).to.not.equal(null);
-            expect(res[0].err).to.equal(true);
-            expect(res[0].err_reason).to.contain("a is not defined");
+            expect(res.length).to.equal(3);
+
+            expect(res[0].passed).to.equal(false);
+            expect(res[0].actual_outputs[0]).to.contain("a is not defined");
+
+            expect(res[1].passed).to.equal(false);
+            expect(res[1].actual_outputs[0]).to.contain("a is not defined");
+
+            expect(res[2].passed).to.equal(false);
+            expect(res[2].actual_outputs[0]).to.contain("a is not defined");
         });
     
         it('Testing improper JSON formats and undefined', function () {
@@ -227,11 +233,11 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
             
             const graded = oa.TestGeneratedCode(resp);
             expect(graded.length).to.equal(3);
-            expect(graded[0].score).to.equal(1);
+            expect(graded[0].passed).to.equal(true);
             expect(graded[0].desc).to.equal("A test to check if adding properly.");
-            expect(graded[1].score).to.equal(1);
+            expect(graded[1].passed).to.equal(true);
             expect(graded[1].desc).to.equal("A less basic test to check if adding properly.");
-            expect(graded[2].score).to.equal(1);
+            expect(graded[2].passed).to.equal(true);
             expect(graded[2].desc).to.equal("Another basic test to check if adding properly.");
         })
     })
@@ -239,9 +245,9 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
     describe('Testing the getTotalScore function', function () {
         const err_results = [{err: true, err_reason: "a is not defined"}];
         const normal_results = [
-            {"desc": "A less basic test to check if adding properly.", score: 2},
-            {"desc": "Another basic test to check if adding properly.", score: 3},
-            {"desc": "A more advanced test to check if adding properly.", score: 1}
+            {"desc": "A less basic test to check if adding properly.", pts: 2, passed: true},
+            {"desc": "Another basic test to check if adding properly.", pts: 3, passed: true},
+            {"desc": "A more advanced test to check if adding properly.", pts: 1, passed: true}
         ]
 
         it('Testing when results are null/undefined', function () {

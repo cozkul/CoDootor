@@ -72,9 +72,9 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
                 expect(res.statusCode).to.equal(200);
                 expect(res.body).to.not.equal(null);
                 expect(res.body.results.length).to.equal(3);
-                expect(res.body.results[0].score).to.equal(0);
-                expect(res.body.results[1].score).to.equal(0);
-                expect(res.body.results[2].score).to.equal(0);
+                expect(res.body.results[0].passed).to.equal(false);
+                expect(res.body.results[1].passed).to.equal(false);
+                expect(res.body.results[2].passed).to.equal(false);
                 if (err) done(err);
                 done();
             })
@@ -116,9 +116,9 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
             .end(function(err, res) {
                 expect(res.body).to.not.equal(null);
                 expect(res.body.results.length).to.equal(3);
-                expect(res.body.results[0].score).to.equal(1);
-                expect(res.body.results[1].score).to.equal(1);
-                expect(res.body.results[2].score).to.equal(1);
+                expect(res.body.results[0].passed).to.equal(true);
+                expect(res.body.results[1].passed).to.equal(true);
+                expect(res.body.results[2].passed).to.equal(true);
                 if (err) done(err);
                 done();
             })
