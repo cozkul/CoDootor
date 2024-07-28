@@ -25,7 +25,7 @@ async function autoPullModelOnStart() {
 
 async function loadModelOnStart() {
     console.log("Preloading model ", MODEL_NAME, "...")
-    const response = await fetch("http://host.docker.internal:11434/api/chat", {
+    const response = await fetch("http://host.docker.internal:11434/api/generate", {
         method: "POST",
         body: JSON.stringify({"model": MODEL_NAME})
     });
@@ -78,7 +78,7 @@ async function FetchResponse(desc) {
     
     const data = {
         "model": MODEL_NAME, 
-        "messages": [{"role": "user", "content": prompt}],
+        "prompt": prompt,
         "stream": false,
         "keep_alive": -1,
         "options": {
@@ -87,13 +87,13 @@ async function FetchResponse(desc) {
     };
 
     // If fetching from outside the container, then use localhost, otherwise need to use host.docker.internal
-    const response = await fetch("http://host.docker.internal:11434/api/chat", {
+    const response = await fetch("http://host.docker.internal:11434/api/generate", {
         method: "POST",
         body: JSON.stringify(data)
     }).then(resp => {
         return resp.json();
     }).then(resp => {
-        return resp.message.content;
+        return resp.response;
     }).catch(err => {
         console.log(err);
     })

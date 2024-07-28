@@ -132,7 +132,7 @@ export default withPageAuthRequired(function AnswerPage() {
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
       setTestResults(testData.results);
-      fetchAttempts();
+      await fetchAttempts();
     } catch (error) {
       console.error(error);
     } finally {
