@@ -5,9 +5,9 @@
     "passes": 61,
     "pending": 0,
     "failures": 0,
-    "start": "2024-07-28T05:49:08.993Z",
-    "end": "2024-07-28T05:50:16.551Z",
-    "duration": 67558,
+    "start": "2024-07-28T20:01:02.619Z",
+    "end": "2024-07-28T20:01:48.472Z",
+    "duration": 45853,
     "testsRegistered": 61,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "e2c4911b-4169-4434-a16f-723679b3a483",
+      "uuid": "f41917a2-a84a-4ef6-a31f-abf288fa8076",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "1146e25c-a797-4593-a7a9-e9a6076bfc9e",
+          "uuid": "8f712073-b659-429a-bb88-8a191a4b18c7",
           "title": "Tests for the Ollama backend REST API endpoints",
           "fullFile": "/usr/src/app/server/test/app.test.js",
           "file": "/test/app.test.js",
@@ -45,8 +45,8 @@
               "context": null,
               "code": "testServer = server.app.listen(done);\nrequest = supertest.agent(testServer);",
               "err": {},
-              "uuid": "bf47522e-c06e-4480-884b-dce069f9e192",
-              "parentUUID": "1146e25c-a797-4593-a7a9-e9a6076bfc9e",
+              "uuid": "bdce8f89-a345-4c5c-ac91-94f31f4bb3ee",
+              "parentUUID": "8f712073-b659-429a-bb88-8a191a4b18c7",
               "isHook": true,
               "skipped": false
             }
@@ -56,7 +56,7 @@
               "title": "\"after all\" hook in \"Tests for the Ollama backend REST API endpoints\"",
               "fullTitle": "Tests for the Ollama backend REST API endpoints \"after all\" hook in \"Tests for the Ollama backend REST API endpoints\"",
               "timedOut": false,
-              "duration": 1,
+              "duration": 0,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "testServer.close(done);",
               "err": {},
-              "uuid": "74e8ccf1-1e14-4eb2-b9cd-407e72dac7ca",
-              "parentUUID": "1146e25c-a797-4593-a7a9-e9a6076bfc9e",
+              "uuid": "f225f751-2b5e-4259-a531-7005cda29d8a",
+              "parentUUID": "8f712073-b659-429a-bb88-8a191a4b18c7",
               "isHook": true,
               "skipped": false
             }
@@ -74,7 +74,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "2e0a5d69-f6d1-4600-9b01-77c80ce01a32",
+              "uuid": "5f7fb0ea-5692-4021-a0ce-7c4b616a42b8",
               "title": "Testing the POST endpoint for /code",
               "fullFile": "/usr/src/app/server/test/app.test.js",
               "file": "/test/app.test.js",
@@ -85,7 +85,7 @@
                   "title": "Providing a regular description",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing the POST endpoint for /code Providing a regular description",
                   "timedOut": false,
-                  "duration": 19791,
+                  "duration": 9530,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -94,8 +94,8 @@
                   "context": null,
                   "code": "request\n.post('/code')\n.send(two_sum_fn_desc)\n.set('Accept', 'application/json')\n.expect('Content-Type', /json/)\n.expect(200)\n.end(function(err, res) {\n    expect(res.body.llm_code).to.not.equal(null);\n    expect(res.body.llm_code).to.match(/return [\\w]+ \\+ [\\w]+/);\n    expect(res.body.llm_code).to.match(/function [\\w]+\\([\\w]+\\,[\\s]*[\\w]+\\)/);\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "2ecc1229-061d-47fd-99f2-08f7c74efe66",
-                  "parentUUID": "2e0a5d69-f6d1-4600-9b01-77c80ce01a32",
+                  "uuid": "9c92749d-2991-45a1-8248-b52d68cd6fcd",
+                  "parentUUID": "5f7fb0ea-5692-4021-a0ce-7c4b616a42b8",
                   "isHook": false,
                   "skipped": false
                 },
@@ -103,7 +103,7 @@
                   "title": "Not providing a body",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing the POST endpoint for /code Not providing a body",
                   "timedOut": false,
-                  "duration": 4,
+                  "duration": 3,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -112,27 +112,27 @@
                   "context": null,
                   "code": "request.post('/code')\n.send({})\n.set('Accept', 'application/json')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(400);\n    expect(res.body.error).to.equal(\"No description was provided.\");\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "1e14077c-c555-4527-ab7e-ee5ab90b42c1",
-                  "parentUUID": "2e0a5d69-f6d1-4600-9b01-77c80ce01a32",
+                  "uuid": "a25f2f94-caaa-43d2-b568-cf38408810fd",
+                  "parentUUID": "5f7fb0ea-5692-4021-a0ce-7c4b616a42b8",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "2ecc1229-061d-47fd-99f2-08f7c74efe66",
-                "1e14077c-c555-4527-ab7e-ee5ab90b42c1"
+                "9c92749d-2991-45a1-8248-b52d68cd6fcd",
+                "a25f2f94-caaa-43d2-b568-cf38408810fd"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 19795,
+              "duration": 9533,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "307bf6ad-47be-4634-9789-77bc4e46012d",
+              "uuid": "95ff6bf9-cb4c-4f1b-b8bd-73db9c328f48",
               "title": "Testing the POST endpoint for /grade",
               "fullFile": "/usr/src/app/server/test/app.test.js",
               "file": "/test/app.test.js",
@@ -143,7 +143,7 @@
                   "title": "Providing random description",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing the POST endpoint for /grade Providing random description",
                   "timedOut": false,
-                  "duration": 20851,
+                  "duration": 9008,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -152,8 +152,8 @@
                   "context": null,
                   "code": "request.post('/grade')\n.send({\"id\": 1, \"desc\": \"blah\"})\n.set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})\n.set('Accept', 'application/json')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(200);\n    expect(res.body).to.not.equal(null);\n    expect(res.body.results.length).to.equal(3);\n    expect(res.body.results[0].passed).to.equal(false);\n    expect(res.body.results[1].passed).to.equal(false);\n    expect(res.body.results[2].passed).to.equal(false);\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "23826c3a-4963-414a-958f-6113a150271c",
-                  "parentUUID": "307bf6ad-47be-4634-9789-77bc4e46012d",
+                  "uuid": "e556aade-ab27-4260-9d15-7406830bae91",
+                  "parentUUID": "95ff6bf9-cb4c-4f1b-b8bd-73db9c328f48",
                   "isHook": false,
                   "skipped": false
                 },
@@ -161,7 +161,7 @@
                   "title": "Providing bad JSON body",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing the POST endpoint for /grade Providing bad JSON body",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 2,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -170,8 +170,8 @@
                   "context": null,
                   "code": "request.post('/grade')\n.send({})\n.set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})\n.set('Accept', 'application/json')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(400);\n    expect(res.body).to.not.equal(null);\n    expect(res.body.error).to.equal(\"No description was provided.\");\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "db028e45-d415-4fdd-ab3c-cbc8c3a564a2",
-                  "parentUUID": "307bf6ad-47be-4634-9789-77bc4e46012d",
+                  "uuid": "25acd235-fb49-4789-a9f5-70a3d9f9dbb7",
+                  "parentUUID": "95ff6bf9-cb4c-4f1b-b8bd-73db9c328f48",
                   "isHook": false,
                   "skipped": false
                 },
@@ -188,8 +188,8 @@
                   "context": null,
                   "code": "request.post('/grade')\n.send({\"id\": 999, \"llm_code\": \"function foo(a, b) { return a + b; }\", \"user_id\": \"75043986\"})\n.set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})\n.set('Accept', 'application/json')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(400);\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "e5a01d3f-c8dd-4408-9da4-4a7770eac4c3",
-                  "parentUUID": "307bf6ad-47be-4634-9789-77bc4e46012d",
+                  "uuid": "3cea6140-d4fd-4f61-92b6-0964756155c8",
+                  "parentUUID": "95ff6bf9-cb4c-4f1b-b8bd-73db9c328f48",
                   "isHook": false,
                   "skipped": false
                 },
@@ -197,7 +197,7 @@
                   "title": "Providing a regular, valid function for grade",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing the POST endpoint for /grade Providing a regular, valid function for grade",
                   "timedOut": false,
-                  "duration": 4805,
+                  "duration": 4380,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -206,29 +206,29 @@
                   "context": null,
                   "code": "request.post('/grade')\n.send({\"id\": 1, \"desc\": \"Takes two numbers and adds them together\", \"user_id\": \"75043986\"})\n.set({'Authorization': `Bearer ${process.env.JWT_TEST_TOKEN}`})\n.set('Accept', 'application/json')\n.expect('Content-Type', /json/)\n.expect(200)\n.end(function(err, res) {\n    expect(res.body).to.not.equal(null);\n    expect(res.body.results.length).to.equal(3);\n    expect(res.body.results[0].passed).to.equal(true);\n    expect(res.body.results[1].passed).to.equal(true);\n    expect(res.body.results[2].passed).to.equal(true);\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "29754067-34a5-4231-bedd-86906de7ae6d",
-                  "parentUUID": "307bf6ad-47be-4634-9789-77bc4e46012d",
+                  "uuid": "02080f16-9992-4e0f-bfcb-da51e84f84d6",
+                  "parentUUID": "95ff6bf9-cb4c-4f1b-b8bd-73db9c328f48",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "23826c3a-4963-414a-958f-6113a150271c",
-                "db028e45-d415-4fdd-ab3c-cbc8c3a564a2",
-                "e5a01d3f-c8dd-4408-9da4-4a7770eac4c3",
-                "29754067-34a5-4231-bedd-86906de7ae6d"
+                "e556aade-ab27-4260-9d15-7406830bae91",
+                "25acd235-fb49-4789-a9f5-70a3d9f9dbb7",
+                "3cea6140-d4fd-4f61-92b6-0964756155c8",
+                "02080f16-9992-4e0f-bfcb-da51e84f84d6"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 25658,
+              "duration": 13391,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "2e507275-999b-4802-9fd0-911157032943",
+              "uuid": "bf5c65f0-ebb4-4eba-8cae-45536fc01438",
               "title": "Testing question and unit test GET endpoints",
               "fullFile": "/usr/src/app/server/test/app.test.js",
               "file": "/test/app.test.js",
@@ -239,7 +239,7 @@
                   "title": "Fetching question 1",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing question and unit test GET endpoints Fetching question 1",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 3,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -248,8 +248,8 @@
                   "context": null,
                   "code": "request.get('/question/1')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(200);\n    expect(res.body).to.not.equal(null);\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "40aebd5c-3be3-445f-b4a2-03c3587fe7f8",
-                  "parentUUID": "2e507275-999b-4802-9fd0-911157032943",
+                  "uuid": "e0030fa2-7fcf-4121-ae9e-718534d5c808",
+                  "parentUUID": "bf5c65f0-ebb4-4eba-8cae-45536fc01438",
                   "isHook": false,
                   "skipped": false
                 },
@@ -257,7 +257,7 @@
                   "title": "Fetching a non-existant question",
                   "fullTitle": "Tests for the Ollama backend REST API endpoints Testing question and unit test GET endpoints Fetching a non-existant question",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 2,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -266,8 +266,8 @@
                   "context": null,
                   "code": "request.get('/question/ford_prefect')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(400);\n    expect(res.body).to.not.equal(null);\n    expect(res.body.error).to.equal(\"Failed to retrieve the question.\");\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "31835d1b-fa7c-4a63-b27f-74e82c13e5a6",
-                  "parentUUID": "2e507275-999b-4802-9fd0-911157032943",
+                  "uuid": "ac767413-b12f-4b72-823c-14fb5d483981",
+                  "parentUUID": "bf5c65f0-ebb4-4eba-8cae-45536fc01438",
                   "isHook": false,
                   "skipped": false
                 },
@@ -284,8 +284,8 @@
                   "context": null,
                   "code": "request.get('/unit_tests/1')\n.end(function(err, res) {\n    expect(res.body).to.not.equal(null);\n    expect(res.body.length).to.equal(3);\n    expect(res.body[0].desc).to.equal(\"A test to check if adding properly.\");\n    expect(res.body[1].desc).to.equal(\"A less basic test to check if adding properly.\");\n    expect(res.body[2].desc).to.equal(\"Another basic test to check if adding properly.\");\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "3fe81d80-6701-4f05-af9e-dbec67b865e0",
-                  "parentUUID": "2e507275-999b-4802-9fd0-911157032943",
+                  "uuid": "9b02d9b2-8d12-43d1-a2e0-e6fa67b9722d",
+                  "parentUUID": "bf5c65f0-ebb4-4eba-8cae-45536fc01438",
                   "isHook": false,
                   "skipped": false
                 },
@@ -302,26 +302,26 @@
                   "context": null,
                   "code": "request.get('/unit_tests/ford_prefect')\n.end(function(err, res) {\n    expect(res.statusCode).to.equal(400);\n    expect(res.body).to.not.equal(null);\n    expect(res.body.error).to.equal(\"Failed to retrieve test cases.\");\n    if (err) done(err);\n    done();\n})",
                   "err": {},
-                  "uuid": "99867f92-5a4d-4a73-96d6-6a123c9e1978",
-                  "parentUUID": "2e507275-999b-4802-9fd0-911157032943",
+                  "uuid": "64b5deff-3249-4bce-af2a-d72696abbc69",
+                  "parentUUID": "bf5c65f0-ebb4-4eba-8cae-45536fc01438",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "40aebd5c-3be3-445f-b4a2-03c3587fe7f8",
-                "31835d1b-fa7c-4a63-b27f-74e82c13e5a6",
-                "3fe81d80-6701-4f05-af9e-dbec67b865e0",
-                "99867f92-5a4d-4a73-96d6-6a123c9e1978"
+                "e0030fa2-7fcf-4121-ae9e-718534d5c808",
+                "ac767413-b12f-4b72-823c-14fb5d483981",
+                "9b02d9b2-8d12-43d1-a2e0-e6fa67b9722d",
+                "64b5deff-3249-4bce-af2a-d72696abbc69"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 4,
+              "duration": 7,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             }
           ],
           "passes": [],
@@ -331,10 +331,10 @@
           "duration": 0,
           "root": false,
           "rootEmpty": false,
-          "_timeout": 300000
+          "_timeout": 30000
         },
         {
-          "uuid": "7929335b-2743-43bf-905f-a2a38a804cef",
+          "uuid": "92571308-29fe-46bc-8571-96c6c3464540",
           "title": "Tests for Ollama Backend Fetching, Parsing, and Grading Helpers",
           "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
           "file": "/test/ollama_api.test.js",
@@ -343,7 +343,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "29223c39-af74-441e-bcfa-be2e3bc12449",
+              "uuid": "95340630-3ec3-4b73-8bb2-499b53bd2eed",
               "title": "Testing the GeneratePrompt function",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -363,8 +363,8 @@
                   "context": null,
                   "code": "const prompt = oa.GeneratePrompt(\"hello world\");\nexpect(prompt)\n.to\n.equal(\"Write me a Javascript function that has the following purpose: hello world. Only show me the code and call the function foo.\")",
                   "err": {},
-                  "uuid": "88b82983-d418-4803-8588-6ac36993468a",
-                  "parentUUID": "29223c39-af74-441e-bcfa-be2e3bc12449",
+                  "uuid": "4edb386c-b9fd-448f-bddd-49608a21b91f",
+                  "parentUUID": "95340630-3ec3-4b73-8bb2-499b53bd2eed",
                   "isHook": false,
                   "skipped": false
                 },
@@ -381,8 +381,8 @@
                   "context": null,
                   "code": "const prompt = oa.GeneratePrompt(\"\");\nexpect(prompt)\n.to\n.equal(null)",
                   "err": {},
-                  "uuid": "a1bb98c7-52c9-4e43-999a-ff047490eeb7",
-                  "parentUUID": "29223c39-af74-441e-bcfa-be2e3bc12449",
+                  "uuid": "1887d8e3-4b1e-4e7d-9413-2744472a656a",
+                  "parentUUID": "95340630-3ec3-4b73-8bb2-499b53bd2eed",
                   "isHook": false,
                   "skipped": false
                 },
@@ -399,8 +399,8 @@
                   "context": null,
                   "code": "const prompt = oa.GeneratePrompt(null);\nexpect(prompt)\n.to\n.equal(null)",
                   "err": {},
-                  "uuid": "fc517364-6593-4817-b25f-1066d98f7b09",
-                  "parentUUID": "29223c39-af74-441e-bcfa-be2e3bc12449",
+                  "uuid": "a537a2e1-a1d9-4d67-8752-42350fff4af5",
+                  "parentUUID": "95340630-3ec3-4b73-8bb2-499b53bd2eed",
                   "isHook": false,
                   "skipped": false
                 },
@@ -417,18 +417,18 @@
                   "context": null,
                   "code": "const prompt = oa.GeneratePrompt();\nexpect(prompt)\n.to\n.equal(null)",
                   "err": {},
-                  "uuid": "127ff7dc-846e-41e9-b4ad-8228df577c93",
-                  "parentUUID": "29223c39-af74-441e-bcfa-be2e3bc12449",
+                  "uuid": "5bd130fa-8c73-4c12-a007-4b7049cce293",
+                  "parentUUID": "95340630-3ec3-4b73-8bb2-499b53bd2eed",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "88b82983-d418-4803-8588-6ac36993468a",
-                "a1bb98c7-52c9-4e43-999a-ff047490eeb7",
-                "fc517364-6593-4817-b25f-1066d98f7b09",
-                "127ff7dc-846e-41e9-b4ad-8228df577c93"
+                "4edb386c-b9fd-448f-bddd-49608a21b91f",
+                "1887d8e3-4b1e-4e7d-9413-2744472a656a",
+                "a537a2e1-a1d9-4d67-8752-42350fff4af5",
+                "5bd130fa-8c73-4c12-a007-4b7049cce293"
               ],
               "failures": [],
               "pending": [],
@@ -436,10 +436,10 @@
               "duration": 0,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "e70e182f-4b5f-4c15-9729-17921fe2e21d",
+              "uuid": "a0777fdb-0bce-47d2-926b-0d03f6726a37",
               "title": "Testing the ParseResponse function",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -459,8 +459,8 @@
                   "context": null,
                   "code": "const resp = oa.ParseLLMResponse(llm_two_sum_response);\nexpect(resp).to.contain('function foo');\nexpect(resp).to.not.contain(\"```\");\nexpect(resp).to.contain('return a + b');",
                   "err": {},
-                  "uuid": "a536d155-e593-4be0-bdaa-a31bfb59b979",
-                  "parentUUID": "e70e182f-4b5f-4c15-9729-17921fe2e21d",
+                  "uuid": "6b4c2570-e876-4383-b561-aeb90f199e76",
+                  "parentUUID": "a0777fdb-0bce-47d2-926b-0d03f6726a37",
                   "isHook": false,
                   "skipped": false
                 },
@@ -477,8 +477,8 @@
                   "context": null,
                   "code": "const resp = oa.ParseLLMResponse(null);\nexpect(resp).to.equal(null);",
                   "err": {},
-                  "uuid": "5470aa35-9636-4119-98b8-89bb4befc3e4",
-                  "parentUUID": "e70e182f-4b5f-4c15-9729-17921fe2e21d",
+                  "uuid": "c92260ad-9976-4268-a7a0-61d2c555d15f",
+                  "parentUUID": "a0777fdb-0bce-47d2-926b-0d03f6726a37",
                   "isHook": false,
                   "skipped": false
                 },
@@ -495,8 +495,8 @@
                   "context": null,
                   "code": "const resp = oa.ParseLLMResponse();\nexpect(resp).to.equal(null);",
                   "err": {},
-                  "uuid": "e97fd3aa-0077-4cfb-9e78-df09e2d63186",
-                  "parentUUID": "e70e182f-4b5f-4c15-9729-17921fe2e21d",
+                  "uuid": "f0cb95fc-8503-420b-a936-8d143e4a67d9",
+                  "parentUUID": "a0777fdb-0bce-47d2-926b-0d03f6726a37",
                   "isHook": false,
                   "skipped": false
                 },
@@ -513,18 +513,18 @@
                   "context": null,
                   "code": "const resp = oa.ParseLLMResponse(weird_llm_response);\nexpect(resp).to.contain('function');\nexpect(resp).to.not.contain(\"```\");\nexpect(resp).to.contain('toLowerCase');",
                   "err": {},
-                  "uuid": "06503829-fd1a-4e8d-930e-c20d8fccb971",
-                  "parentUUID": "e70e182f-4b5f-4c15-9729-17921fe2e21d",
+                  "uuid": "78d2cae3-bf70-45b5-86dc-96031dda580c",
+                  "parentUUID": "a0777fdb-0bce-47d2-926b-0d03f6726a37",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "a536d155-e593-4be0-bdaa-a31bfb59b979",
-                "5470aa35-9636-4119-98b8-89bb4befc3e4",
-                "e97fd3aa-0077-4cfb-9e78-df09e2d63186",
-                "06503829-fd1a-4e8d-930e-c20d8fccb971"
+                "6b4c2570-e876-4383-b561-aeb90f199e76",
+                "c92260ad-9976-4268-a7a0-61d2c555d15f",
+                "f0cb95fc-8503-420b-a936-8d143e4a67d9",
+                "78d2cae3-bf70-45b5-86dc-96031dda580c"
               ],
               "failures": [],
               "pending": [],
@@ -532,10 +532,10 @@
               "duration": 1,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "2a847170-b45c-4a7c-ad07-348cabc7d64f",
+              "uuid": "6deb82a2-c087-4750-8796-4e1dd2d25369",
               "title": "Testing the FetchResponse function",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -546,7 +546,7 @@
                   "title": "Fetching response for regular query",
                   "fullTitle": "Tests for Ollama Backend Fetching, Parsing, and Grading Helpers Testing the FetchResponse function Fetching response for regular query",
                   "timedOut": false,
-                  "duration": 7597,
+                  "duration": 7897,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -555,8 +555,8 @@
                   "context": null,
                   "code": "const resp = await oa.FetchResponse(two_sum_fn_desc.desc);\nexpect(resp).to.not.equal(null);\nexpect(resp.llm_code).to.contain(\"function\");\nexpect(resp.llm_code).to.contain(\"+\");",
                   "err": {},
-                  "uuid": "81c3320b-8025-4ed6-b089-283438be7ccc",
-                  "parentUUID": "2a847170-b45c-4a7c-ad07-348cabc7d64f",
+                  "uuid": "8de9d402-49ca-4338-a1b1-9ab34445c7d4",
+                  "parentUUID": "6deb82a2-c087-4750-8796-4e1dd2d25369",
                   "isHook": false,
                   "skipped": false
                 },
@@ -564,7 +564,7 @@
                   "title": "Fetching response for random query",
                   "fullTitle": "Tests for Ollama Backend Fetching, Parsing, and Grading Helpers Testing the FetchResponse function Fetching response for random query",
                   "timedOut": false,
-                  "duration": 9007,
+                  "duration": 8794,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -573,8 +573,8 @@
                   "context": null,
                   "code": "const resp = await oa.FetchResponse(\"blah\")\nexpect(resp).to.not.equal(null);",
                   "err": {},
-                  "uuid": "42fc4d5c-8582-4cc0-a735-91f1592d9fa6",
-                  "parentUUID": "2a847170-b45c-4a7c-ad07-348cabc7d64f",
+                  "uuid": "306b5ea5-8c69-4337-bb4c-711f4cd4a175",
+                  "parentUUID": "6deb82a2-c087-4750-8796-4e1dd2d25369",
                   "isHook": false,
                   "skipped": false
                 },
@@ -591,8 +591,8 @@
                   "context": null,
                   "code": "const resp = await oa.FetchResponse(null);\nexpect(resp).to.equal(null);",
                   "err": {},
-                  "uuid": "bc1fbc69-ce0b-482c-a10d-e2ba2e53ad11",
-                  "parentUUID": "2a847170-b45c-4a7c-ad07-348cabc7d64f",
+                  "uuid": "d9976c02-7a7b-43f2-8208-208fa4732829",
+                  "parentUUID": "6deb82a2-c087-4750-8796-4e1dd2d25369",
                   "isHook": false,
                   "skipped": false
                 },
@@ -609,29 +609,29 @@
                   "context": null,
                   "code": "const resp = await oa.FetchResponse();\nexpect(resp).to.equal(null);",
                   "err": {},
-                  "uuid": "40957ab2-7a6f-41cf-8547-7ad21dcfc1f2",
-                  "parentUUID": "2a847170-b45c-4a7c-ad07-348cabc7d64f",
+                  "uuid": "a5329e87-91e0-4f78-b686-de000ae0a544",
+                  "parentUUID": "6deb82a2-c087-4750-8796-4e1dd2d25369",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "81c3320b-8025-4ed6-b089-283438be7ccc",
-                "42fc4d5c-8582-4cc0-a735-91f1592d9fa6",
-                "bc1fbc69-ce0b-482c-a10d-e2ba2e53ad11",
-                "40957ab2-7a6f-41cf-8547-7ad21dcfc1f2"
+                "8de9d402-49ca-4338-a1b1-9ab34445c7d4",
+                "306b5ea5-8c69-4337-bb4c-711f4cd4a175",
+                "d9976c02-7a7b-43f2-8208-208fa4732829",
+                "a5329e87-91e0-4f78-b686-de000ae0a544"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 16604,
+              "duration": 16691,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "4e41497e-a062-451d-8d89-a45512483bee",
+              "uuid": "6c79063a-2681-4681-a859-3cb8036828b9",
               "title": "Testing the isMalicious function",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -651,8 +651,8 @@
                   "context": null,
                   "code": "const result = oa.isMalicious(malicious_fn_desc);\nexpect(result).to.equal(true);",
                   "err": {},
-                  "uuid": "690472b6-b38a-4e81-9815-bbe94357ca2c",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "99667ba7-3e83-40f1-a321-5ca11c2af296",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 },
@@ -669,8 +669,8 @@
                   "context": null,
                   "code": "const result = oa.isMalicious(\"for(;;)\");\nexpect(result).to.equal(true);",
                   "err": {},
-                  "uuid": "25414b4d-b293-4e5b-8ba7-561d679b60da",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "6cc14fde-04dc-48ca-8aff-edd7d1669bf3",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 },
@@ -687,8 +687,8 @@
                   "context": null,
                   "code": "const result = oa.isMalicious(two_sum_fn_desc.desc);\nexpect(result).to.equal(false);",
                   "err": {},
-                  "uuid": "3db5aefc-f787-4227-99a0-a2690c52b7ff",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "a049d6e2-dd74-4fff-9e5a-5283e4190002",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 },
@@ -705,8 +705,8 @@
                   "context": null,
                   "code": "const result = oa.isMalicious(\"\");\nexpect(result).to.equal(false);",
                   "err": {},
-                  "uuid": "62305cc5-f6e2-405c-9a60-7768307d25a2",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "d523d3e8-ed8a-4e3a-92b1-320df8d222d5",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 },
@@ -723,8 +723,8 @@
                   "context": null,
                   "code": "const result = oa.isMalicious(null);\nexpect(result).to.equal(false);",
                   "err": {},
-                  "uuid": "752373fe-a60c-49bb-8578-962b5d130876",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "3b4e40dd-0134-40cc-848a-3cd096950f46",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 },
@@ -741,8 +741,8 @@
                   "context": null,
                   "code": "const result = oa.isMalicious(\"my name is Chris\");\nexpect(result).to.equal(false);",
                   "err": {},
-                  "uuid": "665536c7-11bb-41e1-b409-a232b7550667",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "74501e93-c8af-4c06-9d3d-548a5ab66aa5",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 },
@@ -759,21 +759,21 @@
                   "context": null,
                   "code": "const result = oa.isMalicious();\nexpect(result).to.equal(false);",
                   "err": {},
-                  "uuid": "bfc3ebeb-d51b-4d35-a50a-7c5b117307b3",
-                  "parentUUID": "4e41497e-a062-451d-8d89-a45512483bee",
+                  "uuid": "e0c8bb36-828a-4d64-9869-9e4539205408",
+                  "parentUUID": "6c79063a-2681-4681-a859-3cb8036828b9",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "690472b6-b38a-4e81-9815-bbe94357ca2c",
-                "25414b4d-b293-4e5b-8ba7-561d679b60da",
-                "3db5aefc-f787-4227-99a0-a2690c52b7ff",
-                "62305cc5-f6e2-405c-9a60-7768307d25a2",
-                "752373fe-a60c-49bb-8578-962b5d130876",
-                "665536c7-11bb-41e1-b409-a232b7550667",
-                "bfc3ebeb-d51b-4d35-a50a-7c5b117307b3"
+                "99667ba7-3e83-40f1-a321-5ca11c2af296",
+                "6cc14fde-04dc-48ca-8aff-edd7d1669bf3",
+                "a049d6e2-dd74-4fff-9e5a-5283e4190002",
+                "d523d3e8-ed8a-4e3a-92b1-320df8d222d5",
+                "3b4e40dd-0134-40cc-848a-3cd096950f46",
+                "74501e93-c8af-4c06-9d3d-548a5ab66aa5",
+                "e0c8bb36-828a-4d64-9869-9e4539205408"
               ],
               "failures": [],
               "pending": [],
@@ -781,10 +781,10 @@
               "duration": 0,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "53b15fed-3d67-4968-9f6d-36740d069eab",
+              "uuid": "dd76c794-53fd-4046-81ea-8869aab623da",
               "title": "Testing the TestGeneratedCode function",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -804,8 +804,8 @@
                   "context": null,
                   "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo(a, b) { return a + b }\",\n    \"id\": 1\n})\n\nexpect(res.length).to.equal(3);\nexpect(res[0].desc).to.equal(\"A test to check if adding properly.\");\nexpect(res[0].passed).to.equal(true);\n    \nexpect(res[1].desc).to.equal(\"A less basic test to check if adding properly.\");\nexpect(res[1].passed).to.equal(true);\n    \nexpect(res[2].passed).to.equal(true);\nexpect(res[2].desc).to.equal(\"Another basic test to check if adding properly.\");",
                   "err": {},
-                  "uuid": "6f3414c8-f728-46e9-901b-f15e383dd9d3",
-                  "parentUUID": "53b15fed-3d67-4968-9f6d-36740d069eab",
+                  "uuid": "53283a58-b60a-4487-9c05-f5bee4bac110",
+                  "parentUUID": "dd76c794-53fd-4046-81ea-8869aab623da",
                   "isHook": false,
                   "skipped": false
                 },
@@ -822,8 +822,8 @@
                   "context": null,
                   "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo(a, b) { return a + b }\",\n    \"id\": 99\n})\n\nexpect(res).to.not.equal(null);\nexpect(res.length).to.equal(1);\nexpect(res[0].err).to.equal(true);\nexpect(res[0].err_reason).to.include(\"Cannot find module\");",
                   "err": {},
-                  "uuid": "15b44ef9-fc7f-4e14-8204-4d01e38cafcf",
-                  "parentUUID": "53b15fed-3d67-4968-9f6d-36740d069eab",
+                  "uuid": "ecad6778-ee52-4d6c-a93d-c17f9dcbfa2c",
+                  "parentUUID": "dd76c794-53fd-4046-81ea-8869aab623da",
                   "isHook": false,
                   "skipped": false
                 },
@@ -831,17 +831,17 @@
                   "title": "Testing an incorrectly generated LLM function for Q1",
                   "fullTitle": "Tests for Ollama Backend Fetching, Parsing, and Grading Helpers Testing the TestGeneratedCode function Testing an incorrectly generated LLM function for Q1",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo() { return; }\",\n    \"id\": 1 \n})\nconsole.log(res);\n    \nexpect(res.length).to.equal(3);\nexpect(res[0]).to.not.equal(null);\nexpect(res[0].desc).to.equal(\"A test to check if adding properly.\");\nexpect(res[0].passed).to.equal(false);\n    \nexpect(res[1].desc).to.equal(\"A less basic test to check if adding properly.\");\nexpect(res[1].passed).to.equal(false);\n    \nexpect(res[2].passed).to.equal(false);\nexpect(res[2].desc).to.equal(\"Another basic test to check if adding properly.\");",
+                  "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo() { return; }\",\n    \"id\": 1 \n})\n    \nexpect(res.length).to.equal(3);\nexpect(res[0]).to.not.equal(null);\nexpect(res[0].desc).to.equal(\"A test to check if adding properly.\");\nexpect(res[0].passed).to.equal(false);\n    \nexpect(res[1].desc).to.equal(\"A less basic test to check if adding properly.\");\nexpect(res[1].passed).to.equal(false);\n    \nexpect(res[2].passed).to.equal(false);\nexpect(res[2].desc).to.equal(\"Another basic test to check if adding properly.\");",
                   "err": {},
-                  "uuid": "20331a40-d24c-4ae2-9e9a-44e1c9a6f479",
-                  "parentUUID": "53b15fed-3d67-4968-9f6d-36740d069eab",
+                  "uuid": "1ae6cfd5-095d-4985-b425-f6401d71d871",
+                  "parentUUID": "dd76c794-53fd-4046-81ea-8869aab623da",
                   "isHook": false,
                   "skipped": false
                 },
@@ -858,8 +858,8 @@
                   "context": null,
                   "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo() { , }\",\n    \"id\": 1 \n})\n    \nexpect(res.length).to.equal(1);\nexpect(res[0]).to.not.equal(null);\nexpect(res[0].err).to.equal(true);\nexpect(res[0].err_reason).to.contain(\"SyntaxError: Unexpected token \\',\\'\");",
                   "err": {},
-                  "uuid": "a4a16dfe-aa87-4c29-a6e2-ae3eab4a5e42",
-                  "parentUUID": "53b15fed-3d67-4968-9f6d-36740d069eab",
+                  "uuid": "a4f2bd4a-8b18-4c1a-9b37-631d04ed855d",
+                  "parentUUID": "dd76c794-53fd-4046-81ea-8869aab623da",
                   "isHook": false,
                   "skipped": false
                 },
@@ -874,10 +874,10 @@
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo() { return a + b }\",\n    \"id\": 1\n})\nconsole.log(res);\n    \nexpect(res.length).to.equal(3);\nexpect(res[0].passed).to.equal(false);\nexpect(res[0].actual_outputs[0]).to.contain(\"a is not defined\");\nexpect(res[1].passed).to.equal(false);\nexpect(res[1].actual_outputs[0]).to.contain(\"a is not defined\");\nexpect(res[2].passed).to.equal(false);\nexpect(res[2].actual_outputs[0]).to.contain(\"a is not defined\");",
+                  "code": "const res = oa.TestGeneratedCode({\n    \"llm_code\": \"function foo() { return a + b }\",\n    \"id\": 1\n})\n    \nexpect(res.length).to.equal(3);\nexpect(res[0].passed).to.equal(false);\nexpect(res[0].actual_outputs[0]).to.contain(\"a is not defined\");\nexpect(res[1].passed).to.equal(false);\nexpect(res[1].actual_outputs[0]).to.contain(\"a is not defined\");\nexpect(res[2].passed).to.equal(false);\nexpect(res[2].actual_outputs[0]).to.contain(\"a is not defined\");",
                   "err": {},
-                  "uuid": "df9f56db-b23a-4b0f-ae75-054c2d656d57",
-                  "parentUUID": "53b15fed-3d67-4968-9f6d-36740d069eab",
+                  "uuid": "3d725799-6def-4ec5-8ef6-482e936689bb",
+                  "parentUUID": "dd76c794-53fd-4046-81ea-8869aab623da",
                   "isHook": false,
                   "skipped": false
                 },
@@ -894,31 +894,31 @@
                   "context": null,
                   "code": "expect(oa.TestGeneratedCode({})).to.equal(null);\nexpect(oa.TestGeneratedCode({\"code\": \"hello\"})).to.equal(null);\nexpect(oa.TestGeneratedCode({\"id\": \"hello\"})).to.equal(null);\nexpect(oa.TestGeneratedCode({\"llm_code\": \"hello\"})).to.equal(null);\nexpect(oa.TestGeneratedCode(null)).to.equal(null);\nexpect(oa.TestGeneratedCode()).to.equal(null);",
                   "err": {},
-                  "uuid": "7eb949be-f59a-4e1f-80c7-3e6c6c1c4a57",
-                  "parentUUID": "53b15fed-3d67-4968-9f6d-36740d069eab",
+                  "uuid": "5da392e4-d9c0-44d0-b2ec-9f4b5790d521",
+                  "parentUUID": "dd76c794-53fd-4046-81ea-8869aab623da",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "6f3414c8-f728-46e9-901b-f15e383dd9d3",
-                "15b44ef9-fc7f-4e14-8204-4d01e38cafcf",
-                "20331a40-d24c-4ae2-9e9a-44e1c9a6f479",
-                "a4a16dfe-aa87-4c29-a6e2-ae3eab4a5e42",
-                "df9f56db-b23a-4b0f-ae75-054c2d656d57",
-                "7eb949be-f59a-4e1f-80c7-3e6c6c1c4a57"
+                "53283a58-b60a-4487-9c05-f5bee4bac110",
+                "ecad6778-ee52-4d6c-a93d-c17f9dcbfa2c",
+                "1ae6cfd5-095d-4985-b425-f6401d71d871",
+                "a4f2bd4a-8b18-4c1a-9b37-631d04ed855d",
+                "3d725799-6def-4ec5-8ef6-482e936689bb",
+                "5da392e4-d9c0-44d0-b2ec-9f4b5790d521"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 2,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "a90573cd-9496-4004-bd25-e2cc94e6d84c",
+              "uuid": "ac42c9e2-a45b-43df-b36b-62c52ec89627",
               "title": "Combining everything",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -929,7 +929,7 @@
                   "title": "Regular test with proper query",
                   "fullTitle": "Tests for Ollama Backend Fetching, Parsing, and Grading Helpers Combining everything Regular test with proper query",
                   "timedOut": false,
-                  "duration": 5419,
+                  "duration": 6160,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -938,26 +938,26 @@
                   "context": null,
                   "code": "const resp = await oa.FetchResponse(two_sum_fn_desc.desc);\nexpect(resp).to.not.equal(null);\nexpect(resp.llm_code.startsWith(\"function\")).to.equal(true);\nexpect(resp.llm_code).to.match(/function(.|\\s)*\\}/);\n    \nresp.id = 1;\n\nconst graded = oa.TestGeneratedCode(resp);\nexpect(graded.length).to.equal(3);\nexpect(graded[0].passed).to.equal(true);\nexpect(graded[0].desc).to.equal(\"A test to check if adding properly.\");\nexpect(graded[1].passed).to.equal(true);\nexpect(graded[1].desc).to.equal(\"A less basic test to check if adding properly.\");\nexpect(graded[2].passed).to.equal(true);\nexpect(graded[2].desc).to.equal(\"Another basic test to check if adding properly.\");",
                   "err": {},
-                  "uuid": "eec634d9-2ef7-418f-9eed-e9eea5706506",
-                  "parentUUID": "a90573cd-9496-4004-bd25-e2cc94e6d84c",
+                  "uuid": "0fa11bf6-a916-472e-b4ab-0ee0e8a176b6",
+                  "parentUUID": "ac42c9e2-a45b-43df-b36b-62c52ec89627",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "eec634d9-2ef7-418f-9eed-e9eea5706506"
+                "0fa11bf6-a916-472e-b4ab-0ee0e8a176b6"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 5419,
+              "duration": 6160,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "e72d121a-80ef-4e82-996f-483feee7addb",
+              "uuid": "39944249-48fd-4ee6-9443-35e8c359faaf",
               "title": "Testing the getTotalScore function",
               "fullFile": "/usr/src/app/server/test/ollama_api.test.js",
               "file": "/test/ollama_api.test.js",
@@ -977,8 +977,8 @@
                   "context": null,
                   "code": "expect(oa.getTotalScore()).to.equal(null);\nexpect(oa.getTotalScore(null)).to.equal(null);\nexpect(oa.getTotalScore([])).to.equal(0);",
                   "err": {},
-                  "uuid": "aa2abec7-8476-45f7-b449-986267818a2a",
-                  "parentUUID": "e72d121a-80ef-4e82-996f-483feee7addb",
+                  "uuid": "b57fafae-39b6-4230-a9a9-b3c1247d1c5f",
+                  "parentUUID": "39944249-48fd-4ee6-9443-35e8c359faaf",
                   "isHook": false,
                   "skipped": false
                 },
@@ -986,7 +986,7 @@
                   "title": "Testing when error in testing function (i.e. errors)",
                   "fullTitle": "Tests for Ollama Backend Fetching, Parsing, and Grading Helpers Testing the getTotalScore function Testing when error in testing function (i.e. errors)",
                   "timedOut": false,
-                  "duration": 0,
+                  "duration": 1,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -995,8 +995,8 @@
                   "context": null,
                   "code": "expect(oa.getTotalScore(err_results)).to.equal(0);",
                   "err": {},
-                  "uuid": "4225314e-0055-4846-bb48-e808f1b31691",
-                  "parentUUID": "e72d121a-80ef-4e82-996f-483feee7addb",
+                  "uuid": "32aff049-04a4-4fed-bff0-bca45ef01ff4",
+                  "parentUUID": "39944249-48fd-4ee6-9443-35e8c359faaf",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1013,25 +1013,25 @@
                   "context": null,
                   "code": "expect(oa.getTotalScore(normal_results)).to.equal(6);",
                   "err": {},
-                  "uuid": "fe1e7cf0-aefd-4ae6-a804-5763f0e80087",
-                  "parentUUID": "e72d121a-80ef-4e82-996f-483feee7addb",
+                  "uuid": "ac2e52aa-fe1a-4bae-b7f5-64fa9f63a6f7",
+                  "parentUUID": "39944249-48fd-4ee6-9443-35e8c359faaf",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "aa2abec7-8476-45f7-b449-986267818a2a",
-                "4225314e-0055-4846-bb48-e808f1b31691",
-                "fe1e7cf0-aefd-4ae6-a804-5763f0e80087"
+                "b57fafae-39b6-4230-a9a9-b3c1247d1c5f",
+                "32aff049-04a4-4fed-bff0-bca45ef01ff4",
+                "ac2e52aa-fe1a-4bae-b7f5-64fa9f63a6f7"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 0,
+              "duration": 1,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             }
           ],
           "passes": [],
@@ -1041,10 +1041,10 @@
           "duration": 0,
           "root": false,
           "rootEmpty": false,
-          "_timeout": 300000
+          "_timeout": 30000
         },
         {
-          "uuid": "b995c94f-3064-45ff-8783-4b52838ecb61",
+          "uuid": "fb4a8ab6-9896-4a5b-ab73-53db47be9e10",
           "title": "Tests for user_data functions",
           "fullFile": "/usr/src/app/server/test/user_data.test.js",
           "file": "/test/user_data.test.js",
@@ -1062,8 +1062,8 @@
               "context": null,
               "code": "clearFolder();",
               "err": {},
-              "uuid": "5e7e1b64-8d61-415e-bd06-3754f2a75f63",
-              "parentUUID": "b995c94f-3064-45ff-8783-4b52838ecb61",
+              "uuid": "7458943f-f975-4e2c-b48d-161169f0d896",
+              "parentUUID": "fb4a8ab6-9896-4a5b-ab73-53db47be9e10",
               "isHook": true,
               "skipped": false
             }
@@ -1073,7 +1073,7 @@
               "title": "\"after all\" hook in \"Tests for user_data functions\"",
               "fullTitle": "Tests for user_data functions \"after all\" hook in \"Tests for user_data functions\"",
               "timedOut": false,
-              "duration": 1,
+              "duration": 2,
               "state": null,
               "speed": null,
               "pass": false,
@@ -1082,8 +1082,8 @@
               "context": null,
               "code": "clearFolder();",
               "err": {},
-              "uuid": "3cfcf460-10b0-4eec-ad3f-d36d5be50e8a",
-              "parentUUID": "b995c94f-3064-45ff-8783-4b52838ecb61",
+              "uuid": "2e3625cf-240e-47da-8146-74639c99098d",
+              "parentUUID": "fb4a8ab6-9896-4a5b-ab73-53db47be9e10",
               "isHook": true,
               "skipped": false
             }
@@ -1091,7 +1091,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "fd3d22fd-bc01-4d4c-a171-921ea4cd72be",
+              "uuid": "097f051f-3033-4082-9348-c09e86e2d2a7",
               "title": "Testing the loadUserDataOnStart function",
               "fullFile": "/usr/src/app/server/test/user_data.test.js",
               "file": "/test/user_data.test.js",
@@ -1111,8 +1111,8 @@
                   "context": null,
                   "code": "const users = udata.loadUserDataOnStart(testFolderName);\nexpect(users.length).to.equal(0);",
                   "err": {},
-                  "uuid": "f4a94271-ad9b-416a-89cd-1d7a38eae8b9",
-                  "parentUUID": "fd3d22fd-bc01-4d4c-a171-921ea4cd72be",
+                  "uuid": "3142035c-fdb7-495f-894c-18995157a5c9",
+                  "parentUUID": "097f051f-3033-4082-9348-c09e86e2d2a7",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1129,8 +1129,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nudata.initializeUserDataFile(testFolderName, user1.user_id, user1.nickname);\nconst users = udata.loadUserDataOnStart(testFolderName);\nexpect(users.length).to.equal(2);",
                   "err": {},
-                  "uuid": "ac39cbd9-6e23-4b2b-a896-821506ae6e4b",
-                  "parentUUID": "fd3d22fd-bc01-4d4c-a171-921ea4cd72be",
+                  "uuid": "553db8a9-3e42-4d27-ba87-295ff01daa54",
+                  "parentUUID": "097f051f-3033-4082-9348-c09e86e2d2a7",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1147,8 +1147,8 @@
                   "context": null,
                   "code": "const users = udata.loadUserDataOnStart(\"nonExistentFolder\");\nexpect(users).to.equal(null);",
                   "err": {},
-                  "uuid": "080b17a0-af25-454c-a3f3-e4e0818557e7",
-                  "parentUUID": "fd3d22fd-bc01-4d4c-a171-921ea4cd72be",
+                  "uuid": "3f469bc4-83d8-48b1-8379-3ffb0e44547d",
+                  "parentUUID": "097f051f-3033-4082-9348-c09e86e2d2a7",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1156,7 +1156,7 @@
                   "title": "Testing null or missing folder param",
                   "fullTitle": "Tests for user_data functions Testing the loadUserDataOnStart function Testing null or missing folder param",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -1165,29 +1165,29 @@
                   "context": null,
                   "code": "const users = udata.loadUserDataOnStart();\nexpect(users).to.equal(null);\nconst users2 = udata.loadUserDataOnStart(null);\nexpect(users2).to.equal(null);",
                   "err": {},
-                  "uuid": "34152e6b-bcf1-4ef4-82af-6c306511bc2a",
-                  "parentUUID": "fd3d22fd-bc01-4d4c-a171-921ea4cd72be",
+                  "uuid": "de037521-8d80-4c10-8084-84872d560cde",
+                  "parentUUID": "097f051f-3033-4082-9348-c09e86e2d2a7",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "f4a94271-ad9b-416a-89cd-1d7a38eae8b9",
-                "ac39cbd9-6e23-4b2b-a896-821506ae6e4b",
-                "080b17a0-af25-454c-a3f3-e4e0818557e7",
-                "34152e6b-bcf1-4ef4-82af-6c306511bc2a"
+                "3142035c-fdb7-495f-894c-18995157a5c9",
+                "553db8a9-3e42-4d27-ba87-295ff01daa54",
+                "3f469bc4-83d8-48b1-8379-3ffb0e44547d",
+                "de037521-8d80-4c10-8084-84872d560cde"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 2,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "966b10a8-f4a5-42ba-b553-6d6fcf6b0ac3",
+              "uuid": "fc4a6c3b-c54b-423d-bcf5-52913ae9fc7c",
               "title": "Testing the initializeUserDataFile function",
               "fullFile": "/usr/src/app/server/test/user_data.test.js",
               "file": "/test/user_data.test.js",
@@ -1198,7 +1198,7 @@
                   "title": "Initializing an existing user",
                   "fullTitle": "Tests for user_data functions Testing the initializeUserDataFile function Initializing an existing user",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -1207,8 +1207,8 @@
                   "context": null,
                   "code": "let res = udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nexpect(udata.getUsers().length).to.equal(1);\nexpect(res).to.equal(\"success\");\nres = udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nexpect(udata.getUsers().length).to.equal(1);\nexpect(res).to.equal(null);",
                   "err": {},
-                  "uuid": "0991fe66-b107-4169-8117-33fbecf3eee7",
-                  "parentUUID": "966b10a8-f4a5-42ba-b553-6d6fcf6b0ac3",
+                  "uuid": "169d0d73-36a0-4a9a-b3e9-0d08a68ab1dd",
+                  "parentUUID": "fc4a6c3b-c54b-423d-bcf5-52913ae9fc7c",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1225,8 +1225,8 @@
                   "context": null,
                   "code": "let res = udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nexpect(udata.getUsers().length).to.equal(1);\nexpect(res).to.equal(\"success\");\nres = udata.initializeUserDataFile(testFolderName, user1.user_id, user1.nickname);\nexpect(udata.getUsers().length).to.equal(2);\nexpect(res).to.equal(\"success\");",
                   "err": {},
-                  "uuid": "1191a379-b4d2-43e1-b1c8-cbea51449df9",
-                  "parentUUID": "966b10a8-f4a5-42ba-b553-6d6fcf6b0ac3",
+                  "uuid": "f6f86038-9a38-4d32-ae98-922ba1ca5786",
+                  "parentUUID": "fc4a6c3b-c54b-423d-bcf5-52913ae9fc7c",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1243,8 +1243,8 @@
                   "context": null,
                   "code": "let res = udata.initializeUserDataFile(null, user0.user_id, user0.nickname);\nexpect(res).to.equal(null);\nexpect(udata.getUsers().length).to.equal(0);\nres = udata.initializeUserDataFile(\"nonExistentFolder\", user0.user_id, user0.nickname);\nexpect(res).to.equal(null);\nexpect(udata.getUsers().length).to.equal(0);",
                   "err": {},
-                  "uuid": "e2462da8-b13e-484a-b115-6af9ddf9b5ac",
-                  "parentUUID": "966b10a8-f4a5-42ba-b553-6d6fcf6b0ac3",
+                  "uuid": "baacfe60-3028-4cdc-9436-f9bd61195573",
+                  "parentUUID": "fc4a6c3b-c54b-423d-bcf5-52913ae9fc7c",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1252,7 +1252,7 @@
                   "title": "Initializing with null/missing userid/nickname",
                   "fullTitle": "Tests for user_data functions Testing the initializeUserDataFile function Initializing with null/missing userid/nickname",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -1261,8 +1261,8 @@
                   "context": null,
                   "code": "let res = udata.initializeUserDataFile(testFolderName, null, null);\nexpect(res).to.equal(null);\nexpect(udata.getUsers().length).to.equal(0);\nres = udata.initializeUserDataFile(\"nonExistentFolder\");\nexpect(res).to.equal(null);\nexpect(udata.getUsers().length).to.equal(0);",
                   "err": {},
-                  "uuid": "acbc9225-cf47-4a40-acb7-d7b4bd852590",
-                  "parentUUID": "966b10a8-f4a5-42ba-b553-6d6fcf6b0ac3",
+                  "uuid": "cab5f5a6-afd5-43ba-8aec-ba3b1fb638cc",
+                  "parentUUID": "fc4a6c3b-c54b-423d-bcf5-52913ae9fc7c",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1270,7 +1270,7 @@
                   "title": "Initializing with all null/missing params",
                   "fullTitle": "Tests for user_data functions Testing the initializeUserDataFile function Initializing with all null/missing params",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -1279,30 +1279,30 @@
                   "context": null,
                   "code": "let res = udata.initializeUserDataFile(null, null, null);\nexpect(res).to.equal(null);\nexpect(udata.getUsers().length).to.equal(0);\nres = udata.initializeUserDataFile();\nexpect(res).to.equal(null);\nexpect(udata.getUsers().length).to.equal(0);",
                   "err": {},
-                  "uuid": "3141ffce-edbe-4f1d-a955-97b5322407a4",
-                  "parentUUID": "966b10a8-f4a5-42ba-b553-6d6fcf6b0ac3",
+                  "uuid": "e90c01c4-7fdd-47bb-b273-64a5c0ad4f8b",
+                  "parentUUID": "fc4a6c3b-c54b-423d-bcf5-52913ae9fc7c",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "0991fe66-b107-4169-8117-33fbecf3eee7",
-                "1191a379-b4d2-43e1-b1c8-cbea51449df9",
-                "e2462da8-b13e-484a-b115-6af9ddf9b5ac",
-                "acbc9225-cf47-4a40-acb7-d7b4bd852590",
-                "3141ffce-edbe-4f1d-a955-97b5322407a4"
+                "169d0d73-36a0-4a9a-b3e9-0d08a68ab1dd",
+                "f6f86038-9a38-4d32-ae98-922ba1ca5786",
+                "baacfe60-3028-4cdc-9436-f9bd61195573",
+                "cab5f5a6-afd5-43ba-8aec-ba3b1fb638cc",
+                "e90c01c4-7fdd-47bb-b273-64a5c0ad4f8b"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 5,
+              "duration": 2,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "a902b885-32ca-4165-9152-7b7b7483cc8a",
+              "uuid": "2960db70-051e-444c-98d2-1b481855f8d1",
               "title": "Testing the updateUserDataFile function",
               "fullFile": "/usr/src/app/server/test/user_data.test.js",
               "file": "/test/user_data.test.js",
@@ -1322,8 +1322,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nconst updatedUser = {\n    \"user_id\": \"1234567890\",\n    \"nickname\": \"mikey\",\n    \"questions_solved\": {\n        \"1\": 3,\n        \"2\": 2\n    },\n    \"num_points\": 5\n}\nres = udata.updateUserDataFile(testFolderName, updatedUser);\nexpect(res).to.equal(\"success\");\nconst retrievedUser = udata.getUserDataFile(testFolderName, updatedUser.user_id);\nexpect(retrievedUser.user_id).to.equal(updatedUser.user_id);\nexpect(retrievedUser.nickname).to.equal(updatedUser.nickname);\nexpect(retrievedUser.questions_solved[\"1\"]).to.equal(3);\nexpect(retrievedUser.questions_solved[\"2\"]).to.equal(2);\nexpect(retrievedUser.num_points).to.equal(5);",
                   "err": {},
-                  "uuid": "190ff3a1-a2cf-4625-8cf5-1bd881b8420d",
-                  "parentUUID": "a902b885-32ca-4165-9152-7b7b7483cc8a",
+                  "uuid": "60c2c925-ca2d-4208-aebb-ac599c4eadf9",
+                  "parentUUID": "2960db70-051e-444c-98d2-1b481855f8d1",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1340,8 +1340,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nconst updatedUser = {\n    \"user_id\": \"1234567890\",\n    \"nickname\": \"mikey\",\n    \"questions_solved\": {\n        \"1\": 3,\n        \"2\": 2\n    },\n    \"num_points\": 5\n}\nres = udata.updateUserDataFile(\"nonExistentFolder\", updatedUser);\nexpect(res).to.equal(null);",
                   "err": {},
-                  "uuid": "1812eab1-5563-4e5e-aa50-de21ace1593a",
-                  "parentUUID": "a902b885-32ca-4165-9152-7b7b7483cc8a",
+                  "uuid": "fd1e7a67-f98a-49f1-bbc7-a12ac1bd778c",
+                  "parentUUID": "2960db70-051e-444c-98d2-1b481855f8d1",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1358,8 +1358,8 @@
                   "context": null,
                   "code": "expect(udata.updateUserDataFile(null, null)).to.equal(null);\nexpect(udata.updateUserDataFile()).to.equal(null);\nexpect(udata.updateUserDataFile(null, user0)).to.equal(null);\nexpect(udata.updateUserDataFile(testFolderName, null)).to.equal(null);",
                   "err": {},
-                  "uuid": "5f683423-9fc5-4cc2-bf00-4dbe89f249a6",
-                  "parentUUID": "a902b885-32ca-4165-9152-7b7b7483cc8a",
+                  "uuid": "d449cd61-c50b-41d7-9c77-6c09dbb6106a",
+                  "parentUUID": "2960db70-051e-444c-98d2-1b481855f8d1",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1367,7 +1367,7 @@
                   "title": "Updating non-existent user, correct directory",
                   "fullTitle": "Tests for user_data functions Testing the updateUserDataFile function Updating non-existent user, correct directory",
                   "timedOut": false,
-                  "duration": 0,
+                  "duration": 1,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -1376,29 +1376,29 @@
                   "context": null,
                   "code": "const updatedUser = {\n    \"user_id\": \"1234567890\",\n    \"nickname\": \"mikey\",\n    \"questions_solved\": {\n        \"1\": 3,\n        \"2\": 2\n    },\n    \"num_points\": 5\n}\nres = udata.updateUserDataFile(testFolderName, updatedUser);\nexpect(res).to.equal(\"success\");\nconst retrievedUser = udata.getUserDataFile(testFolderName, updatedUser.user_id);\nexpect(retrievedUser.user_id).to.equal(updatedUser.user_id);\nexpect(retrievedUser.nickname).to.equal(updatedUser.nickname);\nexpect(retrievedUser.questions_solved[\"1\"]).to.equal(3);\nexpect(retrievedUser.questions_solved[\"2\"]).to.equal(2);\nexpect(retrievedUser.num_points).to.equal(5);",
                   "err": {},
-                  "uuid": "f757756b-cc2c-41be-b5ac-5d2ca06d595a",
-                  "parentUUID": "a902b885-32ca-4165-9152-7b7b7483cc8a",
+                  "uuid": "9b65aba5-ffe4-4a6c-b60b-edb2323cb737",
+                  "parentUUID": "2960db70-051e-444c-98d2-1b481855f8d1",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "190ff3a1-a2cf-4625-8cf5-1bd881b8420d",
-                "1812eab1-5563-4e5e-aa50-de21ace1593a",
-                "5f683423-9fc5-4cc2-bf00-4dbe89f249a6",
-                "f757756b-cc2c-41be-b5ac-5d2ca06d595a"
+                "60c2c925-ca2d-4208-aebb-ac599c4eadf9",
+                "fd1e7a67-f98a-49f1-bbc7-a12ac1bd778c",
+                "d449cd61-c50b-41d7-9c77-6c09dbb6106a",
+                "9b65aba5-ffe4-4a6c-b60b-edb2323cb737"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 4,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "0011bf2e-c8a3-4b71-964e-5a3a4052954f",
+              "uuid": "fe750c52-5bd8-4f62-a2b8-24bd143d3503",
               "title": "Testing the updateQuestionScore function",
               "fullFile": "/usr/src/app/server/test/user_data.test.js",
               "file": "/test/user_data.test.js",
@@ -1418,8 +1418,8 @@
                   "context": null,
                   "code": "expect(udata.updateQuestionScore(null, null)).to.equal(null);\nexpect(udata.updateQuestionScore()).to.equal(null);\nexpect(udata.updateQuestionScore(null, newQuestionData)).to.equal(null);\nexpect(udata.updateQuestionScore(user0, null)).to.equal(null);",
                   "err": {},
-                  "uuid": "ec2f00d9-8bb2-4b37-8735-0888815249ea",
-                  "parentUUID": "0011bf2e-c8a3-4b71-964e-5a3a4052954f",
+                  "uuid": "afb2ff7f-1a13-40b7-bf2c-4fa03e65b3ae",
+                  "parentUUID": "fe750c52-5bd8-4f62-a2b8-24bd143d3503",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1436,8 +1436,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nlet updatedUser = udata.updateQuestionScore(user, newQuestionData)\nexpect(updatedUser.questions_solved[newQuestionData.qid]).to.equal(newQuestionData.score);\nexpect(updatedUser.num_points).to.equal(2);",
                   "err": {},
-                  "uuid": "4d6e0322-5a33-4d4a-bebc-eab4c31255c7",
-                  "parentUUID": "0011bf2e-c8a3-4b71-964e-5a3a4052954f",
+                  "uuid": "36e612e6-1202-472e-bf39-783f4e211138",
+                  "parentUUID": "fe750c52-5bd8-4f62-a2b8-24bd143d3503",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1454,8 +1454,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nlet updatedUser0 = udata.updateQuestionScore(user, newQuestionData);\nlet updatedUser1 = udata.updateQuestionScore(updatedUser0, newQuestionDataLower);\nexpect(updatedUser1.questions_solved[newQuestionData.qid]).to.equal(newQuestionData.score);\nexpect(updatedUser1.num_points).to.equal(2);",
                   "err": {},
-                  "uuid": "06d01717-0b8d-45e9-b690-25a70767d9c4",
-                  "parentUUID": "0011bf2e-c8a3-4b71-964e-5a3a4052954f",
+                  "uuid": "db5a8184-035b-4045-b9c3-e5a81e15246d",
+                  "parentUUID": "fe750c52-5bd8-4f62-a2b8-24bd143d3503",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1472,18 +1472,18 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nlet updatedUser0 = udata.updateQuestionScore(user, newQuestionData);\nlet updatedUser1 = udata.updateQuestionScore(updatedUser0, newQuestionDataHigher);\nexpect(updatedUser1.questions_solved[newQuestionData.qid]).to.equal(newQuestionDataHigher.score);\nexpect(updatedUser1.num_points).to.equal(3);",
                   "err": {},
-                  "uuid": "7f301d61-5ec5-41ed-baa4-a10015f5a5d7",
-                  "parentUUID": "0011bf2e-c8a3-4b71-964e-5a3a4052954f",
+                  "uuid": "6f9fde12-abde-4706-8b9f-8415b93d03be",
+                  "parentUUID": "fe750c52-5bd8-4f62-a2b8-24bd143d3503",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "ec2f00d9-8bb2-4b37-8735-0888815249ea",
-                "4d6e0322-5a33-4d4a-bebc-eab4c31255c7",
-                "06d01717-0b8d-45e9-b690-25a70767d9c4",
-                "7f301d61-5ec5-41ed-baa4-a10015f5a5d7"
+                "afb2ff7f-1a13-40b7-bf2c-4fa03e65b3ae",
+                "36e612e6-1202-472e-bf39-783f4e211138",
+                "db5a8184-035b-4045-b9c3-e5a81e15246d",
+                "6f9fde12-abde-4706-8b9f-8415b93d03be"
               ],
               "failures": [],
               "pending": [],
@@ -1491,10 +1491,10 @@
               "duration": 3,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             },
             {
-              "uuid": "82a50013-d0fc-4287-a1e3-dc32871528da",
+              "uuid": "340a2a9a-2069-4481-81fa-a59250a41775",
               "title": "Testing the updatedUserFileWithNewScore function",
               "fullFile": "/usr/src/app/server/test/user_data.test.js",
               "file": "/test/user_data.test.js",
@@ -1514,8 +1514,8 @@
                   "context": null,
                   "code": "expect(udata.updatedUserFileWithNewScore(testFolderName, null, null)).to.equal(null);\nexpect(udata.updatedUserFileWithNewScore(\"nonExistentFolder\", null, null)).to.equal(null);\nexpect(udata.updatedUserFileWithNewScore(null, null, null)).to.equal(null);\nexpect(udata.updatedUserFileWithNewScore(null, user0.user_id, null)).to.equal(null);\nexpect(udata.updatedUserFileWithNewScore(null, null, user0.user_id)).to.equal(null);\nexpect(udata.updatedUserFileWithNewScore()).to.equal(null);",
                   "err": {},
-                  "uuid": "6ea64e9f-6723-46ed-bed9-c1e9f9cb55bc",
-                  "parentUUID": "82a50013-d0fc-4287-a1e3-dc32871528da",
+                  "uuid": "1903d4b4-72a2-4663-b71b-082d5148131a",
+                  "parentUUID": "340a2a9a-2069-4481-81fa-a59250a41775",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1532,8 +1532,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nlet res = udata.updatedUserFileWithNewScore(testFolderName, user0.user_id, newQuestionData);\nexpect(res).to.equal(\"success\");\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nexpect(user.questions_solved[newQuestionData.qid]).to.equal(newQuestionData.score);\nexpect(user.num_points).to.equal(2);",
                   "err": {},
-                  "uuid": "bf018248-1598-4f58-893d-897f5ef15868",
-                  "parentUUID": "82a50013-d0fc-4287-a1e3-dc32871528da",
+                  "uuid": "9149ca3d-ecdc-49d4-948e-9a88e1355eb4",
+                  "parentUUID": "340a2a9a-2069-4481-81fa-a59250a41775",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1550,8 +1550,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nudata.updatedUserFileWithNewScore(testFolderName, user0.user_id, newQuestionData);\nlet res = udata.updatedUserFileWithNewScore(testFolderName, user0.user_id, newQuestionDataLower);\nexpect(res).to.equal(\"success\");\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nexpect(user.questions_solved[newQuestionData.qid]).to.equal(newQuestionData.score);\nexpect(user.num_points).to.equal(2);",
                   "err": {},
-                  "uuid": "ae5f0c21-d50d-4ccb-908a-1cc161384b21",
-                  "parentUUID": "82a50013-d0fc-4287-a1e3-dc32871528da",
+                  "uuid": "75dee3a1-10f3-4bb8-ba13-873642ab9917",
+                  "parentUUID": "340a2a9a-2069-4481-81fa-a59250a41775",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1559,7 +1559,7 @@
                   "title": "Testing updating the score for an existing question with higher score",
                   "fullTitle": "Tests for user_data functions Testing the updatedUserFileWithNewScore function Testing updating the score for an existing question with higher score",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 2,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -1568,8 +1568,8 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nudata.updatedUserFileWithNewScore(testFolderName, user0.user_id, newQuestionData);\nlet res = udata.updatedUserFileWithNewScore(testFolderName, user0.user_id, newQuestionDataHigher);\nexpect(res).to.equal(\"success\");\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nexpect(user.questions_solved[newQuestionData.qid]).to.equal(newQuestionDataHigher.score);\nexpect(user.num_points).to.equal(3);",
                   "err": {},
-                  "uuid": "27e2417f-0562-41a1-bb3e-02ca9a4cd60b",
-                  "parentUUID": "82a50013-d0fc-4287-a1e3-dc32871528da",
+                  "uuid": "3f31b995-4947-483b-95ed-37bc73f05f32",
+                  "parentUUID": "340a2a9a-2069-4481-81fa-a59250a41775",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1586,27 +1586,27 @@
                   "context": null,
                   "code": "udata.initializeUserDataFile(testFolderName, user0.user_id, user0.nickname);\nudata.updatedUserFileWithNewScore(testFolderName, user0.user_id, newQuestionData);\nudata.updatedUserFileWithNewScore(testFolderName, user0.user_id, diffQuestionData);\nlet user = udata.getUserDataFile(testFolderName, user0.user_id);\nexpect(user.questions_solved[newQuestionData.qid]).to.equal(newQuestionData.score);\nexpect(user.questions_solved[diffQuestionData.qid]).to.equal(diffQuestionData.score);\nexpect(user.num_points).to.equal(5);",
                   "err": {},
-                  "uuid": "39ab0261-807a-4e39-9c7c-ad882c15ea1f",
-                  "parentUUID": "82a50013-d0fc-4287-a1e3-dc32871528da",
+                  "uuid": "8eafa2ef-086d-4677-8f8d-e090e19402be",
+                  "parentUUID": "340a2a9a-2069-4481-81fa-a59250a41775",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "6ea64e9f-6723-46ed-bed9-c1e9f9cb55bc",
-                "bf018248-1598-4f58-893d-897f5ef15868",
-                "ae5f0c21-d50d-4ccb-908a-1cc161384b21",
-                "27e2417f-0562-41a1-bb3e-02ca9a4cd60b",
-                "39ab0261-807a-4e39-9c7c-ad882c15ea1f"
+                "1903d4b4-72a2-4663-b71b-082d5148131a",
+                "9149ca3d-ecdc-49d4-948e-9a88e1355eb4",
+                "75dee3a1-10f3-4bb8-ba13-873642ab9917",
+                "3f31b995-4947-483b-95ed-37bc73f05f32",
+                "8eafa2ef-086d-4677-8f8d-e090e19402be"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 5,
+              "duration": 6,
               "root": false,
               "rootEmpty": false,
-              "_timeout": 300000
+              "_timeout": 30000
             }
           ],
           "passes": [],
@@ -1616,7 +1616,7 @@
           "duration": 0,
           "root": false,
           "rootEmpty": false,
-          "_timeout": 300000
+          "_timeout": 30000
         }
       ],
       "passes": [],
@@ -1626,7 +1626,7 @@
       "duration": 0,
       "root": true,
       "rootEmpty": true,
-      "_timeout": 300000
+      "_timeout": 30000
     }
   ],
   "meta": {

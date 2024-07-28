@@ -7,6 +7,7 @@ const oa = require('./ollama_api.js');
 const app = express();
 const port = 5001;
 const udata = require('./user_data.js');
+const mocha = require('./mocha_tests.js');
 
 require('dotenv').config();
 
@@ -195,6 +196,7 @@ app.listen(port, async () => {
   
   await oa.autoPullModelOnStart();
   await oa.loadModelOnStart();
+  mocha.run_mocha_tests();
 })
 
 
