@@ -384,7 +384,7 @@ describe("Tests for user_data functions", function () {
         it("Testing normal input with non-existing attempt data file", function () {
             expect(udata.addAttemptToUserData(attemptsFolder, user0.user_id, 1, attemptDataGoodExample)).to.equal("success");
             const data = udata.getAttemptData(attemptsFolder, 1, user0.user_id);
-            expect(data[0].length).to.equal(1);
+            expect(data.length).to.equal(1);
             expect(data[0].results.length).to.equal(3);
             expect(data[0].desc).to.not.equal(null);
         });
@@ -393,7 +393,7 @@ describe("Tests for user_data functions", function () {
             udata.initializeAttemptData(attemptsFolder, 1, user0.user_id);
             expect(udata.addAttemptToUserData(attemptsFolder, user0.user_id, 1, attemptDataGoodExample)).to.equal("success");
             const data = udata.getAttemptData(attemptsFolder, 1, user0.user_id);
-            expect(data[0].length).to.equal(1);
+            expect(data.length).to.equal(1);
             expect(data[0].results.length).to.equal(3);
             expect(data[0].desc).to.not.equal(null);
         });
