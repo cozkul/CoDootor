@@ -7,6 +7,52 @@ const user0 = {"user_id": "1234567890", "nickname": "mikey"};
 const user1 = {"user_id": "2345678901", "nickname": "davey"};
 const testFolderName = "testDataFolder";
 
+const attemptDataBadExample = {
+    "results": [{ "input_args":[[2,3]],
+    "expected_outputs":[5],
+    "pts":1,
+    "desc":"A test to check if adding properly.",
+    "passed":false,
+    "actual_outputs":[]
+    }, 
+    { "input_args": [[5,2],[3,4]],
+    "expected_outputs":[7,7],
+    "pts":1,
+    "desc":"A less basic test to check if adding properly.",
+    "passed":false,
+    "actual_outputs":[]},
+    {"input_args":[[0,0],[20,7]],
+    "expected_outputs":[0,27],
+    "pts":1,
+    "desc":"Another basic test to check if adding properly.",
+    "passed":false,
+    "actual_outputs":[]}],
+    "desc":"blah"
+};
+
+const attemptDataGoodExample = { 
+    "results": [{"input_args":[[2,3]],
+        "expected_outputs":[5],
+        "pts":1,
+        "desc":"A test to check if adding properly.",
+        "passed":true,
+        "actual_outputs":[5]
+    },
+    {"input_args":[[5,2],[3,4]],
+        "expected_outputs":[7,7],
+        "pts":1,
+        "desc":"A less basic test to check if adding properly.",
+        "passed":true,
+        "actual_outputs":[7,7]},
+    {"input_args":[[0,0],[20,7]],
+        "expected_outputs":[0,27],
+        "pts":1,
+        "desc":"Another basic test to check if adding properly.",
+        "passed":true,
+        "actual_outputs":[0,27]}],
+    "desc":"Takes two numbers and adds them together"
+};
+
 const clearFolder = () => {
     const fp = path.join(__dirname, "../", testFolderName)
     const readme = path.join(fp, "/", "README.md");
@@ -24,11 +70,12 @@ const clearFolder = () => {
 describe("Tests for user_data functions", function () {
     beforeEach(function () {
         clearFolder();
-    })
+    });
 
     after(function () {
         clearFolder();
-    })
+        udata.loadUserDataOnStart("data");
+    });
 
     describe("Testing the loadUserDataOnStart function", function () {
         it('Testing an empty folder', function () {
@@ -298,6 +345,57 @@ describe("Tests for user_data functions", function () {
             expect(user.questions_solved[newQuestionData.qid]).to.equal(newQuestionData.score);
             expect(user.questions_solved[diffQuestionData.qid]).to.equal(diffQuestionData.score);
             expect(user.num_points).to.equal(5);
+        });
+    });
+
+    describe("Testing initializeAttemptData function" , function () {
+        const attemptsFolder = testFolderName + "/attempts";
+        it("Testing null/missing input", function () {
+            expect(udata.initializeAttemptData()).to.equal(null);
+
+            expect(udata.initializeAttemptData(null, null, null)).to.equal(null);
+
+            expect(udata.initializeAttemptData(attemptsFolder, null, null)).to.equal(null);
+            expect(udata.initializeAttemptData(null, 1, null)).to.equal(null);
+            expect(udata.initializeAttemptData(null, 1, user0.user_id)).to.equal(null);
+        });
+
+        it("Testing normal input", function () {
+            const res = udata.initializeAttemptData(attemptsFolder, 1, user0.user_id);
+            expect(res).to.eql([]);
+            expect(udata.getAttemptData(attemptsFolder, 1, user0.user_id)).to.eql([]);
+        });
+
+        it("Testing existing user", function () {
+            udata.initializeAttemptData(attemptsFolder, 1, user0.user_id);
+            expect(udata.initializeAttemptData(attemptsFolder, 1, user0.user_id)).to.equal(null);
+        });
+    });
+
+    describe("Testing addAttemptToUserData function", function () {
+        const attemptsFolder = testFolderName + "/attempts";
+        it("Testing null/undefined input", function () {
+            expect(udata.addAttemptToUserData(attemptsFolder, null, null, null)).to.equal(null);
+            expect(udata.addAttemptToUserData(null, user0.user_id, 1, attemptDataBadExample)).to.equal(null);
+            expect(udata.addAttemptToUserData()).to.equal(null);
+            expect(udata.addAttemptToUserData(null, null, null, null)).to.equal(null);
+        });
+
+        it("Testing normal input with non-existing attempt data file", function () {
+            expect(udata.addAttemptToUserData(attemptsFolder, user0.user_id, 1, attemptDataGoodExample)).to.equal("success");
+            const data = udata.getAttemptData(attemptsFolder, 1, user0.user_id);
+            expect(data[0].length).to.equal(1);
+            expect(data[0].results.length).to.equal(3);
+            expect(data[0].desc).to.not.equal(null);
+        });
+
+        it("Testing normal input with existing attempt data file", function () {
+            udata.initializeAttemptData(attemptsFolder, 1, user0.user_id);
+            expect(udata.addAttemptToUserData(attemptsFolder, user0.user_id, 1, attemptDataGoodExample)).to.equal("success");
+            const data = udata.getAttemptData(attemptsFolder, 1, user0.user_id);
+            expect(data[0].length).to.equal(1);
+            expect(data[0].results.length).to.equal(3);
+            expect(data[0].desc).to.not.equal(null);
         });
     });
 });

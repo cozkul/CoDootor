@@ -192,11 +192,12 @@ app.post('/grade', jwtCheck, async (req, res) => {
 
 app.listen(port, async () => {
   console.log(`Example app listening on port ${port}`);
-  udata.loadUserDataOnStart("data");
   
   await oa.autoPullModelOnStart();
   await oa.loadModelOnStart();
   mocha.run_mocha_tests();
+
+  udata.loadUserDataOnStart("data");
 })
 
 
