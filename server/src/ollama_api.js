@@ -125,6 +125,7 @@ function ParseLLMResponse(resp) {
         const code = words[1];
         const regexMatch = code.match(/function(.|\s)*\}/)
 
+        if (regexMatch == null) return null;
         if (regexMatch.length != 0) return regexMatch[0];
         else return null;
     }   
