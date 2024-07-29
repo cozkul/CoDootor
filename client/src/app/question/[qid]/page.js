@@ -32,6 +32,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const [userInputFirst, setUserInputFirst] = useState(false);
   const [userCommentFirst, setUserCommentFirst] = useState(false);
   const [attempts, setAttempts] = useState([]);
+  const [invalidInput, setInvalidInput] = useState(false);
 
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -129,6 +130,11 @@ export default withPageAuthRequired(function AnswerPage() {
         },
         body: JSON.stringify({ id: questionID, desc: userInput, comment: commentInput}),
       });
+
+      if (testResponse.status === 400) {
+        setInvalidInput(true);
+        return;
+      }
       const testData = await testResponse.json();
       setOllamaOutput(testData.llm_code);
       setTestResults(testData.results);
@@ -197,8 +203,14 @@ export default withPageAuthRequired(function AnswerPage() {
                 value={userInput}
                 disabled={loading}
                 required
-                error={ !userInput && userInputFirst ? "Description cannot be empty." : null }
-                onChange={(event) => { setUserInput(event.currentTarget.value); setUserInputFirst(true); }}
+                error={
+                  invalidInput 
+                    ? "Invalid input, please try a different description." 
+                    : !userInput && userInputFirst 
+                    ? "Description cannot be empty." 
+                    : null
+                }
+                onChange={(event) => { setUserInput(event.currentTarget.value); setUserInputFirst(true); setInvalidInput(false);}}
               />
             </Box>
           </Grid.Col>
