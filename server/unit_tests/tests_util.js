@@ -30,9 +30,10 @@ function run_tests(fn, tests) {
                 const actualOutput = fn(...args[j])
                 const expectedOutput = outputs[j]
 
+                results[i].actual_outputs.push(actualOutput);
+
                 if (actualOutput == expectedOutput) {
                     results[i].passed = true;
-                    results[i].actual_outputs.push(actualOutput);
                 }
             } catch (err) {
                 results[i].actual_outputs.push(err.message);
