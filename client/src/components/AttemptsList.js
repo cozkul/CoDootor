@@ -28,7 +28,7 @@ const AttemptsList = ({ callback, score_callback, attempts }) => {
                 <div>
                     {attempt.results.map((result, idx) => (
                         <div key={idx}>
-                            <span>{`Score: ${result.passed ? result.pts : 0}, Desc: ${result.desc}`}</span>
+                            <span>{`Score: ${result.passed ? result.pts : 0}`}</span>
                         </div>
                     ))}
                 </div>
