@@ -59,8 +59,13 @@ function isMalicious(desc) {
         "infinite loop",
         "while(true)",
         "for(;;)",
-        "eval"
+        "eval",
     ];
+    const codeBlockPattern = /function\s+\w+\s*\(.*\)\s*\{[^]*?\}/;
+
+    if (codeBlockPattern.test(desc)) {
+        return true;
+    }
 
     return maliciousContext.some(context => lowerDesc.includes(context));
 }
