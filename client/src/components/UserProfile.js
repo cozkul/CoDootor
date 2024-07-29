@@ -2,8 +2,7 @@
 
 import { Title, Progress, Text, Timeline, Avatar } from '@mantine/core';
 
-export default function UserProfile( {user, otherUser} ) {
-    const totalQuestions = 10;
+export default function UserProfile( {totalQuestions, user, otherUser} ) {
     var count = 0;
     var question_scores = [];
 
