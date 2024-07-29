@@ -115,9 +115,7 @@ async function FetchResponse(desc) {
 */
 function ParseLLMResponse(resp) {
     if (resp == undefined || resp == null) return null;
-    // console.log(resp);
     const words = resp.split("```");
-    // console.log(words);
 
     if (words.length == 1) {
         const match = resp.match(/function(.|\s)*\}/)
@@ -125,9 +123,7 @@ function ParseLLMResponse(resp) {
         if (match) return match[0]
     } else {
         const code = words[1];
-        console.log(words[1]);
         const regexMatch = code.match(/function(.|\s)*\}/)
-        console.log(regexMatch);
         if (regexMatch == null) return null;
         if (regexMatch.length != 0) return regexMatch[0];
         else return null;
