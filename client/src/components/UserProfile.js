@@ -6,7 +6,7 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
     var count = 0;
     var question_scores = [];
 
-    for (var i = 1; i < totalQuestions; i++) {
+    for (var i = 1; i < totalQuestions + 1; i++) {
         if (otherUser.questions_solved[i] && otherUser.questions_solved[i] > 0) {
             question_scores.push(otherUser.questions_solved[i]);
             count++;
@@ -18,6 +18,7 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
     const numQuestionsCompleted = count;
     const curProgress = Math.max(0, numQuestionsCompleted - 1);
     const pctQuestionsCompleted = Math.floor(numQuestionsCompleted / 10 * 100);
+    const totalScore = question_scores.reduce((acc, score) => score + acc, 0);
 
     const questionProgress = question_scores.map((key, idx) => 
         <Timeline.Item 
@@ -35,6 +36,7 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
             <Title>Welcome to {(user.user_id == otherUser.user_id ? "Your" : otherUser.nickname + "'s")} Profile</Title>
             <br/>
             <Title order={2}>Question Progress</Title>
+            <Title order={3}>Total Score: {totalScore}</Title>
             <Progress.Root size={40}>
                 <Progress.Section value={pctQuestionsCompleted}>
                     <Progress.Label>{numQuestionsCompleted} Completed</Progress.Label>
