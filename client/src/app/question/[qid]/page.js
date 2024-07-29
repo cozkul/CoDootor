@@ -205,8 +205,8 @@ export default withPageAuthRequired(function AnswerPage() {
             <Box pos="relative">
             <Textarea
                 label="User Input"
-                description="Description for Given Function (200 words max)"
-                placeholder="Please enter the description for given function. (200 words max)"
+                description="Description for Given Function (200 chars max)"
+                placeholder="Please enter the description for given function. (200 chars max)"
                 value={userInput}
                 disabled={loading}
                 required={!perfectScore}
