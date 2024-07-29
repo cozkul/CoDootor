@@ -205,11 +205,12 @@ export default withPageAuthRequired(function AnswerPage() {
             <Box pos="relative">
             <Textarea
                 label="User Input"
-                description="Description for Given Function"
-                placeholder="Please enter the description for given function."
+                description="Description for Given Function (200 words max)"
+                placeholder="Please enter the description for given function. (200 words max)"
                 value={userInput}
                 disabled={loading}
                 required={!perfectScore}
+                maxLength="200"
                 error={
                   invalidInput 
                     ? "Invalid input, please try a different description." 
@@ -217,7 +218,7 @@ export default withPageAuthRequired(function AnswerPage() {
                     ? "Description cannot be empty." 
                     : illegalInput ? "Please provide an english description instead of copying functions into the box" : null
                 }
-                onChange={(event) => { setUserInput(event.currentTarget.value); setUserInputFirst(true); setInvalidInput(false);}}
+                onChange={(event) => { setUserInput(event.currentTarget.value); setUserInputFirst(true); setInvalidInput(false); setIllegalInput(false); }}
               />
             </Box>
           </Grid.Col>
