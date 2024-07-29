@@ -82,7 +82,8 @@ async function FetchResponse(desc) {
         "stream": false,
         "keep_alive": -1,
         "options": {
-            "seed": 101
+            "seed": 101,
+            "temperature": 0
         }
     };
 
@@ -162,7 +163,8 @@ function TestGeneratedCode(code_json) {
         const qut = require(test_fp);
         res = tester.run_tests(foo, qut.tests);
     } catch (err) {
-        return [{err: true, err_reason: err.toString()}];
+        const qut = require(test_fp);
+        res = tester.fail_tests(qut.tests, err.message);
     }
 
     return res;

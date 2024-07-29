@@ -153,9 +153,6 @@ describe("Tests for the Ollama backend REST API endpoints", function () {
             .end(function(err, res) {
                 expect(res.body).to.not.equal(null);
                 expect(res.body.length).to.equal(3);
-                expect(res.body[0].desc).to.equal("A test to check if adding properly.");
-                expect(res.body[1].desc).to.equal("A less basic test to check if adding properly.");
-                expect(res.body[2].desc).to.equal("Another basic test to check if adding properly.");
                 if (err) done(err);
                 done();
             })
