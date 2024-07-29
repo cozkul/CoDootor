@@ -215,6 +215,16 @@ app.get('/question_list', (req, res) => {
   }
 })
 
+app.get('/question_list/length', (req, res) => {
+  try {
+    const data = fs.readFileSync('./question_list.json', 'utf-8');
+    const num_questions = JSON.parse(data).question_list.length;
+    res.status(200).send({"num_questions": num_questions});
+  } catch(e) {
+    res.status(400).send({"error": "Failed to retrieve question list length"})
+  }
+})
+
 /*
   API endpoints for user attempts
 */

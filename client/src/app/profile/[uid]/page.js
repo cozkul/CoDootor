@@ -16,7 +16,12 @@ export default withPageAuthRequired(async function ProfilePage({ params }) {
   const uid = params.uid;
   const sessionInfo = await getSession();
   let hasError = false;
-  let errMsg = "";
+  let numQuestions;
+
+  const res = await fetch("http://host.docker.internal:5001/question_list/length").then(res => res.json())
+  .catch(err => console.error(err));
+
+  (res && res.num_questions) ? numQuestions = res.num_questions : numQuestions = 10;
 
   const otherUser = await fetch(`http://host.docker.internal:5001/otherUser?uid=${uid}`)
   .then(resp => {
@@ -38,7 +43,7 @@ export default withPageAuthRequired(async function ProfilePage({ params }) {
         <div className={styles.centerColumn}>
           <UserBanner sessionInfo={sessionInfo} userData={user}/>
           <br></br>
-          {hasError ? otherUser.error : <UserProfile user={user} otherUser={otherUser}></UserProfile>}
+          {hasError ? otherUser.error : <UserProfile user={user} otherUser={otherUser} totalQuestions={numQuestions}></UserProfile>}
         </div>
       </div>
     </div>

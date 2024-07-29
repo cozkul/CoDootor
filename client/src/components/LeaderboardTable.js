@@ -9,8 +9,11 @@ import {
 } from '@tabler/icons-react';
 import QuestionButton from "@/components/QuestionButton";
 import Link from "next/link";
+import styles from "@/components/links.module.css";
 
 export default function LeaderboardTable({ users, cur_user_id }) {
+    const linkStyle = {color: '#000080'}
+
     const ranks = users.map((user, index) => ({
         id: user.user_id,
         rank: index + 1,
@@ -23,7 +26,9 @@ export default function LeaderboardTable({ users, cur_user_id }) {
       return (
         <Table.Tr key={user.rank} bg={(cur_user_id == user.id) ? 'var(--mantine-color-blue-2)' : undefined}>
           <Table.Td>{user.rank}</Table.Td>
-          <Table.Td><Link href={"http://localhost:5173/profile/" + user.id}>{user.nick}</Link></Table.Td>
+          <Table.Td>
+            <Link className={styles.activeLinkStyle} href={"http://localhost:5173/profile/" + user.id}>{user.nick}</Link>
+          </Table.Td>
           <Table.Td>{user.points}</Table.Td>
         </Table.Tr>
       );
