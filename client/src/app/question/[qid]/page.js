@@ -33,6 +33,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const [userCommentFirst, setUserCommentFirst] = useState(false);
   const [attempts, setAttempts] = useState([]);
   const [invalidInput, setInvalidInput] = useState(false);
+  const [perfectScore, setPerfectScore] = useState(false);
 
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -119,7 +120,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const handleSubmit = async () => {
     setUserCommentFirst(true);
     setUserInputFirst(true);
-    if (userInput === "" || (attempts.length > 0 && commentInput === "")) return;
+    if (userInput === "" || (attempts.length > 0 && commentInput === "") & !perfectScore) return;
     setLoading.open();
     try {
       const testResponse = await fetch('http://localhost:5001/grade', {
@@ -202,7 +203,7 @@ export default withPageAuthRequired(function AnswerPage() {
                 placeholder="Please enter the description for given function."
                 value={userInput}
                 disabled={loading}
-                required
+                required={!perfectScore}
                 error={
                   invalidInput 
                     ? "Invalid input, please try a different description." 
@@ -214,7 +215,7 @@ export default withPageAuthRequired(function AnswerPage() {
               />
             </Box>
           </Grid.Col>
-          {attempts.length ? (<Grid.Col span={ 4 }>
+          {(attempts.length & !perfectScore) ? (<Grid.Col span={ 4 }>
             <Box pos="relative">
               <Textarea
                 label="Comment"
@@ -233,7 +234,7 @@ export default withPageAuthRequired(function AnswerPage() {
             {attempts.length ? (
             <><Divider my="md"></Divider>
             <Title order={2}>Previous Attempts</Title>
-            <AttemptsList callback={populateAnswerFields} attempts={attempts}></AttemptsList></>) : null}
+            <AttemptsList callback={populateAnswerFields} score_callback={setPerfectScore} attempts={attempts}></AttemptsList></>) : null}
           </Grid.Col>
         </Grid>
       </div>

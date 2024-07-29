@@ -8,7 +8,11 @@ import { useUser } from '@auth0/nextjs-auth0/client';
     Clicking on the attempt panel will load the attempt data into the form
 */
 
-const AttemptsList = ({ callback, attempts }) => {
+const AttemptsList = ({ callback, score_callback, attempts }) => {
+    const correct = (test) => test.passed
+    const perfect = (attempt) => attempt.results.every(correct)
+    if (attempts.some(perfect)) score_callback(true);
+    
     const items = attempts.map((attempt, index) => {
         const totalScore = attempt.results.reduce((acc, cur) => cur.passed ? acc + cur.pts : acc, 0);
         const maxScore = attempt.results.reduce((acc, cur) => acc + cur.pts, 0);
