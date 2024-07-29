@@ -123,7 +123,7 @@ export default withPageAuthRequired(function AnswerPage() {
     setUserInputFirst(true);
     if (userInput === "" || (attempts.length > 0 && commentInput === "") & !perfectScore) return;
     // check if user copies the function or some other function
-    if (userInput.match(/function(\s|\S)*\{/)) {
+    if (userInput.match(/(function(\s|\S)*\{)|(function(\s|\S)*\})/)) {
       setIllegalInput(true);
       return;
     }
