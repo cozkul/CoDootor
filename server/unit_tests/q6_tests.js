@@ -3,7 +3,6 @@ var tests = {
         "input_args": [[""]],
         "expected_outputs": [true],
         "pts": 1,
-        "desc": "Test with empty string.",
         "passed": false,
         "actual_outputs": []
     },
@@ -11,7 +10,6 @@ var tests = {
         "input_args": [["a"]],
         "expected_outputs": [true],
         "pts": 1,
-        "desc": "A test with a single character.",
         "passed": false,
         "actual_outputs": []
     },
@@ -19,7 +17,6 @@ var tests = {
         "input_args": [["racecar"]],
         "expected_outputs": [true],
         "pts": 1,
-        "desc": "Test with input word 'racecar'.",
         "passed": false,
         "actual_outputs": []
     },
@@ -27,7 +24,6 @@ var tests = {
         "input_args": [["mlem mlom"]],
         "expected_outputs": [false],
         "pts": 1,
-        "desc": "A secret test with a mystery character sequence.",
         "passed": false,
         "actual_outputs": []
     },
@@ -35,7 +31,6 @@ var tests = {
         "input_args": [["The quick brown fox jumps over the lazy dog."]],
         "expected_outputs": [false],
         "pts": 1,
-        "desc": "Test with input sentence 'The quick brown fox jumps over the lazy dog.'.",
         "passed": false,
         "actual_outputs": []
     }
