@@ -34,6 +34,7 @@ export default withPageAuthRequired(function AnswerPage() {
   const [attempts, setAttempts] = useState([]);
   const [invalidInput, setInvalidInput] = useState(false);
   const [perfectScore, setPerfectScore] = useState(false);
+  const [illegalInput, setIllegalInput] = useState(false);
 
   if (!questionID) return (<div>"Invalid page, please visit a valid question.";</div>);
 
@@ -121,6 +122,11 @@ export default withPageAuthRequired(function AnswerPage() {
     setUserCommentFirst(true);
     setUserInputFirst(true);
     if (userInput === "" || (attempts.length > 0 && commentInput === "") & !perfectScore) return;
+    // check if user copies the function or some other function
+    if (userInput.match(/function(\s|\S)*\{/)) {
+      setIllegalInput(true);
+      return;
+    }
     setLoading.open();
     try {
       const testResponse = await fetch('http://localhost:5001/grade', {
@@ -209,7 +215,7 @@ export default withPageAuthRequired(function AnswerPage() {
                     ? "Invalid input, please try a different description." 
                     : !userInput && userInputFirst 
                     ? "Description cannot be empty." 
-                    : null
+                    : illegalInput ? "Please provide an english description instead of copying functions into the box" : null
                 }
                 onChange={(event) => { setUserInput(event.currentTarget.value); setUserInputFirst(true); setInvalidInput(false);}}
               />

@@ -119,12 +119,12 @@ function ParseLLMResponse(resp) {
     const words = resp.split("```");
 
     if (words.length == 1) {
-        const match = resp.match(/function(.|\s)*\}/)
+        const match = resp.match(/function(\s|\S)*\{/)
         console.log(match);
         if (match) return match[0]
     } else {
         const code = words[1];
-        const regexMatch = code.match(/function(.|\s)*\}/)
+        const regexMatch = code.match(/function(\s|\S)*\{/)
         if (regexMatch == null) return null;
         if (regexMatch.length != 0) return regexMatch[0];
         else return null;
