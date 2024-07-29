@@ -43,7 +43,7 @@ async function loadModelOnStart() {
 function GeneratePrompt(x) {
     if (x == null || x == undefined || x == "") return null;
     return "Write me a Javascript function that has the following purpose: " + x + 
-    ". Only show me the code and call the function foo."
+    ". Only show me the code and call the function foo. Do not make it a const and do not make it an anonymous function."
 }
 
 /*
@@ -115,15 +115,14 @@ async function FetchResponse(desc) {
 */
 function ParseLLMResponse(resp) {
     if (resp == undefined || resp == null) return null;
-    
     const words = resp.split("```");
 
     if (words.length == 1) {
-        const match = resp.match(/function(.|\s)*\}/)
+        const match = resp.match(/(?:function|const)(.|\s)*?\}/)
         if (match) return match[0]
     } else {
         const code = words[1];
-        const regexMatch = code.match(/function(.|\s)*\}/)
+        const regexMatch = code.match(/(?:function|const)(.|\s)*?\}/)
 
         if (regexMatch == null) return null;
         if (regexMatch.length != 0) return regexMatch[0];

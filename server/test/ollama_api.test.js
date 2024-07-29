@@ -22,7 +22,7 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
             const prompt = oa.GeneratePrompt("hello world");
             expect(prompt)
             .to
-            .equal("Write me a Javascript function that has the following purpose: hello world. Only show me the code and call the function foo.")
+            .equal("Write me a Javascript function that has the following purpose: hello world. Only show me the code and call the function foo. Do not make it a const and do not make it an anonymous function.")
         });
     
         it('Missing description (empty string)', function () {
