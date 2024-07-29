@@ -50,7 +50,7 @@ export function NavbarSimple() {
     <nav className={classes.navbar}>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
-          <Image src={"./logo.png"}></Image>
+          <Image src={"http://localhost:5173/logo.png"}></Image>
           <Code fw={700}>v1.0</Code>
         </Group>
         {links}

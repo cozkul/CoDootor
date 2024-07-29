@@ -68,11 +68,12 @@ const createUser = (req, res, user_id, nickname) => {
   else return res.status(400).send("There was an error initializing the user in the database.");
 };
 
-app.get('/users', (req, res) => {
-  // you can call udata.getUsers() function to retrieve all the users in the database
-  // if you want to be sure you get all the users, you can also call udata.loadUserDataOnStart("data"); before
-  // you call udata.getUsers() which returns a list of all the current users in the database
-  res.status(500).send("Endpoint not implemented yet.");
+app.get('/otherUser', (req, res) => {
+  const uid = req.query.uid;
+  const user = udata.getUserDataFile("data", uid);
+  
+  if (!user) res.status(400).json({"error": "User could not be found."});
+  else res.status(200).json(user);
 })
 
 /*
