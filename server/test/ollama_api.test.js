@@ -155,10 +155,7 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
                 "id": 99
             })
             
-            expect(res).to.not.equal(null);
-            expect(res.length).to.equal(1);
-            expect(res[0].err).to.equal(true);
-            expect(res[0].err_reason).to.include("Cannot find module");
+            expect(res).to.equal(null);
         });
     
         it('Testing an incorrectly generated LLM function for Q1', function () {
@@ -189,7 +186,7 @@ describe("Tests for Ollama Backend Fetching, Parsing, and Grading Helpers", func
             expect(res[0].passed).to.equal(false);
             expect(res[1].passed).to.equal(false);
             expect(res[2].passed).to.equal(false);
-            expect(res[0].actual_outputs[0]).to.contain("SyntaxError: Unexpected token \',\'");
+            expect(res[0].actual_outputs[0]).to.contain("Code Failed to Compile: Unexpected token \',\'");
         });
     
         it('Testing a function with missing parameters for Q1', function () {

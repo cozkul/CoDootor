@@ -157,14 +157,15 @@ function TestGeneratedCode(code_json) {
     const test_fp = "../unit_tests/" + "q" + qid.toString() + "_tests.js";
     var res = null;
 
+    if (!tester.is_valid_fp(test_fp)) return null;
+    const qut = require(test_fp);
+
     // Run the tests on the foo function
     try {
         eval("var foo = " + code);
-        const qut = require(test_fp);
         res = tester.run_tests(foo, qut.tests);
     } catch (err) {
-        const qut = require(test_fp);
-        res = tester.fail_tests(qut.tests, err.message);
+        res = tester.fail_tests(qut.tests, "Code Failed to Compile: " + err.message);
     }
 
     return res;
