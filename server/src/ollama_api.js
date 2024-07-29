@@ -115,15 +115,19 @@ async function FetchResponse(desc) {
 */
 function ParseLLMResponse(resp) {
     if (resp == undefined || resp == null) return null;
+    // console.log(resp);
     const words = resp.split("```");
+    // console.log(words);
 
     if (words.length == 1) {
-        const match = resp.match(/(?:function|const)(.|\s)*?\}/)
+        const match = resp.match(/function(.|\s)*\}/)
+        console.log(match);
         if (match) return match[0]
     } else {
         const code = words[1];
-        const regexMatch = code.match(/(?:function|const)(.|\s)*?\}/)
-
+        console.log(words[1]);
+        const regexMatch = code.match(/function(.|\s)*\}/)
+        console.log(regexMatch);
         if (regexMatch == null) return null;
         if (regexMatch.length != 0) return regexMatch[0];
         else return null;
