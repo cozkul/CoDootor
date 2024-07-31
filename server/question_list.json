@@ -69,6 +69,13 @@
 			"num_tests": 3,
 			"filepath": "./questions/q10.js",
 			"test_filepath": "./unit_tests/q10_tests.js"
+		},
+		{
+			"stage": 11,
+			"name": "Double trouble",
+			"num_tests": 4,
+			"filepath": "./questions/q11.js",
+			"test_filepath": "./unit_tests/q11_tests.js"
 		}
 	]
 }
