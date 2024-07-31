@@ -49,7 +49,7 @@ function run_tests(fn, tests) {
 }
 
 function check_array_equality(act, exp) {
-    return Array.isArray(actualOutput) && act.length == exp.length && exp.every((ele, idx) => ele == act[idx]);
+    return Array.isArray(act) && act.length == exp.length && exp.every((ele, idx) => ele == act[idx]);
 }
 
 function is_valid_fp(fp) {
