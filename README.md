@@ -38,7 +38,7 @@ Our backend will have Llama3 via Ollama. REST API will handle this interaction w
 ### Prerequisites
 - Docker
 - Docker Compose
-### Installation
+## Docker Compose (Installation)
 1. **Clone the repository:**
     ```sh
     git clone https://github.students.cs.ubc.ca/CPSC310-2024S/Project-Groups-19-Lab-B.git
