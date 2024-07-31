@@ -222,7 +222,7 @@ export default withPageAuthRequired(function AnswerPage() {
               />
             </Box>
           </Grid.Col>
-          {(attempts.length & !perfectScore) ? (<Grid.Col span={ 4 }>
+          {(attempts.length > 0 & !perfectScore) ? (<Grid.Col span={ 4 }>
             <Box pos="relative">
               <Textarea
                 label="Comment"
