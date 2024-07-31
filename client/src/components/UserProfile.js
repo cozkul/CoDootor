@@ -16,7 +16,7 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
     }
 
     const numQuestionsCompleted = count;
-    const curProgress = Math.max(0, numQuestionsCompleted - 1);
+    const curProgress = numQuestionsCompleted - 1;
     const pctQuestionsCompleted = Math.floor(numQuestionsCompleted / totalQuestions * 100);
     const totalScore = question_scores.reduce((acc, score) => score + acc, 0);
 
@@ -46,7 +46,7 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
                 </Progress.Section>
             </Progress.Root>
             <br></br>
-            <Timeline bulletSize={40} lineWidth={6} color="green" active={curProgress > 0 ? curProgress : -1}>
+            <Timeline bulletSize={40} lineWidth={6} color="green" active={curProgress}>
                 {questionProgress}
             </Timeline>
         </div>
