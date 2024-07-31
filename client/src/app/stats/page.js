@@ -17,7 +17,6 @@ export default withPageAuthRequired(async function StatsPage() {
   
   const stats = await fetch(`http://host.docker.internal:5001/stats`)
     .then(res => res.json())
-    .then(res => JSON.parse(res))
     .then(res => res.question_list)
     .catch(error => console.error('Error fetching data:', error));
   return (
