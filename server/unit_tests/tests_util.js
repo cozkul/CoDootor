@@ -31,7 +31,8 @@ function run_tests(fn, tests) {
                 const expectedOutput = outputs[j]
 
                 results[i].actual_outputs.push(actualOutput);
-
+                
+                // If comparing arrays to see if equal, we need to compare every element directly
                 if (Array.isArray(expectedOutput)) {
                     results[i].passed = check_array_equality(actualOutput, expectedOutput);
                 } else if (actualOutput == expectedOutput) {
