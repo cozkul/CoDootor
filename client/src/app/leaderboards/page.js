@@ -2,7 +2,6 @@
 
 // import React, { useState, useEffect } from 'react';
 import styles from "./page.module.css";
-import { Space, Image, Title } from '@mantine/core';
 import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import LeaderboardTable from "@/components/LeaderboardTable";
 import { getSession } from '@auth0/nextjs-auth0';

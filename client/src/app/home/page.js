@@ -1,7 +1,6 @@
 'use server'
 
 import styles from "./page.module.css";
-import { Space, Image, Title } from '@mantine/core';
 import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import QuestionList from "@/components/QuestionList";
 import { getAccessToken, getSession } from '@auth0/nextjs-auth0';
