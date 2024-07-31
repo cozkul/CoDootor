@@ -6,7 +6,6 @@ import { Space, Image, Title } from '@mantine/core';
 import { NavbarSimple } from "@/components/NavbarSimple/NavbarSimple";
 import LeaderboardTable from "@/components/LeaderboardTable";
 import { getSession } from '@auth0/nextjs-auth0';
-import LoginPrompt from "@/components/LoginPrompt";
 import { withPageAuthRequired, getAccessToken } from '@auth0/nextjs-auth0';
 import UserBanner from "@/components/UserBanner";
 import GetUser from "@/util/GetUser";
