@@ -23,7 +23,7 @@ API will handle user login and its hashed token to validate their login informat
 REST API works as a server between frontend and backend to deliver requests. This will handle various CRUD functionalities, such as user authentication, question retrieval, processing user inputs, and updating user information.
 
 #### Interaction with Ollama
-Our backend will have Llama3 via Ollama. REST API will handle this interaction with parsing user requests to Ollama and returning the generated results.
+Our backend will use Granite-code:3b via Ollama. REST API will handle this interaction with parsing user requests to Ollama and returning the generated results.
 
 #### Problem Logic
 **Game Flow Control** manages the progressions of each question based on user interactions. This function may include controlling game state, managing user inputs and results.
