@@ -295,21 +295,27 @@ app.get('/stats', (req, res) => {
   try {
     let list = fs.readFileSync('./question_list.json', 'utf-8');
     list = JSON.parse(list);
-    let stats = list.question_list;
     
     list.question_list.forEach(question => {
       let totalScore = 0;
       let userCount = 0;
+      let numSolved = 0;
+
       users.forEach(user => {
-        if (user.questions_solved[question.stage]) {
+        const userScore = user.questions_solved[question.stage];
+        if (!isNaN(userScore)) {
           totalScore += user.questions_solved[question.stage];
           userCount++;
+
+          userScore >= question.max_score ? numSolved++ : null;
         }
       });
       question.average_score = userCount > 0 ? totalScore / userCount : 0;
+      question.num_attempted = userCount;
+      question.num_solved = numSolved;
     });
 
-    res.status(200).json(JSON.stringify(list));
+    res.status(200).json(list);
   } catch(e) {
     res.status(400).send({"error": "Failed to retrieve questions"})
   }

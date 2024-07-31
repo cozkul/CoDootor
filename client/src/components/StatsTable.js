@@ -11,7 +11,10 @@ export default function StatsTable({ stats, userData }) {
           <Table.Td style={{textAlign: 'right'}}> <NumberFormatter value={stats[index].average_score} decimalScale={2} /> </Table.Td>
           <Table.Td style={{textAlign: 'right'}}> <NumberFormatter value={stats[index].num_attempted} /> </Table.Td>
           <Table.Td style={{textAlign: 'right'}}> <NumberFormatter value={stats[index].num_solved} /> </Table.Td>
-          <Table.Td style={{textAlign: 'right'}}> <NumberFormatter value={stats[index].num_attempted == 0 ? 0 : stats[index].num_solved / stats[index].num_attempted * 100} suffix="%" /> </Table.Td>
+          <Table.Td style={{textAlign: 'right'}}> 
+            <NumberFormatter value={stats[index].num_attempted == 0 ? 
+              0 : stats[index].num_solved / stats[index].num_attempted * 100} decimalScale={0} suffix="%" /> 
+          </Table.Td>
         </Table.Tr>
       );
     });
