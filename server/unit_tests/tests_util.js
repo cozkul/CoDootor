@@ -32,9 +32,12 @@ function run_tests(fn, tests) {
 
                 results[i].actual_outputs.push(actualOutput);
 
-                if (actualOutput == expectedOutput) {
+                if (Array.isArray(expectedOutput)) {
+                    results[i].passed = check_array_equality(actualOutput, expectedOutput);
+                } else if (actualOutput == expectedOutput) {
                     results[i].passed = true;
                 }
+
             } catch (err) {
                 results[i].actual_outputs.push(err.message);
             }
@@ -42,6 +45,10 @@ function run_tests(fn, tests) {
     }
 
     return results;
+}
+
+function check_array_equality(act, exp) {
+    return Array.isArray(actualOutput) && act.length == exp.length && exp.every((ele, idx) => ele == act[idx]);
 }
 
 function is_valid_fp(fp) {
