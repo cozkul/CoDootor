@@ -17,7 +17,7 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
 
     const numQuestionsCompleted = count;
     const curProgress = Math.max(0, numQuestionsCompleted - 1);
-    const pctQuestionsCompleted = Math.floor(numQuestionsCompleted / 10 * 100);
+    const pctQuestionsCompleted = Math.floor(numQuestionsCompleted / totalQuestions * 100);
     const totalScore = question_scores.reduce((acc, score) => score + acc, 0);
 
     const questionProgress = question_scores.map((key, idx) => 
@@ -42,11 +42,11 @@ export default function UserProfile( {totalQuestions, user, otherUser} ) {
                     <Progress.Label>{numQuestionsCompleted} Completed</Progress.Label>
                 </Progress.Section>
                 <Progress.Section value={100 - pctQuestionsCompleted} color="gray">
-                    <Progress.Label>{10 - numQuestionsCompleted} Remaining</Progress.Label>
+                    <Progress.Label>{totalQuestions - numQuestionsCompleted} Remaining</Progress.Label>
                 </Progress.Section>
             </Progress.Root>
             <br></br>
-            <Timeline bulletSize={40} lineWidth={6} color="green" active={curProgress}>
+            <Timeline bulletSize={40} lineWidth={6} color="green" active={curProgress > 0 ? curProgress : -1}>
                 {questionProgress}
             </Timeline>
         </div>
